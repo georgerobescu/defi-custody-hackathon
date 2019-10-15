@@ -16,6 +16,7 @@ const Address = ({ currentAddress, index, DSCStore }) => {
     setIsAddingAddress(false);
   };
   const toggleAdding = () => {
+    if (!DSCStore.isInteractionAllowed) return;
     setIsAddingAddress(!isAddingAddress);
   };
   return (

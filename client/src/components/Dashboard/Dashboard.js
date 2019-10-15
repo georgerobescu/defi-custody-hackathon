@@ -7,7 +7,7 @@ import SmartContractData from "./SmartContractData";
 import MetamaskConnection from "./MetamaskConnection";
 import { fetchTokens } from "../../blockchain";
 import Rates from "./Assets/Rates";
-import { SpaceBetweenDiv } from "../../styled";
+import { ColumnDiv, FlexCenteredItem, SpaceBetweenDiv } from "../../styled";
 
 const CenteredColumns = styled.div`
   display: flex;
@@ -23,13 +23,15 @@ const Dashboard = ({ Web3Store, DSCStore }) => {
   }, [DSCStore, Web3Store.loading]);
   return (
     <>
-      <SpaceBetweenDiv>
-        <Rates />
-        <MetamaskConnection />
-      </SpaceBetweenDiv>
       <CenteredColumns>
-        <Assets />
-        <SmartContractData />
+        <ColumnDiv>
+          <FlexCenteredItem>
+            <Rates />
+            <MetamaskConnection />
+          </FlexCenteredItem>
+          <Assets />
+          <SmartContractData />
+        </ColumnDiv>
       </CenteredColumns>
     </>
   );

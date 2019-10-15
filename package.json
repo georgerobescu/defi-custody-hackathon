@@ -4,6 +4,7 @@
   "description": "Smart contract and react client for DeFi Custody",
   "main": "index.js",
   "scripts": {
+    "start": "yarn --cwd ./client react-app-rewired start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pre-push": "cd client && npm run pre-push",
     "pre-commit": "cd client && npm run pre-commit"

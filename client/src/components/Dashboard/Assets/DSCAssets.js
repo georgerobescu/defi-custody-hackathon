@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Table, TokenAmountInput } from "../../../styled";
+import { CenteredTD, FlexDiv, Table, TokenAmountInput } from "../../../styled";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
-import { Button } from "rimble-ui";
+import { Button, Flex } from "rimble-ui";
 
 const DSCAssets = ({ DSCStore, Web3Store }) => {
   const [transferAmount, setTransferAmount] = useState();
@@ -34,28 +34,31 @@ const DSCAssets = ({ DSCStore, Web3Store }) => {
         </tr>
       </thead>
       <tbody>
-        {DSCStore.tokens.map(token => (
-          <tr key={token.address}>
-            <td>{`${token.name}`}</td>
-            <td>{token.balance + " " + token.symbol}</td>
+        {DSCStore.tokens.map((token, i) => (
+          <tr key={token.address + i}>
+            <CenteredTD>{`${token.name}`}</CenteredTD>
+            <CenteredTD>{token.balance + " " + token.symbol}</CenteredTD>
             <td>
-              <TokenAmountInput
-                disabled={isTransferring}
-                type="number"
-                value={transferAmount || ""}
-                onChange={onChange(token)}
-              />
-              {token.symbol}
-              <Button
-                size="small"
-                mx={3}
-                onClick={transferTokens(token)}
-                disabled={isTransferring || !transferAmount}
-              >
-                Transfer
-              </Button>
+              <Flex>
+                <TokenAmountInput
+                  disabled={isTransferring || token.amount === 0}
+                  type="number"
+                  placeholder="Amount"
+                  value={transferAmount || ""}
+                  onChange={onChange(token)}
+                  symbol={token.symbol}
+                />
+                <Button
+                  size="small"
+                  mx={3}
+                  onClick={transferTokens(token)}
+                  disabled={isTransferring || !transferAmount}
+                >
+                  Transfer
+                </Button>
+              </Flex>
             </td>
-            <td>{token.amount + " " + token.symbol}</td>
+            <CenteredTD>{token.amount + " " + token.symbol}</CenteredTD>
           </tr>
         ))}
       </tbody>

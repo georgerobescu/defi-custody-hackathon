@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { compose } from "recompose";
 import { inject, observer } from "mobx-react";
 import { MetaMaskButton } from "rimble-ui";
-import { EthAddress, FlexCenteredItem } from "../../styled";
+import { EthAddress, MetamaskContainer } from "../../styled";
 import Web3 from "web3";
 import { toast } from "react-toastify";
 
@@ -43,13 +43,12 @@ const MetamaskConnection = ({ Web3Store }) => {
       }
       toast.success("Success! Metamask connected");
     } else {
-      console.log();
       toast.warn("Please, Install metamask extension!");
     }
     setIsLoading(false);
   };
   return (
-    <FlexCenteredItem>
+    <MetamaskContainer>
       {defaultAddress ? (
         <EthAddress address={defaultAddress} textLabels />
       ) : (
@@ -57,7 +56,7 @@ const MetamaskConnection = ({ Web3Store }) => {
           Connect with MetaMask
         </MetaMaskButton.Outline>
       )}
-    </FlexCenteredItem>
+    </MetamaskContainer>
   );
 };
 

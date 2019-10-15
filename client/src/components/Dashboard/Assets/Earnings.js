@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from "../../../styled";
+import { CenteredTD, RightTD, Table } from "../../../styled";
 import { compose } from "recompose";
 import { inject, observer } from "mobx-react";
 
@@ -12,10 +12,10 @@ const Earnings = ({ DSCStore }) => (
       </tr>
     </thead>
     <tbody>
-      {DSCStore.tokens.map(token => (
-        <tr key={token.address}>
-          <td>{token.name}</td>
-          <td>{token.earnings + " " + token.symbol}</td>
+      {DSCStore.tokens.map((token, i) => (
+        <tr key={token.address + i}>
+          <CenteredTD>{token.name}</CenteredTD>
+          <CenteredTD>{token.earnings + " " + token.symbol}</CenteredTD>
         </tr>
       ))}
     </tbody>

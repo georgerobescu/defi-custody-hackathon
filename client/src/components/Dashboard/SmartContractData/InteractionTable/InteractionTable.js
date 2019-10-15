@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { OneRemInput, SmallInput, Table } from "../../../../styled";
+import {
+  OneRemInput,
+  SmallInput,
+  CenteredTD,
+  Table,
+  PercentageInput
+} from "../../../../styled";
 import { Button } from "rimble-ui";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
@@ -58,21 +64,21 @@ const InteractionTable = ({ DSCStore }) => {
       </thead>
       <tbody>
         {tokens.map((token, tokenIndex) => (
-          <tr key={token.address}>
-            <td>{token.name}</td>
-            <td>{token.amount + " " + token.symbol}</td>
+          <tr key={token.address + tokenIndex}>
+            <CenteredTD>{token.name}</CenteredTD>
+            <CenteredTD>{token.amount + " " + token.symbol}</CenteredTD>
             {addresses.map((address, i) => {
               const percent = token.percentage[address] || "";
               return (
-                <td key={i}>
-                  <OneRemInput
-                    disabled={DSCStore.tokens.length === 0}
+                <CenteredTD key={i}>
+                  <PercentageInput
+                    disabled={token.amount === 0}
+                    symbol="%"
                     value={percent}
                     type="number"
                     onChange={changePercentage(tokenIndex, address)}
                   />
-                  %
-                </td>
+                </CenteredTD>
               );
             })}
             <td />

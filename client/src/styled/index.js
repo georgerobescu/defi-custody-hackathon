@@ -1,4 +1,4 @@
-import Table, { StyledTable } from "./Table";
+import Table, { StyledTable, CenteredTD, RightTD, CenteredTH } from "./Table";
 import {
   OneRemInput,
   SmallInput,
@@ -9,7 +9,9 @@ import {
   TokenAmountInput,
   EndDiv,
   AddressHeader,
-  FlexCenteredItem
+  FlexCenteredItem,
+  PercentageInput,
+  MetamaskContainer
 } from "./Common";
 import EthAddress from "./EthAddress";
 export {
@@ -25,5 +27,10 @@ export {
   EndDiv,
   AddressHeader,
   StyledTable,
-  FlexCenteredItem
+  FlexCenteredItem,
+  CenteredTD,
+  RightTD,
+  PercentageInput,
+  CenteredTH,
+  MetamaskContainer
 };

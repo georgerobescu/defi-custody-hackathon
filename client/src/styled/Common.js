@@ -4,12 +4,22 @@ import styled from "styled-components";
 
 const SmallInput = styled(Input)`
   height: 2rem;
+  border: none;
+  border-radius: 4px 0px 0px 4px;
+  box-shadow: none;
+  ::placeholder {
+    color: rgb(117, 117, 117);
+    opacity: ${props => (props.disabled ? "1" : "0.4")};
+  }
 `;
-
+const OneRemInput = styled(SmallInput)`
+  height: 1rem;
+  max-width: 80px;
+`;
 const FlexCenteredItem = styled.div`
   display: flex;
   align-items: center;
-  padding: 0px;
+  padding: 0px 24px;
 `;
 
 const AddressHeader = styled(SmallInput)`
@@ -17,16 +27,31 @@ const AddressHeader = styled(SmallInput)`
   max-width: 120px;
 `;
 
-const TokenAmountInput = styled(SmallInput)`
-  border: none;
+const TokenAmount = styled(SmallInput)`
   max-width: 160px;
 `;
-
-const OneRemInput = styled(Input)`
-  height: 1rem;
-  border: 0px;
-  max-width: 80px;
+const BorderedDiv = styled.div`
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
 `;
+
+const Symbol = styled.div`
+  width: 40px;
+  padding-left: 4px;
+`;
+
+const InputWithSymbol = Input => ({ symbol, ...rest }) => (
+  <BorderedDiv>
+    <Input {...rest} />
+    <Symbol>{symbol}</Symbol>
+  </BorderedDiv>
+);
+
+const TokenAmountInput = InputWithSymbol(TokenAmount);
+
+const PercentageInput = InputWithSymbol(OneRemInput);
 
 const FlexDiv = styled.div`
   display: flex;
@@ -50,6 +75,12 @@ const ColumnDiv = styled(FlexDiv)`
   flex-direction: column;
 `;
 
+const MetamaskContainer = styled.div`
+  width: 270px;
+  display: flex;
+  justify-content: center;
+`;
+
 export {
   SmallInput,
   OneRemInput,
@@ -60,5 +91,7 @@ export {
   TokenAmountInput,
   EndDiv,
   AddressHeader,
-  FlexCenteredItem
+  FlexCenteredItem,
+  PercentageInput,
+  MetamaskContainer
 };

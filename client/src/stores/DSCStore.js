@@ -1,14 +1,43 @@
-import { action, autorun, computed, observable } from "mobx";
-import Web3 from "web3";
+import { action, observable } from "mobx";
 
 class DSCStore {
   @observable addresses = [undefined, undefined, undefined, undefined];
-  @observable tokens = [];
+  @observable tokens = [
+    {
+      address: "-",
+      name: "-",
+      symbol: "",
+      balance: 0,
+      amount: 0,
+      earnings: 0,
+      percentage: {}
+    },
+    {
+      address: "-",
+      name: "-",
+      symbol: "",
+      balance: 0,
+      amount: 0,
+      earnings: 0,
+      percentage: {}
+    },
+    {
+      address: "-",
+      name: "-",
+      symbol: "",
+      balance: 0,
+      amount: 0,
+      earnings: 0,
+      percentage: {}
+    }
+  ];
   @observable isInteractionAllowed = false;
   @observable isFetched = false;
 
   @action
   changePercentage = (tokenIndex, address, value) => {
+    if (this.tokens[tokenIndex].amount === 0) return;
+    console.log(this.tokens[tokenIndex].amount);
     value = parseInt(value);
     if (value > 100) {
       value = 100;
