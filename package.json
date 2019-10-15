@@ -1,7 +1,7 @@
 {
-  "name": "starter-kit",
+  "name": "DeFi_Custody",
   "version": "1.0.0",
-  "description": "OpenZeppelin kit containing React, & OpenZeppelin SDK",
+  "description": "Smart contract and react client for DeFi Custody",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OpenZeppelin/starter-kit"
+    "url": "git+https://github.com/Defi-custody/defi-custody-sf-hackathon.git"
   },
   "keywords": [
     "openzeppelin",
@@ -30,13 +30,14 @@
     "web3js",
     "ethereum"
   ],
-  "author": "Ramon Recuero <ramon@dapis.io>, Igor Yalovoy <to@ylv.io>",
-  "license": "MIT",
+  "author": "DeFi Custody",
+  "license": "",
   "bugs": {
-    "url": "https://github.com/OpenZeppelin/starter-kit/issues"
+    "url": "https://github.com/Defi-custody/defi-custody-sf-hackathon.git/issues"
   },
-  "homepage": "https://github.com/OpenZeppelin/starter-kit/blob/stable/README.md",
+  "homepage": "https://github.com/Defi-custody/defi-custody-sf-hackathon.git/blob/stable/README.md",
   "dependencies": {
+    "@openzeppelin/contracts": "^2.3.0",
     "dotenv": "^6.2.0",
     "truffle-hdwallet-provider": "^1.0.3"
   },
