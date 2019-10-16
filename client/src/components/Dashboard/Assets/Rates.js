@@ -13,7 +13,8 @@ const Rates = () => (
     <thead>
       <tr>
         <th />
-        <CenteredTH colspan="3">Current ARY Interest Rate</CenteredTH> <th />
+        <CenteredTH>Current ARY Interest Rate</CenteredTH>
+        <th />
       </tr>
     </thead>
     <tbody>

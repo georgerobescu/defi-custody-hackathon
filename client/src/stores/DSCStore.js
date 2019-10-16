@@ -73,8 +73,14 @@ class DSCStore {
 
   @action
   transferTokens = (token, amount) => {
-    this.tokens[token.index].balance -= amount;
-    this.tokens[token.index].amount += amount;
+    const newBalance = this.tokens[token.index].balance - amount;
+    const newAmount = this.tokens[token.index].amount + amount;
+    this.tokens[token.index].balance = parseFloat(
+      newBalance.toFixed(6).toString()
+    );
+    this.tokens[token.index].amount = parseFloat(
+      newAmount.toFixed(6).toString()
+    );
     this.isInteractionAllowed = true;
   };
 }

@@ -40,4 +40,9 @@ export const fetchTokens = DSCStore => {
   DSCStore.setTokensFetched(true);
 };
 
-export const transferTokens = (web3, amount, token) => {};
+export const depositTokens = (web3, amount, token) => {
+  console.log("Smart contract call, deposit", amount);
+};
+export const withdrawTokens = (web3, amount, token) => {
+  console.log("Smart contract call, withdraw", amount);
+};

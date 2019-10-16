@@ -7,7 +7,7 @@ import SmartContractData from "./SmartContractData";
 import MetamaskConnection from "./MetamaskConnection";
 import { fetchTokens } from "../../blockchain";
 import Rates from "./Assets/Rates";
-import { ColumnDiv, FlexCenteredItem, SpaceBetweenDiv } from "../../styled";
+import { ColumnDiv, FlexCenteredItem } from "../../styled";
 
 const CenteredColumns = styled.div`
   display: flex;
