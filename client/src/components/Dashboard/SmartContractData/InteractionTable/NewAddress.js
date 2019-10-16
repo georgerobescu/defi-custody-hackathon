@@ -1,86 +1,73 @@
 import React, { useState } from "react";
 import {
-  AddressHeader,
+  CenteredDiv,
   FlexCenteredItem,
-  CenteredTH,
-  SmallInput,
-  CenteredDiv
+  FlexDiv,
+  SmallInput
 } from "../../../../styled";
 import { Button, Icon, Tooltip } from "rimble-ui";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
-import { toShortAddress } from "../../../../utils/ethereum";
 
-const Address = ({ currentAddress, index, DSCStore, Web3Store }) => {
+const NewAddress = ({ DSCStore, Web3Store }) => {
   const { addresses, setAddresses } = DSCStore;
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [error, setError] = useState();
-  const [address, setNewAddress] = useState(currentAddress || "");
-  console.log(currentAddress, address);
-
+  const [newAddress, setNewAddress] = useState("");
   const onChangeNewAddress = ({ target: { value } }) => {
     setNewAddress(value);
     if (error && Web3Store.web3.utils.isAddress(value)) {
       setError();
     }
   };
-  const updateAddress = () => {
-    if (Web3Store.web3.utils.isAddress(address)) {
-      addresses[index] = address;
-      setAddresses([...addresses]);
+  const addAddress = () => {
+    if (Web3Store.web3.utils.isAddress(newAddress)) {
+      setAddresses([...addresses, newAddress]);
+      setNewAddress("");
       setIsAddingAddress(false);
     } else {
       setError("Wrong eth address format!");
     }
   };
   const toggleAdding = () => {
-    if (!DSCStore.isInteractionAllowed) return;
     setIsAddingAddress(!isAddingAddress);
     setError();
   };
   return (
-    <CenteredTH>
-      {isAddingAddress ? (
-        <CenteredDiv>
+    <FlexCenteredItem>
+      {isAddingAddress && (
+        <>
           {error && (
             <Tooltip message={error}>
               <Icon color="tomato" name="Error" />
             </Tooltip>
           )}
-          {console.log(!!error)}
           <SmallInput
             error={!!error}
             type="text"
             onChange={onChangeNewAddress}
-            value={address}
+            value={newAddress}
             placeholder="0x00...?"
           />
           <Button.Outline size="small" mx={3} onClick={toggleAdding}>
             Cancel
           </Button.Outline>
-          <Button
-            size="small"
-            onClick={updateAddress}
-            disabled={!DSCStore.isInteractionAllowed}
-          >
-            Update
-          </Button>
-        </CenteredDiv>
-      ) : (
-        <div onClick={toggleAdding}>
-          <AddressHeader
-            type="text"
-            disabled={!currentAddress}
-            defaultValue={toShortAddress(currentAddress)}
-            placeholder="0x00...?"
-          />
-        </div>
+        </>
       )}
-    </CenteredTH>
+      <Button
+        icon={!isAddingAddress && "Add"}
+        iconpos="right"
+        size="small"
+        onClick={isAddingAddress ? addAddress : toggleAdding}
+        disabled={DSCStore.hasNotToken}
+      >
+        Add
+      </Button>
+    </FlexCenteredItem>
   );
 };
 
 export default compose(
   inject("DSCStore", "Web3Store"),
   observer
-)(Address);
+)(NewAddress);

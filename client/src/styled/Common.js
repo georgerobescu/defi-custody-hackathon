@@ -11,6 +11,7 @@ const SmallInput = styled(Input)`
     color: rgb(117, 117, 117);
     opacity: ${props => (props.disabled ? "1" : "0.4")};
   }
+  border-color: ${props => props.error && "#DC2C10"} !important;
 `;
 const OneRemInput = styled(SmallInput)`
   height: 1rem;
@@ -25,6 +26,7 @@ const FlexCenteredItem = styled.div`
 const AddressHeader = styled(SmallInput)`
   padding: 8px;
   max-width: 120px;
+  text-align: center;
 `;
 
 const TokenAmount = styled(SmallInput)`
