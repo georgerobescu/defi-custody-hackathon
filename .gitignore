@@ -71,3 +71,6 @@ build
 .openzeppelin
 
 .vscode
+
+# macOS
+.DS_Store
