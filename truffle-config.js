@@ -4,12 +4,11 @@ const HDWalletProvider = require("truffle-hdwallet-provider");
 // Create your own key for Production environments (https://infura.io/)
 const INFURA_ID = process.env.INFURA_ID || 'd6760e62b67f4937ba1ea2691046f06d';
 
-
 const configNetwok = (network, networkId, path = "m/44'/60'/0'/0/", gas = 4465030, gasPrice = 1e10) => ({
   provider: () => new HDWalletProvider(
-    mnemonic, `https://${network}.infura.io/v3/${INFURA_ID}`, 
-        0, 1, true, path
-    ),
+      mnemonic, `https://${network}.infura.io/v3/${INFURA_ID}`,
+      0, 1, true, path
+  ),
   networkId,
   gas,
   gasPrice,

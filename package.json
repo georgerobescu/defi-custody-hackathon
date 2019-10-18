@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "yarn --cwd ./client react-app-rewired start",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "truffle compile && truffle test",
+    "ganache": "ganache-cli",
     "pre-push": "cd client && npm run pre-push",
-    "pre-commit": "cd client && npm run pre-commit"
+    "pre-commit": "yarn test && cd client && npm run pre-commit"
   },
   "husky": {
     "hooks": {
@@ -39,6 +40,8 @@
   "homepage": "https://github.com/Defi-custody/defi-custody-sf-hackathon.git/blob/stable/README.md",
   "dependencies": {
     "@openzeppelin/contracts": "^2.3.0",
+    "@openzeppelin/contracts-ethereum-package": "^2.3.0",
+    "@openzeppelin/upgrades": "^2.5.3",
     "dotenv": "^6.2.0",
     "truffle-hdwallet-provider": "^1.0.3"
   },
