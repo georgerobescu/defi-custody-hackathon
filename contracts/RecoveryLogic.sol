@@ -1,11 +1,13 @@
 pragma solidity >=0.5.0 <0.6.0;
 
-contract RecoveryLogic {
+import "@openzeppelin/contracts/ownership/Ownable.sol";
+
+contract RecoveryLogic is Ownable {
     uint256 public lastAction;
     uint256 public recoveryDeadline;
     address[] public recoveryWallets;
 
-    // recoveryWallet => asset address => percentage | 1 ETH = 100%    
+    // recoveryWallet => asset address => percentage | 1 ETH = 100%
     mapping(address => mapping(address => uint256)) public recoverySheet;
 
     modifier updateAction() {
@@ -34,10 +36,11 @@ contract RecoveryLogic {
     }
 
     function isRecoverable() public view returns (bool) {
-        return (lastAction + deadline) >= now;
+        return (lastAction + recoveryDeadline) >= now;
     }
 
-    function recover() public ifRecoverable {
+    function recover() public ifRecoverable returns (bool) {
         // implement recovery logic
+        return true;
     }
 }
