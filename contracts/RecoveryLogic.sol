@@ -33,6 +33,7 @@ contract RecoveryLogic is Ownable {
             recoverySheet[wallets[i]][asset] = values[i];
         }
         recoveryDeadline = deadline;
+        recoveryWallets = wallets;
     }
 
     function isRecoverable() public view returns (bool) {
@@ -42,5 +43,9 @@ contract RecoveryLogic is Ownable {
     function recover() public ifRecoverable returns (bool) {
         // implement recovery logic
         return true;
+    }
+
+    function getRecoveryWallets() public view returns (address[] memory) {
+        return recoveryWallets;
     }
 }
