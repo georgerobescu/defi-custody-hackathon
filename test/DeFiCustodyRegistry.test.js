@@ -1,12 +1,10 @@
 const { TestHelper } = require("@openzeppelin/cli");
 const { Contracts, ZWeb3 } = require("@openzeppelin/upgrades");
-const { RecoveryLogicTest } = require("./RecoveryLogic.test");
 /* Initialize OpenZeppelin's Web3 provider. */
 ZWeb3.initialize(web3.currentProvider);
 
 /* Retrieve compiled contract artifacts. */
 const DeFiCustodyRegistry = Contracts.getFromLocal("DeFiCustodyRegistry");
-const RecoveryLogic = Contracts.getFromLocal("RecoveryLogic");
 
 // TODO: remove after Wallet implementation is developed
 const Migrations = artifacts.require("./Migrations.sol");
@@ -24,7 +22,6 @@ contract("DeFiCustodyRegistry", async accounts => {
   const emptyData = "0x";
   const gas = 6500000;
   let deFiCustodyRegistryInstance;
-  const dependencies = {};
 
   before(async () => {
     project = await TestHelper({ from: admin });
@@ -37,9 +34,6 @@ contract("DeFiCustodyRegistry", async accounts => {
         initArgs: [owner, tempForAddress.address]
       }
     );
-    dependencies.recoveryLogicInstance = await RecoveryLogic.deploy({
-      data: RecoveryLogic.schema.bytecode
-    }).send({ from: admin, gas });
   });
 
   it("should deploy DeFiCustodyRegistry", async () => {
@@ -98,6 +92,4 @@ contract("DeFiCustodyRegistry", async accounts => {
       "Forbidden"
     );
   });
-
-  await RecoveryLogicTest(accounts, dependencies);
 });
