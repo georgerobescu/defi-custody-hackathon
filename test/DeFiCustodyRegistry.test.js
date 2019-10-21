@@ -28,7 +28,6 @@ contract("DeFiCustodyRegistry", async accounts => {
 
   before(async () => {
     project = await TestHelper({ from: admin });
-
     // TODO: replace tempForAddress with Wallet implementation after it's developed
     const tempForAddress = await Migrations.new();
     deFiCustodyRegistryInstance = await project.createProxy(
@@ -41,7 +40,6 @@ contract("DeFiCustodyRegistry", async accounts => {
     dependencies.recoveryLogicInstance =  await RecoveryLogic.deploy({
       data: RecoveryLogic.schema.bytecode
     }).send({ from: admin, gas });
-
   });
 
   it("should deploy DeFiCustodyRegistry", async () => {
