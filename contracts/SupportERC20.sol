@@ -1,8 +1,13 @@
 pragma solidity >=0.5.0 <0.6.0;
 
-contract SupportERC20 {
-    function transfer(address erc20, address recipient, uint256 amount) public onlyOwner {
-        erc20.transfer(to, value);
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/ownership/Ownable.sol";
+
+contract SupportERC20 is Ownable {
+    IERC20 public erc20;
+
+    function transfer(address recipient, uint256 amount) public onlyOwner {
+        erc20.transfer(recipient, amount);
     }
 
     function approve(address spender, uint256 value) public onlyOwner {
