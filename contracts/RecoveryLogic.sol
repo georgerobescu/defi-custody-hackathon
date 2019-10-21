@@ -20,18 +20,26 @@ contract RecoveryLogic is Ownable {
         _;
     }
 
+//Percentages value varies from 0 to 10000. So 55.05 is represented by 5505.
     function setRecoverySheet(
         address asset,
         address[] memory wallets,
         uint256[] memory values,
         uint256 deadline
     ) public onlyOwner updateAction {
-        require(wallets.length == values.length, "Length incorrect. Data corrupted");
         require(asset != address(0), "Asset cannot be zero address");
+        require(deadline > 0, "Deadline must be bigger than zero");
 
+        require(wallets.length == values.length && wallets.length > 0, "Length incorrect. Data corrupted");
+        uint valuesTotalAmmount = 0;
         for (uint256 i = 0; i < wallets.length; i++) {
+            require(wallets[i] != address(0), "Recovery wallet cannot be zero address");
+            require(values[i] > 0 && values[i] <= 10000, "Percentage must be bigger then 0 smaller then 10000(100%)");
+             
             recoverySheet[wallets[i]][asset] = values[i];
+            valuesTotalAmmount += values[i]; 
         }
+        require(valuesTotalAmmount == 10000, "Sum of all the percentages is not 10000(100%)");
         recoveryDeadline = deadline;
         recoveryWallets = wallets;
     }
