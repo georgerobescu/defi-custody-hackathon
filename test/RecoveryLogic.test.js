@@ -1,10 +1,7 @@
 const { Contracts, ZWeb3 } = require("@openzeppelin/upgrades");
 /* Initialize OpenZeppelin's Web3 provider. */
-
 ZWeb3.initialize(web3.currentProvider);
-
 const { RecoveryLogicTest } = require("./RecoveryLogic.behaviour");
-
 const RecoveryLogic = Contracts.getFromLocal("RecoveryLogic");
 
 contract("RecoveryLogic", async accounts => {
