@@ -6,11 +6,19 @@ import "@openzeppelin/contracts/ownership/Ownable.sol";
 contract SupportERC20 is Ownable {
     IERC20 public erc20;
 
+    constructor (IERC20 _erc20) {
+        erc20 = _erc20;
+    }
+
     function transfer(address recipient, uint256 amount) public onlyOwner {
         erc20.transfer(recipient, amount);
     }
 
     function approve(address spender, uint256 value) public onlyOwner {
         erc20.approve(spender, value);
+    }
+
+    function setERC20(IERC20 _erc20) public onlyOwner {
+        erc20 = _erc20;
     }
 }
