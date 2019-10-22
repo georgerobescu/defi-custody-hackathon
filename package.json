@@ -8,7 +8,7 @@
     "test": "truffle compile && truffle test",
     "ganache": "ganache-cli",
     "pre-push": "cd client && npm run pre-push",
-    "pre-commit": "yarn test && cd client && npm run pre-commit"
+    "pre-commit": "cd client && npm run pre-commit"
   },
   "husky": {
     "hooks": {
