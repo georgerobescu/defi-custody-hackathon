@@ -1,11 +1,10 @@
-const { TestHelper } = require('@openzeppelin/cli');
-const { Contracts, ZWeb3 } = require('@openzeppelin/upgrades');
-
+const { TestHelper } = require("@openzeppelin/cli");
+const { Contracts, ZWeb3 } = require("@openzeppelin/upgrades");
 /* Initialize OpenZeppelin's Web3 provider. */
 ZWeb3.initialize(web3.currentProvider);
 
 /* Retrieve compiled contract artifacts. */
-const DeFiCustodyRegistry = Contracts.getFromLocal('DeFiCustodyRegistry');
+const DeFiCustodyRegistry = Contracts.getFromLocal("DeFiCustodyRegistry");
 
 // TODO: remove after Wallet implementation is developed
 const Migrations = artifacts.require("./Migrations.sol");
@@ -20,22 +19,24 @@ contract("DeFiCustodyRegistry", async accounts => {
   const adminAddress = accounts[4];
   const nonOwner = accounts[5];
   const roleName = "owner";
-  const emptyData = "0x"
+  const emptyData = "0x";
   const gas = 6500000;
   let deFiCustodyRegistryInstance;
 
   before(async () => {
-    project = await TestHelper({from: admin});
-
+    project = await TestHelper({ from: admin });
     // TODO: replace tempForAddress with Wallet implementation after it's developed
     const tempForAddress = await Migrations.new();
-    deFiCustodyRegistryInstance = await project.createProxy(DeFiCustodyRegistry, {
-      initMethod: 'init',
-      initArgs: [owner, tempForAddress.address]
-    });
+    deFiCustodyRegistryInstance = await project.createProxy(
+      DeFiCustodyRegistry,
+      {
+        initMethod: "init",
+        initArgs: [owner, tempForAddress.address]
+      }
+    );
   });
 
-  it("should deploy contract", async () => {
+  it("should deploy DeFiCustodyRegistry", async () => {
     const name = await deFiCustodyRegistryInstance.methods
       .OWNER()
       .call({ from: owner });
@@ -84,10 +85,10 @@ contract("DeFiCustodyRegistry", async accounts => {
   });
 
   it("should throw error if adding token from non owner account", async () => {
-   await expectRevert(
+    await expectRevert(
       deFiCustodyRegistryInstance.methods
         .addSupportedToken(tokenAddress)
-        .send({ from: nonOwner}),
+        .send({ from: nonOwner }),
       "Forbidden"
     );
   });
