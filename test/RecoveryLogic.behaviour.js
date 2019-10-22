@@ -9,12 +9,12 @@ const RecoveryLogicTest = async (accounts, dependencies) =>
     const CHILD_WALLETS_AMOUNT = 4;
     const childWallets = accounts.slice(accounts.length - CHILD_WALLETS_AMOUNT);
     // fill percentage with 100 / CHILD_WALLETS_AMOUNT in ether
-    const assetPercentage = Array(CHILD_WALLETS_AMOUNT).map(() =>
+    const assetPercentage = Array(CHILD_WALLETS_AMOUNT).fill(
       web3.utils.toWei(100 / CHILD_WALLETS_AMOUNT + "0", "milli")
     );
-    const gas = 6500000;
     const burnAddress = "0x0000000000000000000000000000000000000000";
     const deadline = new BN(100);
+    const gas = 6500000;
     let recoveryLogicInstance;
 
     before(async () => {
@@ -143,7 +143,7 @@ const RecoveryLogicTest = async (accounts, dependencies) =>
             deadline.toNumber()
           )
           .send({ from: admin, gas }),
-        "Sum of all the percentages is not 10000(100%)"
+          "Sum of all the percentages is not 1 ether(100%)"
       );
     });
 

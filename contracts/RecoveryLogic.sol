@@ -23,7 +23,7 @@ contract RecoveryLogic is Ownable {
     /**
      * @dev Allows to recoverySheet state.
      * @param asset The address of token that will be used as Asset.
-     * @param wallet The array of addresses to whom the asset will be sent.
+     * @param wallets The array of addresses to whom the asset will be sent.
      * @param values The array of percentages that corresponds to each wallets share. 1 ether = 100%.
      * @param deadline The number of seconds from the current moment (lastAction) the Asset will be sent to wallets.
      */
