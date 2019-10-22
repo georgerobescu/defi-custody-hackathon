@@ -1,8 +1,7 @@
 const { BN } = web3.utils;
 const { expectRevert } = require("openzeppelin-test-helpers");
 
-const RecoveryLogicTest = async (accounts, dependencies) =>
-  describe("RecoveryLogic", async () => {
+const RecoveryLogicTest = async (accounts, dependencies) => {
     const admin = accounts[1];
     const owner = accounts[2];
     const assetAddress = accounts[3];
@@ -155,7 +154,7 @@ const RecoveryLogicTest = async (accounts, dependencies) =>
         "Deadline must be bigger than zero"
       );
     });
-  });
+  }
 
 module.exports = {
   RecoveryLogicTest
