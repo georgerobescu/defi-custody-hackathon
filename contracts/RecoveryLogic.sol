@@ -20,7 +20,13 @@ contract RecoveryLogic is Ownable {
         _;
     }
 
-//Percentages value varies from 0 to 10000. So 55.05 is represented by 5505.
+    /**
+     * @dev Allows to recoverySheet state.
+     * @param asset The address of token that will be used as Asset.
+     * @param wallet The array of addresses to whom the asset will be sent.
+     * @param values The array of percentages that corresponds to each wallets share. 1 ether = 100%.
+     * @param deadline The number of seconds from the current moment (lastAction) the Asset will be sent to wallets.
+     */
     function setRecoverySheet(
         address asset,
         address[] memory wallets,
@@ -29,23 +35,21 @@ contract RecoveryLogic is Ownable {
     ) public onlyOwner updateAction {
         require(asset != address(0), "Asset cannot be zero address");
         require(deadline > 0, "Deadline must be bigger than zero");
-
         require(wallets.length == values.length && wallets.length > 0, "Length incorrect. Data corrupted");
-        uint valuesTotalAmmount = 0;
+        uint valuesTotalAmount = 0;
         for (uint256 i = 0; i < wallets.length; i++) {
             require(wallets[i] != address(0), "Recovery wallet cannot be zero address");
-            require(values[i] > 0 && values[i] <= 10000, "Percentage must be bigger then 0 smaller then 10000(100%)");
-             
+            require(values[i] <= 1 ether, "Percentage must be smaller then 1 ether(100%)");
             recoverySheet[wallets[i]][asset] = values[i];
-            valuesTotalAmmount += values[i]; 
+            valuesTotalAmount += values[i];
         }
-        require(valuesTotalAmmount == 10000, "Sum of all the percentages is not 10000(100%)");
+        require(valuesTotalAmount == 1 ether, "Sum of all the percentages is not 1 ether(100%)");
         recoveryDeadline = deadline;
         recoveryWallets = wallets;
     }
 
     function isRecoverable() public view returns (bool) {
-        return (lastAction + recoveryDeadline) >= now;
+        return (lastAction + recoveryDeadline) <= now;
     }
 
     function recover() public ifRecoverable returns (bool) {

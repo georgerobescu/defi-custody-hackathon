@@ -6,6 +6,7 @@
   "scripts": {
     "start": "yarn --cwd ./client react-app-rewired start",
     "test": "truffle test",
+    "compile": "truffle compile",
     "ganache": "ganache-cli",
     "pre-push": "cd client && npm run pre-push",
     "pre-commit": "cd client && npm run pre-commit"

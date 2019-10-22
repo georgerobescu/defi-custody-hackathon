@@ -1,4 +1,3 @@
-const { TestHelper } = require("@openzeppelin/cli");
 const { Contracts, ZWeb3 } = require("@openzeppelin/upgrades");
 /* Initialize OpenZeppelin's Web3 provider. */
 
@@ -14,7 +13,6 @@ contract("RecoveryLogic", async accounts => {
   const gas = 6500000;
 
   before(async () => {
-    project = await TestHelper({ from: admin });
     dependencies.recoveryLogicInstance = await RecoveryLogic.deploy({
       data: RecoveryLogic.schema.bytecode
     }).send({ from: admin, gas });

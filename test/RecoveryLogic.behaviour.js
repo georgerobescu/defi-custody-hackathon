@@ -6,8 +6,12 @@ const RecoveryLogicTest = async (accounts, dependencies) =>
     const admin = accounts[1];
     const owner = accounts[2];
     const assetAddress = accounts[3];
-    const childWallets = accounts.slice(6);
-    const assetPercentage = childWallets.map((wallet, i) => 2500);
+    const WALLETS_AMOUNT = 4;
+    const childWallets = accounts.slice(accounts.length - WALLETS_AMOUNT);
+    // fill percentage with 100 / WALLETS_AMOUNT in ether
+    const assetPercentage = Array(WALLETS_AMOUNT).map(() =>
+      web3.utils.toWei(100 / WALLETS_AMOUNT + "0", "milli")
+    );
     const gas = 6500000;
     const burnAddress = "0x0000000000000000000000000000000000000000";
     const deadline = new BN(100);
