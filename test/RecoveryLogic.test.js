@@ -1,8 +1,5 @@
-const { Contracts, ZWeb3 } = require("@openzeppelin/upgrades");
-/* Initialize OpenZeppelin's Web3 provider. */
-ZWeb3.initialize(web3.currentProvider);
-const { RecoveryLogicTest } = require("./RecoveryLogic.behaviour");
-const RecoveryLogic = Contracts.getFromLocal("RecoveryLogic");
+var RecoveryLogic = artifacts.require("./RecoveryLogic.sol");
+const { RecoveryLogicTest } = require("./RecoveryLogic.behaviour.js");
 
 contract("RecoveryLogic", async accounts => {
   const dependencies = {};
@@ -10,9 +7,12 @@ contract("RecoveryLogic", async accounts => {
   const gas = 6500000;
 
   before(async () => {
-    dependencies.recoveryLogicInstance = await RecoveryLogic.deploy({
-      data: RecoveryLogic.schema.bytecode
-    }).send({ from: admin, gas });
+    let recoveryLogicInstance = await RecoveryLogic.new({from: admin});
+    dependencies.recoveryLogicInstance = new web3.eth.Contract(
+      recoveryLogicInstance.abi,
+      recoveryLogicInstance.address,
+      {from: admin}
+    );
   });
 
   await RecoveryLogicTest(accounts, dependencies);
