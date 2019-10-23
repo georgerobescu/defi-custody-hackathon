@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Assets from "./Assets";
 import SmartContractData from "./SmartContractData";
 import MetamaskConnection from "./MetamaskConnection";
-import { fetchTokens } from "../../blockchain";
+import { fetchWallet } from "../../blockchain";
 import Rates from "./Assets/Rates";
 import { ColumnDiv, FlexCenteredItem } from "../../styled";
 
@@ -18,9 +18,9 @@ const CenteredColumns = styled.div`
 const Dashboard = ({ Web3Store, DSCStore }) => {
   useEffect(() => {
     if (!Web3Store.loading) {
-      fetchTokens(DSCStore);
+      fetchWallet(Web3Store.web3, DSCStore);
     }
-  }, [DSCStore, Web3Store.loading]);
+  }, [DSCStore, Web3Store.loading, Web3Store.web3]);
   return (
     <>
       <CenteredColumns>

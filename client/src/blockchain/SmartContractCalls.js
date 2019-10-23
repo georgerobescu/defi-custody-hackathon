@@ -1,4 +1,7 @@
 //TODO fetch balances -> filter -> fetchDCSAmount -> fetchEarnings
+export const fetchWallet = (web3, DSCStore) => {
+  fetchTokens(DSCStore);
+};
 export const fetchTokens = DSCStore => {
   const dummyTokens = [
     {

@@ -17,7 +17,7 @@ const MetamaskConnection = ({ Web3Store }) => {
       const web3 = new Web3(ethereum);
       const accounts = await web3.eth.getAccounts();
       if (accounts.length > 0) {
-        Web3Store.setWeb3(web3, accounts);
+        await Web3Store.setWeb3(web3, accounts);
         setDefaultAddress(accounts[0]);
       }
       setIsLoading(false);
@@ -31,7 +31,7 @@ const MetamaskConnection = ({ Web3Store }) => {
       const web3 = new Web3(ethereum);
       try {
         const accounts = await ethereum.enable();
-        Web3Store.setWeb3(web3, accounts);
+        await Web3Store.setWeb3(web3, accounts);
         setDefaultAddress(accounts[0]);
       } catch (error) {
         if (error.code === USER_DENIED_ACCESS) {
