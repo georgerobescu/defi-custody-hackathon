@@ -92,22 +92,22 @@ const SupportERC20Tests = async (accounts, dependencies) => {
   it("should set new ERC20 token", async () => {
     const mockedContractAddress = supportERC20Instance.options.address;
     await supportERC20Instance.methods
-    .setERC20(mockedContractAddress)
-    .send({ from: admin });
+      .setERC20(mockedContractAddress)
+      .send({ from: admin });
     const addressAfter = await supportERC20Instance.methods.erc20().call();
     assert.strictEqual(
-        addressAfter,
-        mockedContractAddress,
-        "ERC20 address wasn't change"
+      addressAfter,
+      mockedContractAddress,
+      "ERC20 address wasn't change"
     );
   });
 
   it("should throw error if was set non contract address", async () => {
     await expectRevert(
-        supportERC20Instance.methods
+      supportERC20Instance.methods
         .setERC20(thirdPartyWallet)
         .send({ from: admin }),
-        "Cannot set a ERC20 implementation to a non-contract address"
+      "Cannot set a ERC20 implementation to a non-contract address"
     );
   });
 };

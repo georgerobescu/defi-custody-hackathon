@@ -9,13 +9,11 @@ contract("SupportERC20", async accounts => {
   const dependencies = {};
 
   before(async () => {
-    const ERC20Instance = await ERC20.new(
-        { from: user }
-    );
+    const ERC20Instance = await ERC20.new({ from: user });
     dependencies.ERC20Instance = new web3.eth.Contract(
-        ERC20Instance.abi,
-        ERC20Instance.address,
-        { from: user }
+      ERC20Instance.abi,
+      ERC20Instance.address,
+      { from: user }
     );
     const supportERC20Instance = await SupportERC20.new(
       dependencies.ERC20Instance.options.address,
