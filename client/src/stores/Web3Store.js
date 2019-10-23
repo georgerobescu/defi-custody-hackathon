@@ -9,7 +9,6 @@ class Web3Store {
   setWeb3 = async (web3, accounts) => {
     web3.eth.defaultAccount = accounts[0];
     this.web3 = web3;
-    console.log(DeFiCustodyRegistry);
     this.loading = false;
   };
 

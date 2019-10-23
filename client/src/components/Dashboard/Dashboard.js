@@ -1,43 +1,35 @@
-import React, { useEffect } from "react";
-import { compose } from "recompose";
-import { inject, observer } from "mobx-react";
+import React from "react";
 import styled from "styled-components";
 import Assets from "./Assets";
 import SmartContractData from "./SmartContractData";
 import MetamaskConnection from "./MetamaskConnection";
-import { fetchWallet } from "../../blockchain";
 import Rates from "./Assets/Rates";
 import { ColumnDiv, FlexCenteredItem } from "../../styled";
+import withDrizzle from "../../drizzle/WithDrizzle";
 
 const CenteredColumns = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-
-const Dashboard = ({ Web3Store, DSCStore }) => {
-  useEffect(() => {
-    if (!Web3Store.loading) {
-      fetchWallet(Web3Store.web3, DSCStore);
-    }
-  }, [DSCStore, Web3Store.loading, Web3Store.web3]);
+const Drizzeled = withDrizzle(() => (
+  <>
+    <Assets />
+    <SmartContractData />
+  </>
+));
+const Dashboard = () => {
   return (
-    <>
-      <CenteredColumns>
-        <ColumnDiv>
-          <FlexCenteredItem>
-            <Rates />
-            <MetamaskConnection />
-          </FlexCenteredItem>
-          <Assets />
-          <SmartContractData />
-        </ColumnDiv>
-      </CenteredColumns>
-    </>
+    <CenteredColumns>
+      <ColumnDiv>
+        <FlexCenteredItem>
+          <Rates />
+          <MetamaskConnection />
+        </FlexCenteredItem>
+        <Drizzeled />
+      </ColumnDiv>
+    </CenteredColumns>
   );
 };
 
-export default compose(
-  inject("Web3Store", "DSCStore"),
-  observer
-)(Dashboard);
+export default Dashboard;
