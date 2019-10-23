@@ -24,11 +24,11 @@ jobs: # a collection of steps
           paths:
             - ~/.cache/yarn
       #- run:
-      #     name: Run tests
-      #     command: yarn test
+      #    name: Run tests
+      #    command: yarn test
       - run:
           name: Build
           command: CI=false yarn build
-      # - run:
-      #     name: Docker build
-      #     command: docker build . -t dapp
+      - run:
+          name: Docker build
+          command: docker build . -t dapp
