@@ -1,2 +1,2 @@
-# defi-custody-sf-hackathon
-DeFi Custody proof of concept for SF hackathon
+# defi-custody-hackathon
+DeFi Custody proof of concept for hackathon
