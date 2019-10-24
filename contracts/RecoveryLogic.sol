@@ -3,8 +3,8 @@ pragma solidity >=0.5.0 <0.6.0;
 import "@openzeppelin/contracts/ownership/Ownable.sol";
 
 contract RecoveryLogic is Ownable {
-    address[] public DCwalletsList;
-    
+    address[] public dcWalletsList;
+
     mapping(address => uint256) public lastAction;
     mapping(address => uint256) public recoveryDeadline;
     mapping(address => address[]) public recoveryWallets;
@@ -36,7 +36,7 @@ contract RecoveryLogic is Ownable {
         address[] memory wallets,
         uint256[] memory values,
         uint256 deadline
-    ) public updateAction(msg.sender) {
+    ) public updateAction(msg.sender) onlyOwner {
         require(asset != address(0), "#RecoveryLogic setRecoverySheet(): Asset cannot be zero address");
         require(deadline > 0, "#RecoveryLogic setRecoverySheet(): Deadline must be bigger than zero");
         require(wallets.length == values.length && wallets.length > 0, "#RecoveryLogic setRecoverySheet(): Length incorrect. Data corrupted");
@@ -51,7 +51,12 @@ contract RecoveryLogic is Ownable {
         recoveryDeadline[msg.sender] = deadline;
         recoveryWallets[msg.sender] = wallets;
         emit NewRecoverySheet(msg.sender, asset, wallets, values, deadline);
-        DCwalletsList.push(msg.sender);
+        dcWalletsList.push(msg.sender);
+    }
+
+    /// @dev extend the deadline for recovery
+    function alive() public updateAction(msg.sender) returns (bool) {
+        return true;
     }
 
     function isRecoverable(address wallet) public view returns (bool) {
