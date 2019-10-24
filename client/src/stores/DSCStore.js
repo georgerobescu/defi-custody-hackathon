@@ -1,5 +1,4 @@
 import { action, observable } from "mobx";
-import getDrizzleStore from "../drizzle/setup";
 
 class DSCStore {
   @observable addresses = [undefined, undefined, undefined, undefined];
@@ -35,6 +34,7 @@ class DSCStore {
   @observable isInteractionAllowed = false;
   @observable isFetched = false;
   @observable drizzle;
+  @observable drizzleConnected = false;
 
   @action
   changePercentage = (tokenIndex, address, value) => {
@@ -87,8 +87,13 @@ class DSCStore {
   };
 
   @action
-  initStore = () => {
-    this.drizzle = getDrizzleStore();
+  setStore = drizzle => {
+    this.drizzle = drizzle;
+  };
+
+  @action
+  connected = () => {
+    this.drizzleConnected = true;
   };
 }
 

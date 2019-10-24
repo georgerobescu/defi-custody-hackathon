@@ -12,7 +12,7 @@ const CenteredColumns = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-const Drizzeled = withDrizzle(() => (
+const Drizzled = withDrizzle(() => (
   <>
     <Assets />
     <SmartContractData />
@@ -26,7 +26,7 @@ const Dashboard = () => {
           <Rates />
           <MetamaskConnection />
         </FlexCenteredItem>
-        <Drizzeled />
+        <Drizzled />
       </ColumnDiv>
     </CenteredColumns>
   );

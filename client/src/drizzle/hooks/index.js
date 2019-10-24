@@ -68,6 +68,8 @@ export const useDrizzleState = (mapState, args) => {
 };
 
 export const DrizzleProvider = ({ children, drizzle }) => {
+  // console.log(Object.keys(drizzle.contracts));
+
   const useCacheCall = useMemo(() => createUseCacheCall(drizzle), [drizzle]);
   const useCacheSend = useMemo(() => createUseCacheSend(drizzle), [drizzle]);
   const useCacheEvents = useMemo(() => createUseCacheEvents(drizzle), [

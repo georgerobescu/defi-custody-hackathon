@@ -1,22 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { CenteredTD, Table } from "../../../styled";
+import React from "react";
+import { CenteredTD, Table } from "../../../../styled";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
-import TransferButtons from "./TransferButtons";
-import { drizzleReactHooks } from "../../../drizzle";
-const DSCAssets = ({ DSCStore }) => {
-  const [walletAddress, setWalletAddress] = useState();
-  const drizzleState = drizzleReactHooks.useDrizzleState(drizzleState => ({
-    drizzleStatus: drizzleState.drizzleStatus
-  }));
-  useEffect(() => {
-    if (drizzleState.notConnected) {
-      return;
-    }
-    setWalletAddress("hi");
-  }, [drizzleState]);
-  console.log(drizzleState);
-  console.log(walletAddress);
+import TransferButtons from "../TransferButtons";
+
+const View = ({ DSCStore }) => {
   return (
     <Table title="Wallet" fullWidth={true}>
       <thead>
@@ -46,4 +34,4 @@ const DSCAssets = ({ DSCStore }) => {
 export default compose(
   inject("DSCStore"),
   observer
-)(DSCAssets);
+)(View);

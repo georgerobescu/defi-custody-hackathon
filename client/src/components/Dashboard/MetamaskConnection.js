@@ -11,11 +11,14 @@ const USER_DENIED_ACCESS = "User denied account authorization";
 const MetamaskConnection = ({ Web3Store, DSCStore }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [defaultAddress, setDefaultAddress] = useState();
-  const setInitContractsStore = useCallback(async (web3, accounts) => {
-    await Web3Store.setWeb3(web3, accounts);
-    setDefaultAddress(accounts[0]);
-    DSCStore.initStore();
-  }, [DSCStore, Web3Store]);
+  const setInitContractsStore = useCallback(
+    async (web3, accounts) => {
+      await Web3Store.setWeb3(web3, accounts);
+      setDefaultAddress(accounts[0]);
+      DSCStore.connected();
+    },
+    [DSCStore, Web3Store]
+  );
   useEffect(() => {
     const fetchAccount = async () => {
       const { ethereum } = window;
