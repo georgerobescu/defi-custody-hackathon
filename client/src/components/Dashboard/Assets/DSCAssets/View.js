@@ -4,9 +4,9 @@ import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
 import TransferButtons from "../TransferButtons";
 
-const View = ({ DSCStore }) => {
+const View = ({ DSCStore, wallet }) => {
   return (
-    <Table title="Wallet" fullWidth={true}>
+    <Table title={wallet} fullWidth={true}>
       <thead>
         <tr>
           <th>Asset</th>

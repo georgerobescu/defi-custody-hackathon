@@ -23,7 +23,7 @@
     "recompose": "^0.30.0",
     "rimble-ui": "^0.10.0",
     "styled-components": "^4.4.0",
-    "web3": "^1.2.1"
+    "web3": "^1.2.2"
   },
   "scripts": {
     "start": "react-app-rewired start",

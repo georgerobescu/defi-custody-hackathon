@@ -24,3 +24,6 @@ export const toShortAddress = address =>
   address
     ? address.substring(0, 6) + "..." + address.substring(address.length - 4)
     : "";
+
+export const isZeroAddress = address =>
+  address === "0x0000000000000000000000000000000000000000";

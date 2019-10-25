@@ -57,6 +57,7 @@ const FlexDiv = styled.div`
   display: flex;
   padding: 0px ${props => (props.noPadding ? "" : "24px")};
   flex-wrap: wrap;
+  ${props => props.alignItems && `align-items: ${props.alignItems}`};
 `;
 
 const SpaceBetweenDiv = styled(FlexDiv)`
@@ -81,6 +82,10 @@ const MetamaskContainer = styled.div`
   justify-content: center;
 `;
 
+const Box = styled.div`
+  ${props => props.fontSize && `font-size: ${props.fontSize}`};
+`;
+
 export {
   SmallInput,
   OneRemInput,
@@ -93,5 +98,6 @@ export {
   AddressHeader,
   FlexCenteredItem,
   PercentageInput,
-  MetamaskContainer
+  MetamaskContainer,
+  Box
 };
