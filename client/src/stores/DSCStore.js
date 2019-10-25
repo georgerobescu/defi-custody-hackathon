@@ -35,6 +35,8 @@ class DSCStore {
   @observable isFetched = false;
   @observable drizzle;
   @observable drizzleConnected = false;
+  @observable newDeadline = 0;
+  @observable walletAddress;
 
   @action
   changePercentage = (tokenIndex, address, value) => {
@@ -94,6 +96,16 @@ class DSCStore {
   @action
   connected = () => {
     this.drizzleConnected = true;
+  };
+
+  @action
+  setDeadline = deadline => {
+    this.newDeadline = deadline;
+  };
+
+  @action
+  setWalletAddress = address => {
+    this.walletAddress = address;
   };
 }
 

@@ -1,4 +1,5 @@
 import { action, computed, observable } from "mobx";
+
 const DeFiCustodyRegistry = require("../../../build/contracts/DeFiCustodyRegistry");
 class Web3Store {
   @observable web3;

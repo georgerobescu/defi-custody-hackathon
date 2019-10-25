@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback } from "react";
 import { drizzleReactHooks } from "../../../../drizzle";
 import { isZeroAddress } from "../../../../utils/ethereum";
 import { Button } from "rimble-ui";
@@ -7,18 +7,12 @@ import TransactionStatus from "../../../blockchain";
 import { SpaceBetweenDiv } from "../../../../styled";
 import { TransactionStatus as Status } from "../../../../constants/TransactionStatusEnum";
 
-const Wallet = () => {
-  const { useCacheCall } = drizzleReactHooks.useDrizzle();
-  const walletAddress = useCacheCall(
-    "DeFiCustodyRegistry",
-    "getWalletBySender"
-  );
+const Wallet = ({ walletAddress }) => {
   const { useCacheSend } = drizzleReactHooks.useDrizzle();
   const { send, TXObjects } = useCacheSend(
     "DeFiCustodyRegistry",
     "createWalletProxy"
   );
-
   const createWallet = useCallback(
     ({ to, value }) => send("0x23842Cc3b528FC45671e5f6b48F0b89095B96d7E", "0x"),
     [send]

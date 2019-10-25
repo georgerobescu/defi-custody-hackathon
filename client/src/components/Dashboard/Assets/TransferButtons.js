@@ -49,7 +49,9 @@ const TransferButtons = ({ DSCStore, Web3Store, token }) => {
         size="small"
         mx={3}
         onClick={transfer(token, withdrawTokens, false)}
-        disabled={isTransferring || token.amount < transferAmount}
+        disabled={
+          !transferAmount || isTransferring || token.amount < transferAmount
+        }
       >
         Withdraw
       </Button>
@@ -57,7 +59,9 @@ const TransferButtons = ({ DSCStore, Web3Store, token }) => {
         size="small"
         mx={3}
         onClick={transfer(token, depositTokens)}
-        disabled={isTransferring || token.balance < transferAmount}
+        disabled={
+          !transferAmount || isTransferring || token.balance < transferAmount
+        }
       >
         Deposit
       </Button>

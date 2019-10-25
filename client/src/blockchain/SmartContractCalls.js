@@ -1,4 +1,9 @@
 //TODO fetch balances -> filter -> fetchDCSAmount -> fetchEarnings
+import { generateDicimaledBalance } from "../utils/ethereum";
+
+const API_KEY = "UAK3dea068114955255b188b0cdfd12c9ae";
+const RINKEBY_ID = "1b3f7a72b3e99c13";
+
 export const fetchWallet = (web3, DSCStore) => {
   fetchTokens(DSCStore);
 };
@@ -48,4 +53,39 @@ export const depositTokens = (web3, amount, token) => {
 };
 export const withdrawTokens = (web3, amount, token) => {
   console.log("Smart contract call, withdraw", amount);
+};
+
+export const fetchUserBalances = async (address, toBN) => {
+  const balances = await fetchBalances(address, toBN);
+  return balances.filter(balance => filterToken(balance));
+};
+
+export const fetchBalances = async (address, toBN) => {
+  const response = await fetch(
+    `https://cors-anywhere.herokuapp.com/https://web3api.io/api/v1/addresses/${address}/tokens`,
+    {
+      headers: {
+        "x-api-key": API_KEY,
+        "x-amberdata-blockchain-id": RINKEBY_ID
+      }
+    }
+  );
+  const result = await response.json();
+  if (result.status === 200) {
+    const {
+      payload: { records }
+    } = result;
+    const balances = [];
+    records.forEach(balance => {
+      if (balance.isERC20) {
+        balances.push(generateDicimaledBalance(balance, toBN));
+      }
+    });
+    return balances;
+  }
+};
+
+const filterToken = balance => {
+  console.log(balance);
+  return true;
 };

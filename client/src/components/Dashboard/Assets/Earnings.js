@@ -1,5 +1,5 @@
 import React from "react";
-import { CenteredTD, RightTD, Table } from "../../../styled";
+import { CenteredTD, Table } from "../../../styled";
 import { compose } from "recompose";
 import { inject, observer } from "mobx-react";
 
