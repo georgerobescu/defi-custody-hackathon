@@ -1,42 +1,34 @@
-version: '3'
-  
-services:
-  registry:
-    image: registry:2
-    ports:
-    - "5000:5000"
-    restart: always
-    environment:
-      REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /data
-    volumes:
-      - ./data:/data
-    network_mode: bridge
+version: "3.1"
 
-   nginx-proxy:
-    image: nginx:alpine
-    container_name: nginx-proxy
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - conf:/etc/nginx/conf.d
-      - vhost:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-      - certs:/etc/nginx/certs:ro
-    network_mode: bridge
+services:
+  # watchtower:
+  #     context: .
+  #     dockerfile: client/Dockerfile
+  #   restart: always
+  #   ports:
+  #     - 8081:
+  #   depends_on:
+  #     - letsencrypt
+
+  front-end:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    restart: always
+    depends_on:
+      - letsencrypt
 
   letsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    container_name: nginx-proxy-le
-    volumes_from:
-      - nginx-proxy
+    image: linuxserver/letsencrypt:0.36.0-ls46
+    container_name: letsencrypt
+    ports:
+      - 80:80
+      - 443:443
     volumes:
-      - certs:/etc/nginx/certs:rw
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    network_mode: bridge
-
-volumes:
-  conf:
-  vhost:
-  html:
-  certs:
+      - ./letsencrypt:/config
+      - ./docker-config/nginx.conf:/config/nginx/site-confs/default
+    environment:
+      - EMAIL=deeson@deficustody.com
+      - URL=deficustody.com
+      - SUBDOMAINS=www
+      - VALIDATION=http
