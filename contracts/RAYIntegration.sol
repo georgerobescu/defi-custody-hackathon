@@ -17,20 +17,21 @@ contract RAYIntegration is Initializable, ERC721Holder {
 
 
     // RAY smart contracts used, these id's can be used to identify them dynamically
-    bytes32 internal constant ADMIN_CONTRACT = keccak256("AdminContract");
-    bytes32 internal constant PORTFOLIO_MANAGER_CONTRACT = keccak256("PortfolioManagerContract");
-    bytes32 internal constant PAYER_CONTRACT = keccak256("PayerContract");
-    bytes32 internal constant RAY_TOKEN_CONTRACT = keccak256("RAYTokenContract");
-    bytes32 internal constant NAV_CALCULATOR_CONTRACT = keccak256("NAVCalculatorContract");
+    bytes32 internal ADMIN_CONTRACT;
+    bytes32 internal PORTFOLIO_MANAGER_CONTRACT;
 
-    bytes4 internal constant ERC721_RECEIVER_STANDARD = bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"));
-    address internal constant NULL_ADDRESS = address(0);
+    bytes32 internal PAYER_CONTRACT;
+    bytes32 internal RAY_TOKEN_CONTRACT;
+    bytes32 internal NAV_CALCULATOR_CONTRACT;
+
+    bytes4 internal ERC721_RECEIVER_STANDARD;
+    address internal NULL_ADDRESS;
 
     IRAYStorage public rayStorage;
 
     // map the 'true' owners of the RAY tokens owned by this contract
-    mapping(bytes32 => address payable) rayTokens;
-    mapping(address => bytes32[]) reverseRayTokens;
+    mapping(bytes32 => address payable) public rayTokens;
+    mapping(address => bytes32[]) public reverseRayTokens;
 
 
     event InvestmentRAY(bytes32 portfolioId, address beneficiary, uint256 value, bytes32 rayTokenId);
@@ -71,10 +72,23 @@ contract RAYIntegration is Initializable, ERC721Holder {
 
     function init(address _rayStorage) public initializer {
         rayStorage = IRAYStorage(_rayStorage);
+
+        // constants
+        ADMIN_CONTRACT = keccak256("AdminContract");
+        PORTFOLIO_MANAGER_CONTRACT = keccak256("PortfolioManagerContract");
+        PAYER_CONTRACT = keccak256("PayerContract");
+        RAY_TOKEN_CONTRACT = keccak256("RAYTokenContract");
+        NAV_CALCULATOR_CONTRACT = keccak256("NAVCalculatorContract");
+        ERC721_RECEIVER_STANDARD = bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"));
+        NULL_ADDRESS = address(0);
     }
 
     function genPortfolioId(string memory portfolioDescription) public pure returns (bytes32) {
         return keccak256(abi.encodePacked(portfolioDescription));
+    }
+
+    function getTokenOwner(bytes32 tokenId) external view returns (address) {
+        return rayTokens[tokenId];
     }
 
     /// @notice  Fallback function to receive Ether
