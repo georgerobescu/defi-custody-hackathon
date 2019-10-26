@@ -15,6 +15,7 @@ const DCWalletTestSuite = async (accounts, dependencies) => {
 
   describe("depositDC()", () => {
     it("should deposit tokens to wallet", async () => {
+      const wallet = dcWallet.options.address
       const amount = new BN(web3.utils.toWei("1", "milli"));
       const userBalanceBefore = new BN(
         await ERC20Instance.methods.balanceOf(user).call()
@@ -23,9 +24,14 @@ const DCWalletTestSuite = async (accounts, dependencies) => {
         await ERC20Instance.methods.balanceOf(wallet).call()
       );
       await ERC20Instance.methods
-        .transfer(wallet, amount.toString())
+        .approve(wallet, amount.toString())
         .send({ from: user, gas });
-      const userBalanceAfter = await ERC20Instance.methods.balanceOf(user).call();
+      await dcWallet.methods
+        .depositDC(ERC20Instance.options.address, user, amount.toString())
+        .send({ from: admin, gas });
+      const userBalanceAfter = await ERC20Instance.methods
+        .balanceOf(user)
+        .call();
       const walletBalanceAfter = await ERC20Instance.methods
         .balanceOf(wallet)
         .call();
@@ -44,6 +50,7 @@ const DCWalletTestSuite = async (accounts, dependencies) => {
 
   describe("withdrawDC()", () => {
     it("should withdraw tokens from wallet", async () => {
+      const wallet = dcWallet.options.address
       const amount = new BN(web3.utils.toWei("1", "milli"));
       const userBalanceBefore = new BN(
         await ERC20Instance.methods.balanceOf(user).call()
@@ -51,10 +58,12 @@ const DCWalletTestSuite = async (accounts, dependencies) => {
       const walletBalanceBefore = new BN(
         await ERC20Instance.methods.balanceOf(wallet).call()
       );
-      await supportERC20Instance.methods
-        .transfer(user, amount.toString())
-        .send({ from: admin, gas });
-      const userBalanceAfter = await ERC20Instance.methods.balanceOf(user).call();
+      await dcWallet.methods
+        .withdrawDC(ERC20Instance.options.address, amount.toString())
+        .send({ from: user, gas });
+      const userBalanceAfter = await ERC20Instance.methods
+        .balanceOf(user)
+        .call();
       const walletBalanceAfter = await ERC20Instance.methods
         .balanceOf(wallet)
         .call();

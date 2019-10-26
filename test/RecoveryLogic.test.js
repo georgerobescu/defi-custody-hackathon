@@ -11,7 +11,6 @@ const { RecoveryLogicTestSuite } = require("./RecoveryLogic.behaviour.js");
 contract("RecoveryLogic", async accounts => {
   const dependencies = {};
   const admin = accounts[1];
-  const gas = 6500000;
 
   before(async () => {
     project = await TestHelper({ from: admin });
