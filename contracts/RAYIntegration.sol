@@ -87,6 +87,10 @@ contract RAYIntegration is Initializable, ERC721Holder {
         return keccak256(abi.encodePacked(portfolioDescription));
     }
 
+    function getRayTokens(address wallet) public returns (bytes32[] memory) {
+        return reverseRayTokens[wallet];
+    }
+
     function getTokenOwner(bytes32 tokenId) external view returns (address) {
         return rayTokens[tokenId];
     }
@@ -159,8 +163,7 @@ contract RAYIntegration is Initializable, ERC721Holder {
     /// @param    originalCaller - Unimportant unless Payer is the msg.sender, tells
     ///                            us who signed the original message.
     function redeem(bytes32 rayTokenId, uint valueToWithdraw, address originalCaller)
-        public
-        onlyTokenOwner(rayTokenId, originalCaller)
+        internal
         returns (bytes32, uint256)
     {
         bytes32 portfolioId = rayStorage.getTokenKey(rayTokenId);

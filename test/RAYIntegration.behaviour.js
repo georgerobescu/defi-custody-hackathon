@@ -13,6 +13,7 @@ const RAYIntegrationTestSuite = async (accounts, dependencies) => {
   const watchtower = accounts[1];
   const user1 = accounts[2];
   const gas = 6500000;
+  let rayTokenId;
 
   describe("mint()", () => {
     it("should mint one RAY - value of 1 DAI - in DAI Bzx/Compound/Dydx Portfolio", async () => {
@@ -42,6 +43,43 @@ const RAYIntegrationTestSuite = async (accounts, dependencies) => {
       assert.equal(tokenValue, web3.utils.toWei(value, 'ether'), "Token value is incorrect");
       assert.equal(tokenOwner, user1, "Owner is incorrect");
     });
+  });
+
+  describe("deposit()", () => {
+
+  });
+
+  describe("redeem()", () => {
+
+  });
+  
+  describe("redeemAndWithdraw()", () => {
+    it("should withdraw 1 DAI from DAI RAY token", async () => {
+
+      let value = web3.utils.toWei('1', 'ether');
+      let daiBalanceBefore = await Coins.getDAIBalance(user1);
+
+      let tx = await dependencies.rayIntegration.methods.redeemAndWithdraw(
+        rayTokenId,
+        value,
+        user1
+      ).send({ from: user1, value: 0, gas: 900000 });
+
+      let daiBalanceAfter = await Coins.getDAIBalance(user1);
+
+      assert.equal(daiBalanceAfter.toString(), (new BN(value)).add(daiBalanceBefore).toString());
+
+      // expect(daiBalanceAfter.toString()).to.be.bignumber.equal((new BigNumber(value)).plus(daiBalanceBefore));
+
+    });
+  });
+
+  describe("verifyValue()", () => {
+
+  });
+
+  describe("transferFunds()", () => {
+
   });
 }
 
