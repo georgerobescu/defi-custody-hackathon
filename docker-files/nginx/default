@@ -1,0 +1,70 @@
+# This file is used to configure the NginX server running inside of letsencrypt container
+# to act as a reverse proxy against NodeJS application, provide transparent TLS encryption
+# redirect http to https automatically and www to non-wwww (www.yourdomain.com -> yourdomain.com)
+
+# diamond upstream
+upstream front-end {
+    server front-end:3000;
+}
+
+upstream watchtower {
+    server watchtower:5000;
+}
+
+# redirect www.yourdomain.com to yourdomain.com
+server {
+    # Permanent redirect to non-www
+    server_name www.deficustody.com;
+    rewrite ^/(.*)$ https://deficustody.com/$1 permanent;
+}
+
+# redirect all traffic to https
+server {
+    listen 80;
+    listen [::]:80;
+    server_name _;
+    return 301 https://$host$request_uri;
+}
+
+# main server block
+server {
+    listen 443 ssl http2 default_server;
+    listen [::]:443 ssl http2 default_server;
+
+    #server_name _;
+
+    # enable subfolder method reverse proxy confs
+   # include /config/nginx/proxy-confs/*.subfolder.conf;
+
+    # all ssl related config moved to ssl.conf
+    include /config/nginx/ssl.conf;
+
+    client_max_body_size 0;
+
+        location / {
+            proxy_pass http://front-end;
+            proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+            proxy_redirect off;
+
+            proxy_set_header    Host            $host;
+            proxy_set_header    X-Real-IP       $remote_addr;
+            proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header    X-Forwarded-Proto https;
+        }
+
+        location /api {
+            proxy_pass http://watchtower;
+            proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+            proxy_redirect off;
+
+            proxy_set_header    Host            $host;
+            proxy_set_header    X-Real-IP       $remote_addr;
+            proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header    X-Forwarded-Proto https;
+        }
+}
+
+# enable subdomain method reverse proxy confs
+#include /config/nginx/proxy-confs/*.subdomain.conf;
+# enable proxy cache for auth
+proxy_cache_path cache/ keys_zone=auth_cache:10m;
