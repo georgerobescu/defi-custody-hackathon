@@ -3,7 +3,7 @@ const fs = require('fs')
 
 class Web3 {
 
-  constructor () {
+  constructor() {
     const { providerConfig, gas } = JSON.parse(
       fs.readFileSync(`${__dirname}/../config/deployConfig.json`, 'utf8'),
     )
@@ -13,15 +13,16 @@ class Web3 {
     this._web3 = web3
   }
 
-  getWeb3 () {
+  getWeb3() {
     return this._web3
   }
 
-  async initAccount () {
+  async initAccount() {
     const accounts = await this._web3.eth.getAccounts()
     if (accounts.length === 0) {
       const privateKey = '0x' +
         fs.readFileSync(`${__dirname}/../config/privateKey`, 'utf8')
+
       const account = this._web3.eth.accounts.privateKeyToAccount(privateKey)
       this._web3.eth.accounts.wallet.add(account)
       this._web3.eth.defaultAccount = account.address
@@ -31,7 +32,7 @@ class Web3 {
     console.log(`Default account: ${this._web3.eth.defaultAccount}`)
   }
 
-  sendFromMain (transaction) {
+  sendFromMain(transaction) {
     return transaction.send(
       { from: this._web3.eth.defaultAccount, gas: this.gas })
   }

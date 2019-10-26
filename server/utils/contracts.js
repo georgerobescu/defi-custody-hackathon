@@ -18,11 +18,11 @@ const findInstance = async (contract, web3) => {
   if (!contract.instance) {
     const contractJSON = require(`../../build/contracts/${contract.name}`);
     const networkId =
-      process.env.NODE_ENV === "production"
+      process.env.NODE_ENV === "prod"
         ? "4"
         : Object.keys(contractJSON.networks)[
-            Object.keys(contractJSON.networks).length - 1
-          ];
+        Object.keys(contractJSON.networks).length - 1
+        ];
     const address = contractJSON.networks[networkId].address;
 
     contract.instance = await new web3.eth.Contract(contractJSON.abi, address);
