@@ -32,6 +32,3 @@ jobs: # a collection of steps
       - run:
           name: Docker build
           command: docker build . -t dapp
-      - run:
-          name: Docker push to registry
-          command: docker push 167.71.156.34:5000/dapp

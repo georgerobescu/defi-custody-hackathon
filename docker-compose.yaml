@@ -1,32 +1,35 @@
 version: "3.1"
 
 services:
-  # watchtower:
-  #     context: .
-  #     dockerfile: client/Dockerfile
-  #   restart: always
-  #   ports:
-  #     - 8081:
-  #   depends_on:
-  #     - letsencrypt
-
-  front-end:
+  watchtower:
     build:
       context: .
       dockerfile: server/Dockerfile
     restart: always
+    ports:
+      - 5000:5000
+    depends_on:
+      - letsencrypt
+
+  front-end:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
     depends_on:
       - letsencrypt
 
   letsencrypt:
-    image: linuxserver/letsencrypt:0.36.0-ls46
+    image: linuxserver/letsencrypt:latest
     container_name: letsencrypt
     ports:
       - 80:80
       - 443:443
     volumes:
-      - ./letsencrypt:/config
-      - ./docker-config/nginx.conf:/config/nginx/site-confs/default
+      - ./../data/letsencrypt:/config
+      - ./docker-files/nginx/default:/config/nginx/site-confs/
     environment:
       - EMAIL=deeson@deficustody.com
       - URL=deficustody.com

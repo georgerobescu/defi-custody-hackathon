@@ -8,6 +8,7 @@ const cron = require("node-cron");
 
 customWeb3.initAccount();
 const app = express();
+//TODO set logger var
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -18,7 +19,7 @@ app.use(async (req, res, next) => {
 });
 
 cron.schedule("* * * * *", function () {
-  console.log("here")
+  console.log("running cron job")
   recoveryFunc();
 });
 
