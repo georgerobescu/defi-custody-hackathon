@@ -9,7 +9,10 @@
     "compile": "truffle compile",
     "ganache": "ganache-cli",
     "pre-push": "cd client && npm run pre-push",
-    "pre-commit": "cd client && npm run pre-commit"
+    "pre-commit": "cd client && npm run pre-commit",
+    "chain": "ganache-cli -l 8000000 -d --db='./test/helpers/seed_ganache' -e 1000000 --networkId 27 -m 'float clock pair library upper during question ecology game timber april category'",
+    "docker_test": "truffle test --network docker",
+    "docker_chain": "ganache-cli -h 0.0.0.0 -l 8000000 -d --db='./test/helpers/seed_ganache' -e 1000000 --networkId 27 -m 'float clock pair library upper during question ecology game timber april category'"
   },
   "husky": {
     "hooks": {
@@ -43,7 +46,10 @@
     "@openzeppelin/contracts": "^2.3.0",
     "@openzeppelin/contracts-ethereum-package": "^2.3.0",
     "@openzeppelin/upgrades": "^2.5.3",
+    "chai-as-promised": "^7.1.1",
+    "chai-bignumber": "^3.0.0",
     "dotenv": "^6.2.0",
+    "fs-extra": "^8.1.0",
     "truffle-hdwallet-provider": "^1.0.3"
   },
   "devDependencies": {
