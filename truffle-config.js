@@ -1,4 +1,9 @@
 require('dotenv').config();
+
+// work around for RAY artifacts
+const { copyRayBuilds } = require("./test/utils/ray.js");
+copyRayBuilds();
+
 const mnemonic = process.env.DEFICUSTODY_PRIVATE_KEY;
 const HDWalletProvider = require("truffle-hdwallet-provider");
 // Create your own key for Production environments (https://infura.io/)
