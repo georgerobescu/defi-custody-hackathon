@@ -1,5 +1,6 @@
 const registryContractName = { name: "DeFiCustodyRegistry" };
 const recoveryLogicContractName = { name: "RecoveryLogic" };
+const rayIntegrationContractName = { name: "RAYIntegration" };
 //TODO UPDATE
 const DCContractName = { name: "DCContractName" };
 const customWeb3 = require("../ethereum/web3");
@@ -13,10 +14,16 @@ const getDCContract = async () =>
 const getRecoveryLogic = async () =>
   findInstance(recoveryLogicContractName, await customWeb3.getWeb3());
 
+const getRayIntegration = async () =>
+  findInstance(rayIntegrationContractName, await customWeb3.getWeb3());
+
 const findInstance = async (contract, web3) => {
   console.log(contract);
   if (!contract.instance) {
     const contractJSON = require(`../../build/contracts/${contract.name}`);
+    console.log(contract.name)
+    console.log(contract.instance)
+
     const networkId =
       process.env.NODE_ENV === "prod"
         ? "4"
