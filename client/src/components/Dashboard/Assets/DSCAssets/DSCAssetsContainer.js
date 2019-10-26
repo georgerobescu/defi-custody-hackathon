@@ -2,15 +2,17 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
 import View from "./View";
-import WalletContainer from "./WalletContainer";
+import AssetsObserver from "./AssetsObserver";
 
 const DSCAssetsContainer = ({ DSCStore }) => {
-  const wallet = DSCStore.drizzle ? (
-    <WalletContainer />
-  ) : (
-    "Please connect to metamask."
+  return (
+    <>
+      {DSCStore.drizzle && <AssetsObserver />}
+      <View
+        wallet={DSCStore.drizzle ? "Wallet" : "Please connect to metamask."}
+      />
+    </>
   );
-  return <View wallet={wallet} />;
 };
 
 export default compose(

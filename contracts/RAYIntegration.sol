@@ -31,7 +31,7 @@ contract RAYIntegration is Initializable, ERC721Holder {
 
     // map the 'true' owners of the RAY tokens owned by this contract
     mapping(bytes32 => address payable) public rayTokens;
-    mapping(address => bytes32[]) public reverseRayTokens;
+    mapping(address => bytes32[]) private reverseRayTokens;
 
 
     event InvestmentRAY(bytes32 portfolioId, address beneficiary, uint256 value, bytes32 rayTokenId);
@@ -271,6 +271,14 @@ contract RAYIntegration is Initializable, ERC721Holder {
         } else {
             beneficiary.transfer(value);
             emit FundsTransferRAY(address(0), address(this), beneficiary, value);
+        }
+    }
+
+    function getSenderTokens() external view returns (address payable[] memory result) {
+        bytes32[] memory tokensId = reverseRayTokens[msg.sender];
+        result = new address payable[](tokensId.length);
+        for (uint i = 0; i < tokensId.length; i++) {
+            result[i] = rayTokens[tokensId[i]];
         }
     }
 }

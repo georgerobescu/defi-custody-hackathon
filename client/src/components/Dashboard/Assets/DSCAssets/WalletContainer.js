@@ -27,7 +27,7 @@ const WalletContainer = ({ DSCStore, Web3Store }) => {
   }, [DSCStore, walletAddress]);
 
   useEffect(() => {
-    const setWalletAndFetchSmartContractData = async () => {
+    const fetchSmartContractData = async () => {
       console.log(DSCStore.walletAddress, " wallet found! fetching data.");
       const balances = await fetchUserBalances(
         Web3Store.defaultAccount,
@@ -40,7 +40,7 @@ const WalletContainer = ({ DSCStore, Web3Store }) => {
       DSCStore.setTokensFetched(true);
       console.log(DSCStore.walletAddress, " wallet data fetched.");
     };
-    DSCStore.walletAddress && setWalletAndFetchSmartContractData();
+    DSCStore.walletAddress && fetchSmartContractData();
   }, [
     DSCStore,
     DSCStore.walletAddress,

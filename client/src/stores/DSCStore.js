@@ -1,4 +1,4 @@
-import { action, computed, observable } from "mobx";
+import { action, observable } from "mobx";
 
 class DSCStore {
   @observable addresses = [undefined, undefined, undefined, undefined];
