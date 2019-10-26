@@ -1,4 +1,5 @@
 const web3Library = require('web3')
+// Create your own key for Production environments (https://infura.io/)
 
 const fs = require('fs')
 
