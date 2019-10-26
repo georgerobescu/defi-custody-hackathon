@@ -1,5 +1,4 @@
 const web3Library = require('web3')
-const HDWalletProvider = require("truffle-hdwallet-provider");
 // Create your own key for Production environments (https://infura.io/)
 
 const fs = require('fs')
