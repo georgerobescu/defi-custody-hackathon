@@ -21,9 +21,9 @@ contract DeFiCustodyRegistry is Initializable, Ownable, DCWallet, RAYIntegration
         uint share,
         uint value);
 
-    function init(address _rayStorage, address owner) external initializer {
+    function init(address _rayStorage, address owner) public initializer {
         RAYIntegration.init(_rayStorage);
-        _transferOwnership(owner);
+        RecoveryLogic.init(owner);
     }
 
     function getTokens() external view returns(address[] memory) {
