@@ -19,7 +19,7 @@ const View = ({ DSCStore, wallet }) => {
         {DSCStore.tokens.map((token, i) => (
           <tr key={token.address + i}>
             <CenteredTD>{token.name}</CenteredTD>
-            <CenteredTD>{token.balance + " " + token.symbol}</CenteredTD>
+            <CenteredTD>{token.decimalBalance + " " + token.symbol}</CenteredTD>
             <td>
               <TransferButtons token={token} />
             </td>

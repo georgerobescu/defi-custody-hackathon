@@ -29,7 +29,7 @@ const withDrizzle = Component => {
     } else if (DSCStore.drizzle) {
       return (
         <DrizzleProvider drizzle={DSCStore.drizzle}>
-          <DrizzleConnectionSetter Component={Component} {...props} />;
+          <DrizzleConnectionSetter Component={Component} {...props} />
         </DrizzleProvider>
       );
     }

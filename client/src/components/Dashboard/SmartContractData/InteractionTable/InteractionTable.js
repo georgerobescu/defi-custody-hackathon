@@ -1,20 +1,28 @@
 import React, { useState } from "react";
 import {
-  OneRemInput,
-  SmallInput,
   CenteredTD,
-  Table,
-  PercentageInput
+  PercentageInput,
+  SmallInput,
+  Table
 } from "../../../../styled";
 import { Button } from "rimble-ui";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
 import Address from "./Address";
+import { toast } from "react-toastify";
 
 const InteractionTable = ({ DSCStore }) => {
   const { tokens, addresses, setAddresses } = DSCStore;
   const changePercentage = (tokenIndex, address) => ({ target: { value } }) => {
     DSCStore.changePercentage(tokenIndex, address, value);
+  };
+  const updatePercentage = tokenIndex => () => {
+    const sum = DSCStore.percentageSum(tokenIndex);
+    if (sum !== 100) {
+      toast.error(`Ooops, wrong percentage sum, ${sum}`);
+      return;
+    }
+    DSCStore.updatePercentage(tokenIndex);
   };
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [newAddress, setNewAddress] = useState("");
@@ -81,7 +89,16 @@ const InteractionTable = ({ DSCStore }) => {
                 </CenteredTD>
               );
             })}
-            <td />
+            <td>
+              <Button
+                iconpos="right"
+                size="small"
+                disabled={!DSCStore.isInteractionAllowed}
+                onClick={updatePercentage(tokenIndex)}
+              >
+                Update
+              </Button>
+            </td>
           </tr>
         ))}
       </tbody>

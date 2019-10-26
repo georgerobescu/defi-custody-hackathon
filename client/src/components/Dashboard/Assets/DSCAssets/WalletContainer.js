@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
 import Wallet from "./Wallet";
 import { isZeroAddress } from "../../../../utils/ethereum";
 import { drizzleReactHooks } from "../../../../drizzle";
-import { fetchUserBalances } from "../../../../blockchain/SmartContractCalls";
+import {
+  fetchUserBalances,
+  fetchWallet,
+  mergeTokenAndBalances
+} from "../../../../blockchain/SmartContractCalls";
 
 const WalletContainer = ({ DSCStore, Web3Store }) => {
   const { useCacheCall } = drizzleReactHooks.useDrizzle();
@@ -12,11 +16,38 @@ const WalletContainer = ({ DSCStore, Web3Store }) => {
     "DeFiCustodyRegistry",
     "getWalletBySender"
   );
-  if (!isZeroAddress(walletAddress)) {
-    //TODO fix workaround !DSCStore.walletAddress in if statement not working
-    !DSCStore.walletAddress && DSCStore.setWalletAddress(walletAddress);
-    !DSCStore.walletAddress && fetchUserBalances(Web3Store.defaultAccount);
-  }
+  useEffect(() => {
+    if (
+      walletAddress &&
+      !isZeroAddress(walletAddress) &&
+      !DSCStore.walletAddress
+    ) {
+      DSCStore.setWalletAddress(walletAddress);
+    }
+  }, [DSCStore, walletAddress]);
+
+  useEffect(() => {
+    const setWalletAndFetchSmartContractData = async () => {
+      console.log(DSCStore.walletAddress, " wallet found! fetching data.");
+      const balances = await fetchUserBalances(
+        Web3Store.defaultAccount,
+        Web3Store.web3.utils.toBN
+      );
+      const [tokens, addresses] = await fetchWallet(Web3Store.web3, DSCStore);
+      const mergedTokens = mergeTokenAndBalances(balances, tokens);
+      DSCStore.setTokens(mergedTokens);
+      DSCStore.setAddresses(addresses);
+      DSCStore.setTokensFetched(true);
+      console.log(DSCStore.walletAddress, " wallet data fetched.");
+    };
+    DSCStore.walletAddress && setWalletAndFetchSmartContractData();
+  }, [
+    DSCStore,
+    DSCStore.walletAddress,
+    Web3Store.defaultAccount,
+    Web3Store.web3
+  ]);
+
   return <Wallet walletAddress={walletAddress} />;
 };
 

@@ -1,4 +1,4 @@
-import { action, observable } from "mobx";
+import { action, computed, observable } from "mobx";
 
 class DSCStore {
   @observable addresses = [undefined, undefined, undefined, undefined];
@@ -41,7 +41,6 @@ class DSCStore {
   @action
   changePercentage = (tokenIndex, address, value) => {
     if (this.tokens[tokenIndex].amount === 0) return;
-    console.log(this.tokens[tokenIndex].amount);
     value = parseInt(value);
     if (value > 100) {
       value = 100;
@@ -106,6 +105,20 @@ class DSCStore {
   @action
   setWalletAddress = address => {
     this.walletAddress = address;
+  };
+
+  @action
+  updatePercentage = tokenIndex => {
+    console.log(this.tokens[tokenIndex], "token percentage updated");
+  };
+
+  percentageSum = tokenIndex => {
+    let sum = 0;
+    this.addresses.forEach(addr => {
+      if (this.tokens[tokenIndex].percentage[addr])
+        sum += this.tokens[tokenIndex].percentage[addr];
+    });
+    return sum;
   };
 }
 

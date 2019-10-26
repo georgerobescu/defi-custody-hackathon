@@ -3,39 +3,30 @@ import { generateDicimaledBalance } from "../utils/ethereum";
 
 const API_KEY = "UAK3dea068114955255b188b0cdfd12c9ae";
 const RINKEBY_ID = "1b3f7a72b3e99c13";
+const allowedTokens = ["0x742ba81f0d827c7de4fbf077ac57a74a20ea029b"];
 
-export const fetchWallet = (web3, DSCStore) => {
-  fetchTokens(DSCStore);
+const filterToken = token => {
+  return allowedTokens.includes(token.address);
 };
-export const fetchTokens = DSCStore => {
+
+export const fetchWallet = async (web3, DSCStore) => {
+  return await fetchTokens(DSCStore);
+};
+
+export const fetchTokens = async DSCStore => {
   const dummyTokens = [
     {
-      address: "0x21",
-      name: "DAI",
-      symbol: "DAI",
-      balance: 100.93,
+      address: "0x742ba81f0d827c7de4fbf077ac57a74a20ea029b",
       amount: 7.93,
       earnings: 1,
       percentage: {}
-    },
-    {
-      address: "0x22",
-      name: "DAI1",
-      symbol: "DAI1",
-      balance: 100,
-      amount: 4.93,
-      earnings: 2,
-      percentage: {}
-    },
-    {
-      address: "0x23",
-      name: "DAI2",
-      symbol: "DAI2",
-      balance: 200.93,
-      amount: 0.93,
-      earnings: 3,
-      percentage: {}
     }
+    // {
+    //   address: "0x22",
+    //   amount: 4.93,
+    //   earnings: 2,
+    //   percentage: {}
+    // }
   ];
   const dummyAddresses = [
     "0x004120f424F83417C68109Cc8522594c22528d3c",
@@ -43,9 +34,7 @@ export const fetchTokens = DSCStore => {
     "0x004120f424F83417C68109Cc8522594c2252abcd",
     "0x004120f424F83417C68109Cc8522594c22525678"
   ];
-  DSCStore.setTokens(dummyTokens);
-  DSCStore.setAddresses(dummyAddresses);
-  DSCStore.setTokensFetched(true);
+  return [dummyTokens, dummyAddresses];
 };
 
 export const depositTokens = (web3, amount, token) => {
@@ -57,7 +46,13 @@ export const withdrawTokens = (web3, amount, token) => {
 
 export const fetchUserBalances = async (address, toBN) => {
   const balances = await fetchBalances(address, toBN);
-  return balances.filter(balance => filterToken(balance));
+  const tokens = {};
+  balances
+    .filter(balance => filterToken(balance))
+    .forEach(balance => {
+      tokens[balance.address] = balance;
+    });
+  return tokens;
 };
 
 export const fetchBalances = async (address, toBN) => {
@@ -85,7 +80,5 @@ export const fetchBalances = async (address, toBN) => {
   }
 };
 
-const filterToken = balance => {
-  console.log(balance);
-  return true;
-};
+export const mergeTokenAndBalances = (balances, tokens) =>
+  tokens.map(token => ({ ...balances[token.address], ...token }));
