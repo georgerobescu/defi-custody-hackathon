@@ -1,8 +1,9 @@
 pragma solidity >=0.5.0 <0.6.0;
 
 import "@openzeppelin/contracts/ownership/Ownable.sol";
+import "@openzeppelin/upgrades/contracts/Initializable.sol";
 
-contract RecoveryLogic is Ownable {
+contract RecoveryLogic is Initializable, Ownable {
     address[] public dcWalletsList;
 
     mapping(address => uint256) public lastAction;
@@ -22,6 +23,10 @@ contract RecoveryLogic is Ownable {
     modifier ifRecoverable(address wallet) {
         require(isRecoverable(wallet), "#RecoveryLogic ifRecoverable() modifier: Contract is not recoverable");
         _;
+    }
+
+    function init(address owner) public initializer {
+        _transferOwnership(owner);
     }
 
     /**
