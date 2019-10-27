@@ -63,14 +63,11 @@ const RAYIntegrationTestSuite = async (accounts, dependencies) => {
         rayTokenId,
         value,
         user1
-      ).send({ from: user1, value: 0, gas: 900000 });
+      ).send({ from: watchtower, value: 0, gas: 900000 });
 
       let daiBalanceAfter = await Coins.getDAIBalance(user1);
 
       assert.equal(daiBalanceAfter.toString(), (new BN(value)).add(daiBalanceBefore).toString());
-
-      // expect(daiBalanceAfter.toString()).to.be.bignumber.equal((new BigNumber(value)).plus(daiBalanceBefore));
-
     });
   });
 
