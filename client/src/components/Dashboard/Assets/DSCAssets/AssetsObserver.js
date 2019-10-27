@@ -10,7 +10,10 @@ import {
 import { drizzleReactHooks } from "../../../../drizzle";
 const AssetsObserver = ({ DSCStore, Web3Store }) => {
   const { useCacheCall } = drizzleReactHooks.useDrizzle();
-  const supportedTokens = ["0xc4375b7de8af5a38a93548eb8453a498222c4ff2"]; //useCacheCall("DeFiCustodyRegistry", "getTokens");
+  //useCacheCall("DeFiCustodyRegistry", "getTokens");
+  // kovan 0xc4375b7de8af5a38a93548eb8453a498222c4ff2
+  const supportedTokens = ["0x7F6319187249dB5ec845F92ffA3318A9E6604293"];
+
   const smartContractTokens = useCacheCall(
     "DeFiCustodyRegistry",
     "getSenderTokens"
@@ -26,6 +29,7 @@ const AssetsObserver = ({ DSCStore, Web3Store }) => {
         Web3Store.defaultAccount,
         Web3Store.web3.utils.toBN
       );
+      console.log(balances);
       const [smartContractAssets, addresses] = await fetchSmartContractAssets(
         Web3Store,
         DSCStore,

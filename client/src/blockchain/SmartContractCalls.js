@@ -109,7 +109,7 @@ export const fetchUserBalance = async (DSCStore, address, toBN) => {
   // await DSCStore.drizzle.contracts.MockedERC20.methods
   //   .symbol()
   //   .call();
-  const decimals = 2;
+  const decimals = 0;
   // await DSCStore.drizzle.contracts.MockedERC20.methods
   //   .decimals()
   //   .call();
