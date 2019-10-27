@@ -3,8 +3,10 @@ DeFi Custody proof of concept for SF hackathon
 
 
 ## Run Ganache (with RAY) for testing
-` docker-compose -f ganache-docker-ray.yml build`
-` docker-compose -f ganache-docker-ray.yml up`
+```
+docker-compose -f ganache-docker-ray.yml build
+docker-compose -f ganache-docker-ray.yml up
+```
 
 ## Smart Contract Deployment
 
