@@ -66,8 +66,19 @@ export const fetchRayTokenBalances = async DSCStore => {
   ];
   return [dummyTokens, dummyAddresses];
 };
+// TODO fix porfolioId
+const BZX_COMPOUND_DYDX =
+  "0x87e3990b15e1e64e3a17b0e4ebfcc4c03cc5ec64a33b442ae01ef15d9dadb575";
 
-export const depositTokens = (web3, amount, token) => {
+export const depositTokens = async (Web3Store, amount, token) => {
+  const data = {
+    portfolioId: BZX_COMPOUND_DYDX,
+    payableBeneficiary: Web3Store.defaultAccount,
+    value: amount
+  };
+  const request = await fetchDeFi("invest", data);
+  console.log("sdf");
+  console.log(request);
   console.log("Smart contract call, deposit", amount);
 };
 export const withdrawTokens = (web3, amount, token) => {
@@ -144,3 +155,25 @@ export const mergeTokenAndBalances = (
     ...balances[token],
     ...smartContractAssets[token]
   }));
+
+const fetchDeFi = async (uri = "", data = {}, method = "POST") => {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_MAIN_URL}${uri}`, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json"
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      redirect: "follow",
+      referrer: "no-referrer",
+      body: JSON.stringify(data)
+    });
+    console.log("Success:");
+    return await response.json();
+  } catch (error) {
+    console.error("Failure:", error);
+  }
+};
