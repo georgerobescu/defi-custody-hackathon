@@ -85,7 +85,7 @@ export const withdrawTokens = (web3, amount, token) => {
   console.log("Smart contract call, withdraw", amount);
 };
 
-// TODO wotk only on mainnet and rinkeby
+// TODO work only on mainnet and rinkeby
 export const fetchUserBalances = async (address, toBN) => {
   const balances = await fetchBalances(address, toBN);
   const tokens = {};
@@ -96,18 +96,23 @@ export const fetchUserBalances = async (address, toBN) => {
 };
 
 export const fetchUserBalance = async (DSCStore, address, toBN) => {
+  console.log("DAI address: ", DSCStore.drizzle.contracts.MockedERC20.address);
   const amount = await DSCStore.drizzle.contracts.MockedERC20.methods
     .balanceOf(address)
     .call();
-  const name = await DSCStore.drizzle.contracts.MockedERC20.methods
-    .name()
-    .call();
-  const symbol = await DSCStore.drizzle.contracts.MockedERC20.methods
-    .symbol()
-    .call();
-  const decimals = await DSCStore.drizzle.contracts.MockedERC20.methods
-    .decimals()
-    .call();
+  console.log(amount);
+  const name = "Dai test";
+  // await DSCStore.drizzle.contracts.MockedERC20.methods
+  //   .name()
+  //   .call();
+  const symbol = "DAI";
+  // await DSCStore.drizzle.contracts.MockedERC20.methods
+  //   .symbol()
+  //   .call();
+  const decimals = 2;
+  // await DSCStore.drizzle.contracts.MockedERC20.methods
+  //   .decimals()
+  //   .call();
   const balance = {
     balance: parseInt(amount),
     amount: 0,

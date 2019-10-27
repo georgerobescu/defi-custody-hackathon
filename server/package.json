@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "NODE_ENV=prod DEFICUSTODY_PRIVATE_KEY=5905E46ED8D4ECCB91930EE066A9DA50B3EB4BCEE69BAD44EED76E7767BF1A06 INFURA_ID=968e061bbb804d07a7b592852de2052a NETWORK=kovan nodemon ./bin/www --ignore config/"
+    "dev": "nodemon ./bin/www --ignore config/",
+    "prod_dev": "NODE_ENV=prod DEFICUSTODY_PRIVATE_KEY=5905E46ED8D4ECCB91930EE066A9DA50B3EB4BCEE69BAD44EED76E7767BF1A06 INFURA_ID=968e061bbb804d07a7b592852de2052a NETWORK=kovan nodemon ./bin/www --ignore config/"
   },
   "dependencies": {
     "cors": "^2.8.5",

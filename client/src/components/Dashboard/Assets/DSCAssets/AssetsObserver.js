@@ -8,17 +8,19 @@ import {
   fetchUserBalance
 } from "../../../../blockchain/SmartContractCalls";
 import { drizzleReactHooks } from "../../../../drizzle";
-
 const AssetsObserver = ({ DSCStore, Web3Store }) => {
   const { useCacheCall } = drizzleReactHooks.useDrizzle();
-  const supportedTokens = useCacheCall("DeFiCustodyRegistry", "getTokens");
+  const supportedTokens = ["0xc4375b7de8af5a38a93548eb8453a498222c4ff2"]; //useCacheCall("DeFiCustodyRegistry", "getTokens");
   const smartContractTokens = useCacheCall(
     "DeFiCustodyRegistry",
     "getSenderTokens"
   );
   useEffect(() => {
     const fetchSmartContractData = async () => {
-      console.log("Fetching data.");
+      console.log(
+        "Fetching data from DeFiCustody: ",
+        DSCStore.drizzle.contracts.DeFiCustodyRegistry.address
+      );
       const balances = await fetchUserBalance(
         DSCStore,
         Web3Store.defaultAccount,
