@@ -1,12 +1,25 @@
 const web3Library = require('web3')
+
 const fs = require('fs')
 
+const mnemonic = process.env.DEFICUSTODY_PRIVATE_KEY;
+const network = process.env.NETWORK || "development";
+const INFURA_ID = process.env.INFURA_ID || 'd6760e62b67f4937ba1ea2691046f06d';
+
+const path = "m/44'/60'/0'/0/"
 class Web3 {
 
   constructor() {
-    const { providerConfig, gas } = JSON.parse(
+    var providerConfig
+    const gas = JSON.parse(
       fs.readFileSync(`${__dirname}/../config/deployConfig.json`, 'utf8'),
     )
+    if (network == "development") {
+      providerConfig = "http://localhost:8545";
+    } else {
+      providerConfig = `https://${network}.infura.io/v3/${INFURA_ID}`
+    }
+
     this.gas = gas
     const provider = new web3Library.providers.HttpProvider(providerConfig)
     const web3 = new web3Library(provider)
@@ -20,9 +33,12 @@ class Web3 {
   async initAccount() {
     const accounts = await this._web3.eth.getAccounts()
     if (accounts.length === 0) {
-      const privateKey = '0x' +
-        fs.readFileSync(`${__dirname}/../config/privateKey`, 'utf8')
-
+      if (mnemonic == "") {
+        var privateKey = '0x' +
+          fs.readFileSync(`${__dirname}/../config/privateKey`, 'utf8')
+      } else {
+        var privateKey = mnemonic;
+      }
       const account = this._web3.eth.accounts.privateKeyToAccount(privateKey)
       this._web3.eth.accounts.wallet.add(account)
       this._web3.eth.defaultAccount = account.address

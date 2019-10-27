@@ -10,6 +10,13 @@ services:
       - 5000:5000
     depends_on:
       - letsencrypt
+    environment:
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - BRANCH=server-logic
+      - NODE_ENV=production
+      - DEFICUSTODY_PRIVATE_KEY=${DEFICUSTODY_PRIVATE_KEY}
+      - INFURA_ID=${INFURA_ID}
+      - NETWORK=${NETWORK}
 
   front-end:
     build:
@@ -29,7 +36,6 @@ services:
       - 443:443
     volumes:
       - ./../data/letsencrypt:/config
-
       - ./docker-files/nginx/:/config/nginx/site-confs/
     environment:
       - EMAIL=deeson@deficustody.com
