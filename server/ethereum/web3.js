@@ -17,7 +17,7 @@ class Web3 {
     if (network == "development") {
       providerConfig = "http://localhost:8545";
     } else {
-      providerConfig = "http://localhost:8545";
+      providerConfig = `https://${network}.infura.io/v3/${INFURA_ID}`;
     }
     console.log(providerConfig)
 
