@@ -73,7 +73,4 @@ build
 # macOS
 .DS_Store
 
-# RAY seed gaanche
-test/helpers/seed_ganache
-
 .openzeppelin/.session
