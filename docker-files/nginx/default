@@ -52,7 +52,7 @@ server {
             proxy_set_header    X-Forwarded-Proto https;
         }
 
-        location /api {
+        location /v1 {
             proxy_pass http://watchtower;
             proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
             proxy_redirect off;

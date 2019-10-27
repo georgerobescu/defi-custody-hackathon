@@ -26,4 +26,4 @@ const recoveryFunc = async function () {
   console.log("process finished")
 }
 
-module.exports = recoveryFunc;
+module.exports = { recoveryFunc };
