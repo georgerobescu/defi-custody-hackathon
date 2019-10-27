@@ -1,0 +1,8 @@
+version: '3'
+services:
+  chain:
+    build: .
+    image: robo_advisor_yield_ganache
+    command: yarn-run docker_chain
+    ports:
+    - 8545:8545
