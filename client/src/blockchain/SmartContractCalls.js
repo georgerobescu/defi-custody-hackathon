@@ -72,17 +72,26 @@ const BZX_COMPOUND_DYDX =
   "0x87e3990b15e1e64e3a17b0e4ebfcc4c03cc5ec64a33b442ae01ef15d9dadb575";
 
 export const depositTokens = async (Web3Store, amount, token, DSCStore) => {
-  DSCStore.drizzle.contracts.MockedERC20.methods.approve().send();
-  // const data = {
-  //   portfolioId: BZX_COMPOUND_DYDX,
-  //   payableBeneficiary: Web3Store.defaultAccount,
-  //   value: amount
-  // };
-  // const request = await fetchDeFi("invest", data);
-  console.log("sdf");
-  // console.log(request);
+  console.log(token.address, amount);
+  console.log(
+    await DSCStore.drizzle.contracts.MockedERC20.methods
+      .balanceOf(Web3Store.defaultAccount)
+      .call()
+  );
+  const transaction = await DSCStore.drizzle.contracts.MockedERC20.methods
+    .transfer(token.address, amount)
+    .send();
+  console.log(transaction);
+  const data = {
+    portfolioId: BZX_COMPOUND_DYDX,
+    payableBeneficiary: Web3Store.defaultAccount,
+    value: amount
+  };
+  const request = await fetchDeFi("invest", data);
+  console.log(request);
   console.log("Smart contract call, deposit", amount);
 };
+
 export const withdrawTokens = (web3, amount, token) => {
   console.log("Smart contract call, withdraw", amount);
 };
@@ -102,7 +111,6 @@ export const fetchUserBalance = async (DSCStore, address, toBN) => {
   const amount = await DSCStore.drizzle.contracts.MockedERC20.methods
     .balanceOf(address)
     .call();
-  console.log(amount);
   const name = "Dai test";
   // await DSCStore.drizzle.contracts.MockedERC20.methods
   //   .name()
