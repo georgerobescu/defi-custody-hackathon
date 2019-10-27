@@ -1,9 +1,9 @@
-export const generateDicimaledBalance = (balance, toBN) => {
-  const divisor = toBN("10").pow(toBN(balance.decimals));
-  const beforeDecimal = toBN(balance.amount)
+export const generateDicimaledBalance = (balance, decimals, toBN) => {
+  const divisor = toBN("10").pow(toBN(decimals));
+  const beforeDecimal = toBN(balance)
     .div(divisor)
     .toString();
-  let afterDecimal = toBN(balance.amount)
+  let afterDecimal = toBN(balance)
     .mod(divisor)
     .toString();
   if (afterDecimal.length < 2) {
@@ -16,8 +16,7 @@ export const generateDicimaledBalance = (balance, toBN) => {
       afterDecimal = afterDecimal.substring(0, afterDecimal.length - 1);
     }
   }
-  const decimalBalance = beforeDecimal + "." + afterDecimal;
-  return { ...balance, decimalBalance };
+  return beforeDecimal + "." + afterDecimal;
 };
 
 export const toShortAddress = address =>

@@ -8,20 +8,7 @@ contract MockedERC20 is ERC20 {
     uint8 public _decimals = 2;
 
     constructor() public {
-        _mint(msg.sender, 1000000);
-    }
-
-    // Function to access name of token .
-    function name() public view returns (string memory) {
-        return _name;
-    }
-    // Function to access symbol of token .
-    function symbol() public view returns (string memory) {
-        return _symbol;
-    }
-    // Function to access decimals of token .
-    function decimals() public view returns (uint8) {
-        return _decimals;
+        _mint(msg.sender, 1 ether);
     }
 
     // Function to access name of token .

@@ -87,7 +87,7 @@ contract RAYIntegration is Initializable, ERC721Holder {
         return keccak256(abi.encodePacked(portfolioDescription));
     }
 
-    function getRayTokens(address wallet) public returns (bytes32[] memory) {
+    function getRayTokens(address wallet) public view returns (bytes32[] memory) {
         return reverseRayTokens[wallet];
     }
 
@@ -274,11 +274,17 @@ contract RAYIntegration is Initializable, ERC721Holder {
         }
     }
 
-    function getSenderTokens() external view returns (address payable[] memory result) {
+    function getSenderTokens() external view returns (address [] memory tokens, uint[] memory balances) {
         bytes32[] memory tokensId = reverseRayTokens[msg.sender];
-        result = new address payable[](tokensId.length);
+        tokens = new address [](tokensId.length);
+        balances = new uint[](tokensId.length);
         for (uint i = 0; i < tokensId.length; i++) {
-            result[i] = rayTokens[tokensId[i]];
+            bytes32 portfolioId = rayStorage.getTokenKey(tokensId[i]);
+            uint tokenValue;
+            uint pricePerShare;
+            (tokenValue, pricePerShare) = IRAY(rayStorage.getContractAddress(NAV_CALCULATOR_CONTRACT)).getTokenValue(portfolioId, tokensId[i]);
+            tokens[i] = rayStorage.getPrincipalAddress(portfolioId);
+            balances[i] = tokenValue;
         }
     }
 }

@@ -6,7 +6,7 @@ import { isZeroAddress } from "../../../../utils/ethereum";
 import { drizzleReactHooks } from "../../../../drizzle";
 import {
   fetchUserBalances,
-  fetchWallet,
+  fetchSmartContractAssets,
   mergeTokenAndBalances
 } from "../../../../blockchain/SmartContractCalls";
 
@@ -33,7 +33,10 @@ const WalletContainer = ({ DSCStore, Web3Store }) => {
         Web3Store.defaultAccount,
         Web3Store.web3.utils.toBN
       );
-      const [tokens, addresses] = await fetchWallet(Web3Store.web3, DSCStore);
+      const [tokens, addresses] = await fetchSmartContractAssets(
+        Web3Store.web3,
+        DSCStore
+      );
       const mergedTokens = mergeTokenAndBalances(balances, tokens);
       DSCStore.setTokens(mergedTokens);
       DSCStore.setAddresses(addresses);

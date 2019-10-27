@@ -4,7 +4,7 @@ require('dotenv').config();
 const { copyRayBuilds } = require("./test/utils/ray.js");
 copyRayBuilds();
 
-const mnemonic = process.env.DEFICUSTODY_PRIVATE_KEY;
+const privateKey = process.env.DEFICUSTODY_PRIVATE_KEY;
 const HDWalletProvider = require("truffle-hdwallet-provider");
 // Create your own key for Production environments (https://infura.io/)
 const INFURA_ID = process.env.INFURA_ID || 'd6760e62b67f4937ba1ea2691046f06d';

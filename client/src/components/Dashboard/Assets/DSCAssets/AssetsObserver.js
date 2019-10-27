@@ -3,33 +3,45 @@ import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
 import {
   fetchUserBalances,
-  fetchWallet,
-  mergeTokenAndBalances
+  fetchSmartContractAssets,
+  mergeTokenAndBalances,
+  fetchUserBalance
 } from "../../../../blockchain/SmartContractCalls";
 import { drizzleReactHooks } from "../../../../drizzle";
 
 const AssetsObserver = ({ DSCStore, Web3Store }) => {
   const { useCacheCall } = drizzleReactHooks.useDrizzle();
-  const tokens = useCacheCall("DeFiCustodyRegistry", "getSenderTokens");
+  const supportedTokens = useCacheCall("DeFiCustodyRegistry", "getTokens");
+  const smartContractTokens = useCacheCall(
+    "DeFiCustodyRegistry",
+    "getSenderTokens"
+  );
   useEffect(() => {
-    console.log(tokens);
-    console.log();
     const fetchSmartContractData = async () => {
       console.log("Fetching data.");
-      const balances = await fetchUserBalances(
+      const balances = await fetchUserBalance(
+        DSCStore,
         Web3Store.defaultAccount,
         Web3Store.web3.utils.toBN
       );
-      const [tokens, addresses] = await fetchWallet(Web3Store.web3, DSCStore);
-      const mergedTokens = mergeTokenAndBalances(balances, tokens);
-      DSCStore.setTokens(mergedTokens);
+      const [smartContractAssets, addresses] = await fetchSmartContractAssets(
+        Web3Store,
+        DSCStore,
+        smartContractTokens
+      );
+      const mergedTokens = mergeTokenAndBalances(
+        supportedTokens,
+        balances,
+        smartContractAssets
+      );
       DSCStore.setAddresses(addresses);
+      DSCStore.setTokens(mergedTokens);
       DSCStore.setTokensFetched(true);
       console.log("Data fetched.");
     };
-    tokens && fetchSmartContractData();
+    supportedTokens && smartContractTokens && fetchSmartContractData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tokens]);
+  }, [supportedTokens, smartContractTokens]);
   return null;
 };
 

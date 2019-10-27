@@ -25,7 +25,9 @@ const Wallet = ({ walletAddress }) => {
     currentStatus = TXObjects[TXObjects.length - 1];
     if (currentStatus.status === Status.SUCCESS) {
       currentStatus.successTitle = "Wallet created!";
-      currentStatus.successSubtitle = `New DS wallet address: ${currentStatus.receipt.events.NewWallet.returnValues.proxy}`;
+      currentStatus.successSubtitle = `New DS wallet address: ${
+        currentStatus.receipt.events.NewWallet.returnValues.proxy
+      }`;
     }
   }
   return isZeroAddress(walletAddress) ? (

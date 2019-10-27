@@ -1,29 +1,46 @@
 import React from "react";
-import { CenteredTD, Table } from "../../../../styled";
+import { CenteredTD, CenteredTH, Table } from "../../../../styled";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
-import TransferButtons from "../TransferButtons";
+import TransferButtons from "./TransferButtons";
+import { generateDicimaledBalance } from "../../../../utils/ethereum";
 
-const View = ({ DSCStore, wallet }) => {
+const View = ({ DSCStore, wallet, Web3Store }) => {
   return (
     <Table title={wallet} fullWidth={true}>
       <thead>
         <tr>
-          <th>Asset</th>
-          <th>Wallet Balance</th>
+          <CenteredTH>Asset</CenteredTH>
+          <CenteredTH>Wallet Balance</CenteredTH>
           <th />
-          <th>Defi Custody Balance</th>
+          <CenteredTH>Defi Custody Balance</CenteredTH>
         </tr>
       </thead>
       <tbody>
         {DSCStore.tokens.map((token, i) => (
           <tr key={token.address + i}>
             <CenteredTD>{token.name}</CenteredTD>
-            <CenteredTD>{token.decimalBalance + " " + token.symbol}</CenteredTD>
+            <CenteredTD>
+              {token.balance
+                ? generateDicimaledBalance(
+                    token.balance,
+                    token.decimals,
+                    Web3Store.web3.utils.toBN
+                  )
+                : 0 + " " + token.symbol}
+            </CenteredTD>
             <td>
               <TransferButtons token={token} />
             </td>
-            <CenteredTD>{token.amount + " " + token.symbol}</CenteredTD>
+            <CenteredTD>
+              {token.amount
+                ? generateDicimaledBalance(
+                    token.amount,
+                    token.decimals,
+                    Web3Store.web3.utils.toBN
+                  )
+                : 0 + " " + token.symbol}
+            </CenteredTD>
           </tr>
         ))}
       </tbody>
@@ -32,6 +49,6 @@ const View = ({ DSCStore, wallet }) => {
 };
 
 export default compose(
-  inject("DSCStore"),
+  inject("DSCStore", "Web3Store"),
   observer
 )(View);

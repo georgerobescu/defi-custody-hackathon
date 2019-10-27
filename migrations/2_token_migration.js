@@ -1,6 +1,4 @@
 const DeFiCustodyRegistry = artifacts.require("./DeFiCustodyRegistry.sol");
-// TODO: remove after Wallet implementation is developed
-const Migrations = artifacts.require("./Migrations.sol");
 
 module.exports = async deployer => {
   await deployer.deploy(DeFiCustodyRegistry);

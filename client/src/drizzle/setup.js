@@ -1,9 +1,10 @@
 import { Drizzle, generateStore } from "drizzle";
-import SimpleStorage from "../../../contracts/DeFiCustodyRegistry.sol";
+import DeFiCustodyRegistry from "../../../contracts/DeFiCustodyRegistry.sol";
+import FakeDAI from "../../../contracts/MockedERC20.sol";
 let drizzle;
 const getDrizzleStore = () => {
   if (!drizzle) {
-    const options = { contracts: [SimpleStorage] };
+    const options = { contracts: [DeFiCustodyRegistry, FakeDAI] };
     const drizzleStore = generateStore(options);
     drizzle = new Drizzle(options, drizzleStore);
   }

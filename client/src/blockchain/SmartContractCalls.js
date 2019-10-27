@@ -3,17 +3,47 @@ import { generateDicimaledBalance } from "../utils/ethereum";
 
 const API_KEY = "UAK3dea068114955255b188b0cdfd12c9ae";
 const RINKEBY_ID = "1b3f7a72b3e99c13";
-const allowedTokens = ["0x742ba81f0d827c7de4fbf077ac57a74a20ea029b"];
 
-const filterToken = token => {
-  return allowedTokens.includes(token.address);
+export const fetchSmartContractAssets = async (
+  Web3Store,
+  DSCStore,
+  smartContractTokens
+) => {
+  const tokens = {};
+  const recoveryWallets = await DSCStore.drizzle.contracts.DeFiCustodyRegistry.methods
+    .getRecoveryWallets(Web3Store.defaultAccount)
+    .call();
+  const percentages = [];
+  for (let i = 0; i < smartContractTokens.tokens.length; i++) {
+    const promises = recoveryWallets.map(recoveryWallet =>
+      DSCStore.drizzle.contracts.DeFiCustodyRegistry.recoverySheet(
+        Web3Store.defaultAccount,
+        recoveryWallet,
+        smartContractTokens.tokens[i]
+      ).call()
+    );
+    const percentage = await Promise.all(promises);
+    const tokenPercentage = {};
+    percentage.forEach((percent, i) => {
+      tokenPercentage[recoveryWallets[i]] = percent;
+    });
+    percentages.push(percentage);
+  }
+  //TODO earnings
+  smartContractTokens.tokens
+    .map((token, i) => ({
+      address: token,
+      amount: smartContractTokens.balances[i],
+      percentage: percentages[i],
+      earnings: 0
+    }))
+    .forEach(token => {
+      tokens[token.address] = token;
+    });
+  return [tokens, recoveryWallets];
 };
 
-export const fetchWallet = async (web3, DSCStore) => {
-  return await fetchTokens(DSCStore);
-};
-
-export const fetchTokens = async DSCStore => {
+export const fetchRayTokenBalances = async DSCStore => {
   const dummyTokens = [
     {
       address: "0x742ba81f0d827c7de4fbf077ac57a74a20ea029b",
@@ -44,15 +74,40 @@ export const withdrawTokens = (web3, amount, token) => {
   console.log("Smart contract call, withdraw", amount);
 };
 
+// TODO wotk only on mainnet and rinkeby
 export const fetchUserBalances = async (address, toBN) => {
   const balances = await fetchBalances(address, toBN);
   const tokens = {};
-  balances
-    .filter(balance => filterToken(balance))
-    .forEach(balance => {
-      tokens[balance.address] = balance;
-    });
+  balances.forEach(balance => {
+    tokens[balance.address] = balance;
+  });
   return tokens;
+};
+
+export const fetchUserBalance = async (DSCStore, address, toBN) => {
+  const amount = await DSCStore.drizzle.contracts.MockedERC20.methods
+    .balanceOf(address)
+    .call();
+  const name = await DSCStore.drizzle.contracts.MockedERC20.methods
+    .name()
+    .call();
+  const symbol = await DSCStore.drizzle.contracts.MockedERC20.methods
+    .symbol()
+    .call();
+  const decimals = await DSCStore.drizzle.contracts.MockedERC20.methods
+    .decimals()
+    .call();
+  const balance = {
+    balance: parseInt(amount),
+    amount: 0,
+    name,
+    symbol,
+    decimals: parseInt(decimals),
+    address: DSCStore.drizzle.contracts.MockedERC20.options.address
+  };
+  const token = {};
+  token[DSCStore.drizzle.contracts.MockedERC20.options.address] = balance;
+  return token;
 };
 
 export const fetchBalances = async (address, toBN) => {
@@ -80,5 +135,12 @@ export const fetchBalances = async (address, toBN) => {
   }
 };
 
-export const mergeTokenAndBalances = (balances, tokens) =>
-  tokens.map(token => ({ ...balances[token.address], ...token }));
+export const mergeTokenAndBalances = (
+  supportedTokens,
+  balances,
+  smartContractAssets
+) =>
+  supportedTokens.map(token => ({
+    ...balances[token],
+    ...smartContractAssets[token]
+  }));

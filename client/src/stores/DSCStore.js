@@ -66,7 +66,11 @@ class DSCStore {
   };
 
   @action
-  setAddresses = addresses => (this.addresses = addresses);
+  setAddresses = addresses => {
+    if (addresses.length > 0) {
+      this.addresses = addresses;
+    }
+  };
 
   @action
   setTokensFetched = state => (this.isFetched = state);
@@ -76,6 +80,8 @@ class DSCStore {
 
   @action
   transferTokens = (token, amount) => {
+    amount *= 10 ** this.tokens[token.index].decimals;
+    amount = Math.trunc(amount);
     const newBalance = this.tokens[token.index].balance - amount;
     const newAmount = this.tokens[token.index].amount + amount;
     this.tokens[token.index].balance = parseFloat(
@@ -84,6 +90,8 @@ class DSCStore {
     this.tokens[token.index].amount = parseFloat(
       newAmount.toFixed(6).toString()
     );
+    console.log(this.tokens[token.index].amount);
+    console.log(this.tokens[token.index].balance);
     this.isInteractionAllowed = true;
   };
 

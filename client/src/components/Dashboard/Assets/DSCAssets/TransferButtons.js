@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { TokenAmountInput } from "../../../styled";
+import { TokenAmountInput } from "../../../../styled";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
 import { Button, Flex } from "rimble-ui";
 import {
   depositTokens,
   withdrawTokens
-} from "../../../blockchain/SmartContractCalls";
-import { precision } from "../../../utils/float";
+} from "../../../../blockchain/SmartContractCalls";
+import { precision } from "../../../../utils/float";
 
 const TransferButtons = ({ DSCStore, Web3Store, token }) => {
   const [transferAmount, setTransferAmount] = useState();
