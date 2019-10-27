@@ -1,6 +1,5 @@
-const registryContractName = { name: "DeFiCustodyRegistry" };
-//TODO UPDATE
 const customWeb3 = require("../ethereum/web3");
+const registryContractName = { name: "DeFiCustodyRegistry" };
 
 const getRegistryContract = async () =>
   findInstance(registryContractName, await customWeb3.getWeb3());
@@ -16,7 +15,7 @@ const findInstance = async (contract, web3) => {
   if (!contract.instance) {
     const contractJSON = require(`../../build/contracts/${contract.name}`);
     const networkId =
-      process.env.NODE_ENV === "prod"
+      process.env.NODE_ENV === "production"
         ? "42"
         : Object.keys(contractJSON.networks)[
             Object.keys(contractJSON.networks).length - 1

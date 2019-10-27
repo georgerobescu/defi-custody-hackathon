@@ -1,4 +1,4 @@
-FROM nikolaik/python-nodejs:python3.8-nodejs8 as react-build
+FROM nikolaik/python-nodejs:python3.8-nodejs8
 WORKDIR /app
 COPY . ./
 WORKDIR /app/server
