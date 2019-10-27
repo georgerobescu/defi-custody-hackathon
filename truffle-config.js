@@ -4,17 +4,17 @@ require('dotenv').config();
 const { copyRayBuilds } = require("./test/utils/ray.js");
 copyRayBuilds();
 
-const mnemonic = process.env.DEFICUSTODY_PRIVATE_KEY;
+const privateKey = process.env.DEFICUSTODY_PRIVATE_KEY;
 const HDWalletProvider = require("truffle-hdwallet-provider");
 // Create your own key for Production environments (https://infura.io/)
 const INFURA_ID = process.env.INFURA_ID || 'd6760e62b67f4937ba1ea2691046f06d';
 
-const configNetwok = (network, networkId, path = "m/44'/60'/0'/0/", gas = 6465030, gasPrice = 1e10) => ({
+const configNetwork = (network, network_id, path = "m/44'/60'/0'/0/", gas = 6465030, gasPrice = 1e10) => ({
   provider: () => new HDWalletProvider(
-      mnemonic, `https://${network}.infura.io/v3/${INFURA_ID}`,
+      privateKey, `https://${network}.infura.io/v3/${INFURA_ID}`,
       0, 1, true, path
   ),
-  networkId,
+  network_id,
   gas,
   gasPrice,
 });
@@ -28,9 +28,9 @@ module.exports = {
       port: 8545,
       network_id: "*",
     },
-    ropsten: configNetwok('ropsten', 3),
-    kovan: configNetwok('kovan', 42),
-    rinkeby: configNetwok('rinkeby', 4),
-    main: configNetwok('mainnet', 1),
+    ropsten: configNetwork('ropsten', 3),
+    kovan: configNetwork('kovan', 42),
+    rinkeby: configNetwork('rinkeby', 4),
+    main: configNetwork('mainnet', 1),
   },
 };

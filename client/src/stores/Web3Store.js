@@ -1,12 +1,13 @@
-import { action, autorun, computed, observable } from "mobx";
-import Web3 from "web3";
+import { action, computed, observable } from "mobx";
 
+const DeFiCustodyRegistry = require("../../../build/contracts/DeFiCustodyRegistry");
 class Web3Store {
   @observable web3;
   @observable loading = true;
+  @observable DeFiCustodyRegistry;
 
   @action
-  setWeb3 = (web3, accounts) => {
+  setWeb3 = async (web3, accounts) => {
     web3.eth.defaultAccount = accounts[0];
     this.web3 = web3;
     this.loading = false;

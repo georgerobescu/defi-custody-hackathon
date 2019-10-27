@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { compose } from "recompose";
 import { inject, observer } from "mobx-react";
 import { MetaMaskButton } from "rimble-ui";
@@ -6,24 +6,31 @@ import { EthAddress, MetamaskContainer } from "../../styled";
 import Web3 from "web3";
 import { toast } from "react-toastify";
 
-const USER_DENIED_ACCESS = -32603;
+const USER_DENIED_ACCESS = "User denied account authorization";
 
-const MetamaskConnection = ({ Web3Store }) => {
+const MetamaskConnection = ({ Web3Store, DSCStore }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [defaultAddress, setDefaultAddress] = useState();
+  const setInitContractsStore = useCallback(
+    async (web3, accounts) => {
+      await Web3Store.setWeb3(web3, accounts);
+      setDefaultAddress(accounts[0]);
+      DSCStore.connected();
+    },
+    [DSCStore, Web3Store]
+  );
   useEffect(() => {
     const fetchAccount = async () => {
       const { ethereum } = window;
       const web3 = new Web3(ethereum);
       const accounts = await web3.eth.getAccounts();
       if (accounts.length > 0) {
-        Web3Store.setWeb3(web3, accounts);
-        setDefaultAddress(accounts[0]);
+        await setInitContractsStore(web3, accounts);
       }
       setIsLoading(false);
     };
     fetchAccount();
-  }, [Web3Store]);
+  }, [setInitContractsStore]);
   const connect = async () => {
     setIsLoading(true);
     if (window.ethereum) {
@@ -31,17 +38,16 @@ const MetamaskConnection = ({ Web3Store }) => {
       const web3 = new Web3(ethereum);
       try {
         const accounts = await ethereum.enable();
-        Web3Store.setWeb3(web3, accounts);
-        setDefaultAddress(accounts[0]);
+        await setInitContractsStore(web3, accounts);
+        toast.success("Success! Metamask connected");
       } catch (error) {
-        if (error.code === USER_DENIED_ACCESS) {
+        if (error.message.includes(USER_DENIED_ACCESS)) {
           toast.warn("Please allow to us work with you!");
         } else {
           toast.error("Ooops. Something went wrong");
           console.log(error);
         }
       }
-      toast.success("Success! Metamask connected");
     } else {
       toast.warn("Please, Install metamask extension!");
     }
@@ -61,6 +67,6 @@ const MetamaskConnection = ({ Web3Store }) => {
 };
 
 export default compose(
-  inject("Web3Store"),
+  inject("Web3Store", "DSCStore"),
   observer
 )(MetamaskConnection);

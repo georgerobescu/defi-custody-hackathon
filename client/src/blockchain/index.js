@@ -1,3 +1,3 @@
-import { fetchTokens } from "./SmartContractCalls";
+import { fetchSmartContractAssets } from "./SmartContractCalls";
 
-export { fetchTokens };
+export { fetchSmartContractAssets };

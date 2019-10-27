@@ -1,20 +1,30 @@
 import React, { useState } from "react";
 import {
-  OneRemInput,
-  SmallInput,
   CenteredTD,
-  Table,
-  PercentageInput
+  CenteredTH,
+  PercentageInput,
+  SmallInput,
+  Table
 } from "../../../../styled";
 import { Button } from "rimble-ui";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
 import Address from "./Address";
+import { toast } from "react-toastify";
+import { generateDicimaledBalance } from "../../../../utils/ethereum";
 
-const InteractionTable = ({ DSCStore }) => {
+const InteractionTable = ({ DSCStore, Web3Store }) => {
   const { tokens, addresses, setAddresses } = DSCStore;
   const changePercentage = (tokenIndex, address) => ({ target: { value } }) => {
     DSCStore.changePercentage(tokenIndex, address, value);
+  };
+  const updatePercentage = tokenIndex => () => {
+    const sum = DSCStore.percentageSum(tokenIndex);
+    if (sum !== 100) {
+      toast.error(`Ooops, wrong percentage sum, ${sum}`);
+      return;
+    }
+    DSCStore.updatePercentage(tokenIndex);
   };
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [newAddress, setNewAddress] = useState("");
@@ -31,12 +41,12 @@ const InteractionTable = ({ DSCStore }) => {
     <Table title="Smart contract data">
       <thead>
         <tr>
-          <th>Token name</th>
-          <th>Amount</th>
+          <CenteredTH>Token name</CenteredTH>
+          <CenteredTH>Amount</CenteredTH>
           {addresses.map((address, i) => (
             <Address key={i} currentAddress={address} index={i} />
           ))}
-          <th>
+          <CenteredTH>
             {isAddingAddress && (
               <>
                 <SmallInput
@@ -59,16 +69,24 @@ const InteractionTable = ({ DSCStore }) => {
             >
               Add
             </Button>
-          </th>
+          </CenteredTH>
         </tr>
       </thead>
       <tbody>
         {tokens.map((token, tokenIndex) => (
           <tr key={token.address + tokenIndex}>
             <CenteredTD>{token.name}</CenteredTD>
-            <CenteredTD>{token.amount + " " + token.symbol}</CenteredTD>
+            <CenteredTD>
+              {token.amount
+                ? generateDicimaledBalance(
+                    token.amount,
+                    token.decimals,
+                    Web3Store.web3.utils.toBN
+                  )
+                : 0 + " " + token.symbol}
+            </CenteredTD>
             {addresses.map((address, i) => {
-              const percent = token.percentage[address] || "";
+              const percent = token.percentage ? token.percentage[address] : "";
               return (
                 <CenteredTD key={i}>
                   <PercentageInput
@@ -81,7 +99,16 @@ const InteractionTable = ({ DSCStore }) => {
                 </CenteredTD>
               );
             })}
-            <td />
+            <CenteredTD>
+              <Button
+                iconpos="right"
+                size="small"
+                disabled={!DSCStore.isInteractionAllowed}
+                onClick={updatePercentage(tokenIndex)}
+              >
+                Update
+              </Button>
+            </CenteredTD>
           </tr>
         ))}
       </tbody>
@@ -90,6 +117,6 @@ const InteractionTable = ({ DSCStore }) => {
 };
 
 export default compose(
-  inject("DSCStore"),
+  inject("DSCStore", "Web3Store"),
   observer
 )(InteractionTable);

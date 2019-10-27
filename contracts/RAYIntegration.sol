@@ -31,7 +31,7 @@ contract RAYIntegration is Initializable, ERC721Holder {
 
     // map the 'true' owners of the RAY tokens owned by this contract
     mapping(bytes32 => address payable) public rayTokens;
-    mapping(address => bytes32[]) public reverseRayTokens;
+    mapping(address => bytes32[]) private reverseRayTokens;
 
 
     event InvestmentRAY(bytes32 portfolioId, address beneficiary, uint256 value, bytes32 rayTokenId);
@@ -87,7 +87,7 @@ contract RAYIntegration is Initializable, ERC721Holder {
         return keccak256(abi.encodePacked(portfolioDescription));
     }
 
-    function getRayTokens(address wallet) public returns (bytes32[] memory) {
+    function getRayTokens(address wallet) public view returns (bytes32[] memory) {
         return reverseRayTokens[wallet];
     }
 
@@ -271,6 +271,20 @@ contract RAYIntegration is Initializable, ERC721Holder {
         } else {
             beneficiary.transfer(value);
             emit FundsTransferRAY(address(0), address(this), beneficiary, value);
+        }
+    }
+
+    function getSenderTokens() external view returns (address [] memory tokens, uint[] memory balances) {
+        bytes32[] memory tokensId = reverseRayTokens[msg.sender];
+        tokens = new address [](tokensId.length);
+        balances = new uint[](tokensId.length);
+        for (uint i = 0; i < tokensId.length; i++) {
+            bytes32 portfolioId = rayStorage.getTokenKey(tokensId[i]);
+            uint tokenValue;
+            uint pricePerShare;
+            (tokenValue, pricePerShare) = IRAY(rayStorage.getContractAddress(NAV_CALCULATOR_CONTRACT)).getTokenValue(portfolioId, tokensId[i]);
+            tokens[i] = rayStorage.getPrincipalAddress(portfolioId);
+            balances[i] = tokenValue;
         }
     }
 }

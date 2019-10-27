@@ -33,11 +33,14 @@ class DSCStore {
   ];
   @observable isInteractionAllowed = false;
   @observable isFetched = false;
+  @observable drizzle;
+  @observable drizzleConnected = false;
+  @observable newDeadline = 0;
+  @observable walletAddress;
 
   @action
   changePercentage = (tokenIndex, address, value) => {
     if (this.tokens[tokenIndex].amount === 0) return;
-    console.log(this.tokens[tokenIndex].amount);
     value = parseInt(value);
     if (value > 100) {
       value = 100;
@@ -63,7 +66,11 @@ class DSCStore {
   };
 
   @action
-  setAddresses = addresses => (this.addresses = addresses);
+  setAddresses = addresses => {
+    if (addresses.length > 0) {
+      this.addresses = addresses;
+    }
+  };
 
   @action
   setTokensFetched = state => (this.isFetched = state);
@@ -73,6 +80,8 @@ class DSCStore {
 
   @action
   transferTokens = (token, amount) => {
+    amount *= 10 ** this.tokens[token.index].decimals;
+    amount = Math.trunc(amount);
     const newBalance = this.tokens[token.index].balance - amount;
     const newAmount = this.tokens[token.index].amount + amount;
     this.tokens[token.index].balance = parseFloat(
@@ -81,7 +90,43 @@ class DSCStore {
     this.tokens[token.index].amount = parseFloat(
       newAmount.toFixed(6).toString()
     );
+    console.log(this.tokens[token.index].amount);
+    console.log(this.tokens[token.index].balance);
     this.isInteractionAllowed = true;
+  };
+
+  @action
+  setStore = drizzle => {
+    this.drizzle = drizzle;
+  };
+
+  @action
+  connected = () => {
+    this.drizzleConnected = true;
+  };
+
+  @action
+  setDeadline = deadline => {
+    this.newDeadline = deadline;
+  };
+
+  @action
+  setWalletAddress = address => {
+    this.walletAddress = address;
+  };
+
+  @action
+  updatePercentage = tokenIndex => {
+    console.log(this.tokens[tokenIndex], "token percentage updated");
+  };
+
+  percentageSum = tokenIndex => {
+    let sum = 0;
+    this.addresses.forEach(addr => {
+      if (this.tokens[tokenIndex].percentage[addr])
+        sum += this.tokens[tokenIndex].percentage[addr];
+    });
+    return sum;
   };
 }
 

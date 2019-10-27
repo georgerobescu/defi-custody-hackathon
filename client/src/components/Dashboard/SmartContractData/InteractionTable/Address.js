@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AddressHeader, SmallInput } from "../../../../styled";
+import { AddressHeader, CenteredTH, SmallInput } from "../../../../styled";
 import { Button } from "rimble-ui";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
@@ -20,7 +20,7 @@ const Address = ({ currentAddress, index, DSCStore }) => {
     setIsAddingAddress(!isAddingAddress);
   };
   return (
-    <th>
+    <CenteredTH>
       {isAddingAddress ? (
         <>
           <SmallInput
@@ -50,7 +50,7 @@ const Address = ({ currentAddress, index, DSCStore }) => {
           />
         </span>
       )}
-    </th>
+    </CenteredTH>
   );
 };
 

@@ -18,9 +18,7 @@ contract("DCWallet", async accounts => {
 
   before(async () => {
     project = await TestHelper({ from: admin });
-    dependencies.dcWallet = await project.createProxy(
-      DCWallet
-    );
+    dependencies.dcWallet = await project.createProxy(DCWallet);
 
     const ERC20Instance = await ERC20.new({ from: user });
     dependencies.ERC20Instance = new web3.eth.Contract(

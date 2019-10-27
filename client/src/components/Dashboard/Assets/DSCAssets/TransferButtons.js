@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { TokenAmountInput } from "../../../styled";
+import { TokenAmountInput } from "../../../../styled";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
 import { Button, Flex } from "rimble-ui";
 import {
   depositTokens,
   withdrawTokens
-} from "../../../blockchain/SmartContractCalls";
-import { precision } from "../../../utils/float";
+} from "../../../../blockchain/SmartContractCalls";
+import { precision } from "../../../../utils/float";
 
 const TransferButtons = ({ DSCStore, Web3Store, token }) => {
   const [transferAmount, setTransferAmount] = useState();
@@ -28,7 +28,7 @@ const TransferButtons = ({ DSCStore, Web3Store, token }) => {
   const transfer = (token, transferTokens, isDeposit = true) => async () => {
     setIsTransferring(true);
     const amount = transferAmount * (isDeposit ? 1 : -1);
-    await transferTokens(Web3Store.web3, amount, token);
+    await transferTokens(Web3Store, amount, token);
     DSCStore.transferTokens(token, amount);
     setTransferAmount(0);
     setIsTransferring(false);
@@ -49,7 +49,9 @@ const TransferButtons = ({ DSCStore, Web3Store, token }) => {
         size="small"
         mx={3}
         onClick={transfer(token, withdrawTokens, false)}
-        disabled={isTransferring || token.amount < transferAmount}
+        disabled={
+          !transferAmount || isTransferring || token.amount < transferAmount
+        }
       >
         Withdraw
       </Button>
@@ -57,7 +59,9 @@ const TransferButtons = ({ DSCStore, Web3Store, token }) => {
         size="small"
         mx={3}
         onClick={transfer(token, depositTokens)}
-        disabled={isTransferring || token.balance < transferAmount}
+        disabled={
+          !transferAmount || isTransferring || token.balance < transferAmount
+        }
       >
         Deposit
       </Button>

@@ -9,6 +9,8 @@ const DeadlineChooser = ({ DSCStore }) => (
       type="number"
       disabled={!DSCStore.isInteractionAllowed}
       placeholder="Deadline in"
+      value={DSCStore.isInteractionAllowed && DSCStore.newDeadline}
+      onChange={e => DSCStore.setDeadline(e.target.value)}
     />
     <Select
       disabled={!DSCStore.isInteractionAllowed}

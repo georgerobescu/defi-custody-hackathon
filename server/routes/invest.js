@@ -1,17 +1,21 @@
-const { getDCContract, getRegistryContract } = require("../utils/contracts");
+const { getRayContract } = require("../utils/contracts");
 const customWeb3 = require("../ethereum/web3");
 const express = require("express");
 const router = express.Router();
 
 router.post("/invest", async (req, res, next) => {
+  const { portfolioId, payableBeneficiary, value } = req.body;
 
-  var portfolioId = req.body.portfolioId
-  var payableBeneficiary = req.body.payableBeneficiary
-  var value = req.body.value
-
-  if (parseInt(value) > 0 || portfolioId == "" || web3.utils.isAddress(customWeb3)) {
-    console.error("req=" + req);
-    res.status(400).json({ "error": "Bad params" });
+  if (
+    !value ||
+    !portfolioId ||
+    !payableBeneficiary ||
+    parseInt(value) <= 0 ||
+    portfolioId === "" ||
+    !customWeb3.getWeb3().utils.isAddress(payableBeneficiary)
+  ) {
+    console.error("params: ", portfolioId, payableBeneficiary, value);
+    return res.status(400).json({ error: "Bad params" });
   }
 
   // mint(bytes32 portfolioId, address payable beneficiary, uint value)
@@ -23,13 +27,19 @@ router.post("/invest", async (req, res, next) => {
       payableBeneficiary,
       value
     );
-    await customWeb3.sendFromMain(transaction);
-    res.status(201);
-  }
-  catch (error) {
-    console.error("req=" + req);
+    console.log(
+      "Sending mint transaction for rayContractInstance with params:",
+      portfolioId,
+      payableBeneficiary,
+      value
+    );
+    const result = await customWeb3.sendFromMain(transaction);
+
+    res.json(result);
+  } catch (error) {
     console.error("error=" + error);
-    res.status(500).json({ "error": "Error sending message to Ray" })
+    console.log(error.stack);
+    res.status(500).json({ error: "Error sending message to Ray" });
   }
 });
 

@@ -12,15 +12,13 @@ const { sleep } = require("./utils/utils.js");
 const { BN } = web3.utils;
 
 // RAY
-const RAYUtils = require('./helpers/RAYUtils.js');
-const Coins = require('./helpers/Coins.js');
-const Constants = require('./helpers/constants.js');
+const RAYUtils = require("./helpers/RAYUtils.js");
+const Coins = require("./helpers/Coins.js");
+const Constants = require("./helpers/constants.js");
 const Deployed = Constants.TEST_ADDRESSES;
 const DaiPortfolioIds = Constants.PORTFOLIO_IDS.DAI;
 
-
 contract("DeFiCustodyRegistry", async accounts => {
-
   let project;
   const watchtower = accounts[0];
   const admin = accounts[1];
@@ -42,19 +40,21 @@ contract("DeFiCustodyRegistry", async accounts => {
       }
     );
 
-    erc20Instance = await ERC20.new({ from: admin })
+    erc20Instance = await ERC20.new({ from: admin });
   });
 
   describe("init()", () => {
     it("should have correct owner");
-  })
+  });
 
   describe("addSupportedToken()", () => {
     it("should add token", async () => {
       await deFiCustodyRegistryInstance.methods
         .addSupportedToken(erc20Instance.address)
         .send({ from: owner, gas });
-      const tokens = await deFiCustodyRegistryInstance.methods.getTokens().call();
+      const tokens = await deFiCustodyRegistryInstance.methods
+        .getTokens()
+        .call();
       assert(tokens.length === 1, "Token wasn't add to smart contract");
       assert.strictEqual(erc20Instance.address, tokens[0], "Wrong address.");
     });

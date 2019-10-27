@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { generateDicimaledBalance } from "../utils/ethereum";
 
 const API_KEY = "UAK3dea068114955255b188b0cdfd12c9ae";
