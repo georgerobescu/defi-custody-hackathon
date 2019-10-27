@@ -79,7 +79,7 @@ export const depositTokens = async (Web3Store, amount, token, DSCStore) => {
       .call()
   );
   const transaction = await DSCStore.drizzle.contracts.MockedERC20.methods
-    .transfer(token.address, amount)
+    .approve(token.address, amount)
     .send();
   console.log(transaction);
   const data = {

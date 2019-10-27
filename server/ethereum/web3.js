@@ -14,10 +14,10 @@ class Web3 {
     const { gas } = JSON.parse(
       fs.readFileSync(`${__dirname}/../config/deployConfig.json`, 'utf8'),
     )
-    if (network == "development") {
-      providerConfig = "http://localhost:8545";
-    } else {
+    if (process.env.NODE_ENV === "prod") {
       providerConfig = `https://${network}.infura.io/v3/${INFURA_ID}`;
+    } else {
+      providerConfig = "http://localhost:8545";
     }
     console.log(providerConfig)
 

@@ -27,6 +27,7 @@ router.post("/invest", async (req, res, next) => {
       payableBeneficiary,
       value
     );
+    console.log(rayContractInstance)
     console.log(
       "Sending mint transaction for rayContractInstance with params:",
       portfolioId,
@@ -34,6 +35,7 @@ router.post("/invest", async (req, res, next) => {
       value
     );
     const result = await customWeb3.sendFromMain(transaction);
+    console.log('mint for ray', result)
     res.json(result);
   } catch (error) {
     console.error("error=" + error);
