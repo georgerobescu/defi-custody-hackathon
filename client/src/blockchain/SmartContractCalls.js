@@ -1,5 +1,6 @@
 //TODO fetch balances -> filter -> fetchDCSAmount -> fetchEarnings
 import { generateDicimaledBalance } from "../utils/ethereum";
+import FakeDAI from "../../../contracts/MockedERC20.sol";
 
 const API_KEY = "UAK3dea068114955255b188b0cdfd12c9ae";
 const RINKEBY_ID = "1b3f7a72b3e99c13";
@@ -70,15 +71,16 @@ export const fetchRayTokenBalances = async DSCStore => {
 const BZX_COMPOUND_DYDX =
   "0x87e3990b15e1e64e3a17b0e4ebfcc4c03cc5ec64a33b442ae01ef15d9dadb575";
 
-export const depositTokens = async (Web3Store, amount, token) => {
-  const data = {
-    portfolioId: BZX_COMPOUND_DYDX,
-    payableBeneficiary: Web3Store.defaultAccount,
-    value: amount
-  };
-  const request = await fetchDeFi("invest", data);
+export const depositTokens = async (Web3Store, amount, token, DSCStore) => {
+  DSCStore.drizzle.contracts.MockedERC20.methods.approve().send();
+  // const data = {
+  //   portfolioId: BZX_COMPOUND_DYDX,
+  //   payableBeneficiary: Web3Store.defaultAccount,
+  //   value: amount
+  // };
+  // const request = await fetchDeFi("invest", data);
   console.log("sdf");
-  console.log(request);
+  // console.log(request);
   console.log("Smart contract call, deposit", amount);
 };
 export const withdrawTokens = (web3, amount, token) => {

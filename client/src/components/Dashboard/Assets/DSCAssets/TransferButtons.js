@@ -28,7 +28,7 @@ const TransferButtons = ({ DSCStore, Web3Store, token }) => {
   const transfer = (token, transferTokens, isDeposit = true) => async () => {
     setIsTransferring(true);
     const amount = transferAmount * (isDeposit ? 1 : -1);
-    await transferTokens(Web3Store, amount, token);
+    await transferTokens(Web3Store, amount, token, DSCStore);
     DSCStore.transferTokens(token, amount);
     setTransferAmount(0);
     setIsTransferring(false);
