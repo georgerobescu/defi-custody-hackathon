@@ -9,6 +9,7 @@ const ERC20 = artifacts.require("./MockedERC20.sol");
 
 const { expectRevert } = require("openzeppelin-test-helpers");
 const { sleep } = require("./utils/utils.js");
+const { BN } = web3.utils;
 
 // RAY
 const RAYUtils = require('./helpers/RAYUtils.js');
@@ -106,16 +107,13 @@ contract("DeFiCustodyRegistry", async accounts => {
       assert.equal(tokenOwner, user1, "Owner is incorrect");
 
 
-
-
-
       // setup recovery sheet
       const deadlineBefore = await deFiCustodyRegistryInstance.methods
         .recoveryDeadline(user1)
         .call();
 
       const assetPercentage = [web3.utils.toWei("0.5", "ether"), web3.utils.toWei("0.5", "ether")];
-      const deadline = 2; //2 seconds
+      const deadline = 1; //2 seconds
 
       await deFiCustodyRegistryInstance.methods
         .setRecoverySheet(
@@ -137,21 +135,30 @@ contract("DeFiCustodyRegistry", async accounts => {
 
       assert.equal(firstWalletPercentage, assetPercentage[0], "firstWalletPercentage hasn't changed."
       );
-      assert.equal(deadlineAfter, 2, "Deadline hasn't changed.");
+      assert.equal(deadlineAfter, deadline, "Deadline hasn't changed.");
       assert.deepEqual(recoveryWalletsContract, recoveryWallets, "Recovery wallets haven't been changed.");
 
-
-      // fire recover
-      await sleep(2000);
+      await sleep(1000);
 
       assert(await deFiCustodyRegistryInstance.methods.isRecoverable(user1).call(), "Should be recoverable");
 
-      // check balance of recovery wallets
+      let recoveryWallets0Before = new BN(await Coins.getDAIBalance(recoveryWallets[0]));
+      let recoveryWallets1Before = new BN(await Coins.getDAIBalance(recoveryWallets[1]));
+
       let tokens = await deFiCustodyRegistryInstance.methods.getRayTokens(user1).call();
-      for (var i = 0; i < tokens.length; i++) {
-        let recoveryTx = await deFiCustodyRegistryInstance.methods.recoverRAY(tokens[i]).send({from: watchtower});
-        console.log(recoveryTx);
-      }
+      let recoveryTx = await deFiCustodyRegistryInstance.methods.recoverRAY(tokens[0]).send({from: watchtower, gas: 900000});
+
+      let recoveryWallets0After = new BN(await Coins.getDAIBalance(recoveryWallets[0]));
+      let recoveryWallets1After = new BN(await Coins.getDAIBalance(recoveryWallets[1]));
+
+      let recoveryValue = new BN(tokenValue).div(new BN(2));
+
+      let expectedBal0 = recoveryWallets0Before.add(recoveryValue);
+      let expectedBal1 = recoveryWallets1Before.add(recoveryValue);
+
+      assert.equal(expectedBal0.toString(), recoveryWallets0After.toString(), "Balance for recoveryWallets0 incorrect");
+      assert.equal(expectedBal1.toString(), recoveryWallets1After.toString(), "Balance for recoveryWallets1 incorrect");
+      // TODO: check events
     });
   });
 });
