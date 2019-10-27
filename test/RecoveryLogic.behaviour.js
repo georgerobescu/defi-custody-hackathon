@@ -41,7 +41,7 @@ const RecoveryLogicTestSuite = async (accounts, dependencies) => {
         .recoveryDeadline(user)
         .call({ from: user });
       const recoveryWallets = await recoveryLogicInstance.methods
-        .getRecoveryWallets()
+        .getRecoveryWallets(user)
         .call({ from: user });
       assert.deepEqual(
         firstChildPercentage,
