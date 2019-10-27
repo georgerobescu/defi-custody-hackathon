@@ -42,11 +42,11 @@ contract RecoveryLogic is Initializable, Ownable {
         uint256[] memory values,
         uint256 deadline
     ) public updateAction(msg.sender) {
-        require(asset != address(0), 
+        require(asset != address(0),
             "#RecoveryLogic setRecoverySheet(): Asset cannot be zero address");
-        require(deadline > 0, 
+        require(deadline > 0,
             "#RecoveryLogic setRecoverySheet(): Deadline must be bigger than zero");
-        require(wallets.length == values.length && wallets.length > 0, 
+        require(wallets.length == values.length && wallets.length > 0,
             "#RecoveryLogic setRecoverySheet(): Length incorrect. Data corrupted");
 
         uint valuesTotalAmount = 0;
@@ -61,7 +61,7 @@ contract RecoveryLogic is Initializable, Ownable {
         }
         require(valuesTotalAmount == 1 ether,
             "#RecoveryLogic setRecoverySheet(): Sum of all the percentages is not 1 ether(100%)");
-        
+
         recoveryDeadline[msg.sender] = deadline;
         recoveryWallets[msg.sender] = wallets;
         emit NewRecoverySheet(msg.sender, asset, wallets, values, deadline);
