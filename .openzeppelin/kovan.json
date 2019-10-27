@@ -1,11 +1,11 @@
 {
   "contracts": {
     "DeFiCustodyRegistry": {
-      "address": "0x4F709245014d0f67FE5F68116e02Fc2eEBd8f632",
-      "constructorCode": "608060405233603360006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550603360009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16600073ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a36151a4806100d16000396000f3fe",
-      "bodyBytecodeHash": "1cd2786775fdd1fd5d03fa44616024d479aea9c214e8b02bc96e9c79ade399e3",
-      "localBytecodeHash": "ff2e4cc8cda7f44a7afeaf3003d6e3a373c53dd0acdb2f7720a79a07c6b39b0f",
-      "deployedBytecodeHash": "ff2e4cc8cda7f44a7afeaf3003d6e3a373c53dd0acdb2f7720a79a07c6b39b0f",
+      "address": "0x2269c66579E37Ed77f9e2fC0020CCf3c0cC65de1",
+      "constructorCode": "608060405233603360006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550603360009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16600073ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a36152a9806100d16000396000f3fe",
+      "bodyBytecodeHash": "bd1449278c81af1e01ac8ee6ad980586afb7862e7b5d67f823d9654f09a243b2",
+      "localBytecodeHash": "323b3f9d2425679a6ab829e57fc0aaee52fdb9431deed7d9e5d8b7203bad7eda",
+      "deployedBytecodeHash": "323b3f9d2425679a6ab829e57fc0aaee52fdb9431deed7d9e5d8b7203bad7eda",
       "types": {
         "t_bool": {
           "id": "t_bool",
@@ -88,7 +88,7 @@
           "contract": "Initializable",
           "path": "@openzeppelin/upgrades/contracts/Initializable.sol",
           "label": "initialized",
-          "astId": 2264,
+          "astId": 2273,
           "type": "t_bool",
           "src": "757:24:14"
         },
@@ -96,7 +96,7 @@
           "contract": "Initializable",
           "path": "@openzeppelin/upgrades/contracts/Initializable.sol",
           "label": "initializing",
-          "astId": 2266,
+          "astId": 2275,
           "type": "t_bool",
           "src": "876:25:14"
         },
@@ -104,7 +104,7 @@
           "contract": "Initializable",
           "path": "@openzeppelin/upgrades/contracts/Initializable.sol",
           "label": "______gap",
-          "astId": 2322,
+          "astId": 2331,
           "type": "t_array:50<t_uint256>",
           "src": "1951:29:14"
         },
@@ -112,7 +112,7 @@
           "contract": "Ownable",
           "path": "@openzeppelin/contracts/ownership/Ownable.sol",
           "label": "_owner",
-          "astId": 1647,
+          "astId": 1656,
           "type": "t_address",
           "src": "408:22:9"
         },
@@ -258,7 +258,9 @@
         "hasSelfDestruct": false,
         "hasDelegateCall": false,
         "hasInitialValuesInDeclarations": false,
-        "uninitializedBaseContracts": []
+        "uninitializedBaseContracts": [],
+        "storageUncheckedVars": [],
+        "storageDiff": []
       }
     }
   },
@@ -268,7 +270,7 @@
       {
         "address": "0x543c51db5f3eee8AF5eF1a70F10C644CCc962d49",
         "version": "1.0.0",
-        "implementation": "0x4F709245014d0f67FE5F68116e02Fc2eEBd8f632",
+        "implementation": "0x2269c66579E37Ed77f9e2fC0020CCf3c0cC65de1",
         "admin": "0xfA627d56b6Af6dc5763f73D5803b81B0b0eAB8CE",
         "kind": "Upgradeable"
       }
