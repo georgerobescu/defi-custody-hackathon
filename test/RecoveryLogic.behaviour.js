@@ -160,9 +160,12 @@ const RecoveryLogicTestSuite = async (accounts, dependencies) => {
       const lastActionAfter = await recoveryLogicInstance.methods
         .lastAction(user)
         .call({ from: user, gas });
-      assert.equal(
-        lastActionAfter,
-        timeShift + parseInt(lastActionBefore),
+      const actualTimeShift =
+        parseInt(lastActionAfter) - parseInt(lastActionBefore);
+      const maxBlockchainDelay = 5;
+      assert(
+        actualTimeShift >= timeShift &&
+          actualTimeShift < timeShift + maxBlockchainDelay,
         "Deadline wasn't extended."
       );
     });
