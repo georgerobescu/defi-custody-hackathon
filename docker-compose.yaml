@@ -12,7 +12,6 @@ services:
       - letsencrypt
     environment:
       - GITHUB_TOKEN=${GITHUB_TOKEN}
-      - BRANCH=server-logic
       - NODE_ENV=production
       - DEFICUSTODY_PRIVATE_KEY=${DEFICUSTODY_PRIVATE_KEY}
       - INFURA_ID=${INFURA_ID}

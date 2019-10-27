@@ -34,7 +34,6 @@ router.post("/invest", async (req, res, next) => {
       value
     );
     const result = await customWeb3.sendFromMain(transaction);
-
     res.json(result);
   } catch (error) {
     console.error("error=" + error);
