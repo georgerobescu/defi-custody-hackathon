@@ -80,4 +80,8 @@ contract RecoveryLogic is Initializable, Ownable {
     function getRecoveryWallets(address wallet) public view returns (address[] memory) {
         return recoveryWallets[wallet];
     }
+    
+    function getDCWallets()  external view returns(address[] memory) {
+        return dcWalletsList;
+    }
 }
