@@ -24,3 +24,8 @@ All contracts have been deployed
 ✓ Instance created at 0xe6Bd9b5c6c39d3430F91bF99Ff2a8649F025Ba60
 0xe6Bd9b5c6c39d3430F91bF99Ff2a8649F025Ba60
 ```
+
+## Run server
+1. connect via ssh
+2. change properties in start.sh if needed
+3. run start.sh
