@@ -52,7 +52,7 @@ class DSCStore {
     let sum = 0;
     this.addresses.forEach(addr => {
       if (addr !== address && this.tokens[tokenIndex].percentage[addr])
-        sum += this.tokens[tokenIndex].percentage[addr];
+        sum += parseInt(this.tokens[tokenIndex].percentage[addr]);
     });
     if (value + sum > 100) {
       value = 100 - sum;
