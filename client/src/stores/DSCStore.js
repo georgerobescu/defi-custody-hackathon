@@ -1,7 +1,8 @@
 import { action, observable } from "mobx";
 
 class DSCStore {
-  @observable addresses = [undefined, undefined, undefined, undefined];
+  BN;
+  @observable addresses = [undefined];
   @observable tokens = [
     {
       address: "-",
@@ -56,6 +57,7 @@ class DSCStore {
     if (value + sum > 100) {
       value = 100 - sum;
     }
+    console.log(tokenIndex, address, value, this.tokens[tokenIndex].percentage);
     this.tokens[tokenIndex].percentage[address] = value;
   };
 
@@ -82,16 +84,15 @@ class DSCStore {
   transferTokens = (token, amount) => {
     amount *= 10 ** this.tokens[token.index].decimals;
     amount = Math.trunc(amount);
-    const newBalance = this.tokens[token.index].balance - amount;
-    const newAmount = this.tokens[token.index].amount + amount;
-    this.tokens[token.index].balance = parseFloat(
-      newBalance.toFixed(6).toString()
-    );
-    this.tokens[token.index].amount = parseFloat(
-      newAmount.toFixed(6).toString()
-    );
-    console.log(this.tokens[token.index].amount);
-    console.log(this.tokens[token.index].balance);
+    amount = new this.BN(amount);
+    const newBalance = new this.BN(
+      this.tokens[token.index].balance.toString()
+    ).sub(amount);
+    const newAmount = new this.BN(
+      this.tokens[token.index].amount.toString()
+    ).add(amount);
+    this.tokens[token.index].balance = newBalance.toString();
+    this.tokens[token.index].amount = newAmount.toString();
     this.isInteractionAllowed = true;
   };
 
@@ -120,6 +121,34 @@ class DSCStore {
     console.log(this.tokens[tokenIndex], "token percentage updated");
   };
 
+  @action
+  setRecoverySheet = async (tokenIndex = 0, toWei) => {
+    const percentages = this.addresses.map(address =>
+      toWei(
+        this.tokens[tokenIndex].percentage[address].toString() + "0",
+        "milli"
+      )
+    );
+    console.log(
+      "Setting recovery sheet",
+      this.tokens[0].address,
+      [...this.addresses],
+      percentages,
+      parseInt(this.newDeadline)
+    );
+    const result = await this.drizzle.contracts.DeFiCustodyRegistry.methods
+      .setRecoverySheet(
+        this.tokens[0].address,
+        [...this.addresses],
+        percentages,
+        parseInt(this.newDeadline)
+      )
+      .send();
+    console.log(result);
+  };
+  setBN = BN => {
+    this.BN = BN;
+  };
   percentageSum = tokenIndex => {
     let sum = 0;
     this.addresses.forEach(addr => {

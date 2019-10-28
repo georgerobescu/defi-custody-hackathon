@@ -10,15 +10,16 @@ const INFURA_ID = process.env.INFURA_ID || "d6760e62b67f4937ba1ea2691046f06d";
 const path = "m/44'/60'/0'/0/";
 class Web3 {
   constructor() {
-    var providerConfig;
+    var providerConfig
     const { gas } = JSON.parse(
-      fs.readFileSync(`${__dirname}/../config/deployConfig.json`, "utf8")
-    );
+      fs.readFileSync(`${__dirname}/../config/deployConfig.json`, 'utf8'),
+    )
     if (process.env.NODE_ENV === "prod") {
       providerConfig = `https://${network}.infura.io/v3/${INFURA_ID}`;
     } else {
       providerConfig = "http://localhost:8545";
     }
+    console.log(providerConfig)
 
     this.gas = gas;
     const provider = new web3Library.providers.HttpProvider(providerConfig);

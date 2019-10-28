@@ -28,11 +28,19 @@ const TransferButtons = ({ DSCStore, Web3Store, token }) => {
   const transfer = (token, transferTokens, isDeposit = true) => async () => {
     setIsTransferring(true);
     const amount = transferAmount * (isDeposit ? 1 : -1);
-    await transferTokens(Web3Store, amount, token);
+    await transferTokens(amount, token, DSCStore, Web3Store);
     DSCStore.transferTokens(token, amount);
     setTransferAmount(0);
     setIsTransferring(false);
   };
+  let cantWithdraw, cantDeposit;
+  if (Web3Store.web3) {
+    const { BN } = Web3Store.web3.utils;
+    cantWithdraw =
+      new BN(transferAmount).cmp(new BN(token.amount.toString())) === 1;
+    cantDeposit =
+      new BN(transferAmount).cmp(new BN(token.balance.toString())) === 1;
+  }
   return (
     <Flex>
       <TokenAmountInput
@@ -49,9 +57,7 @@ const TransferButtons = ({ DSCStore, Web3Store, token }) => {
         size="small"
         mx={3}
         onClick={transfer(token, withdrawTokens, false)}
-        disabled={
-          !transferAmount || isTransferring || token.amount < transferAmount
-        }
+        disabled={!transferAmount || isTransferring || cantWithdraw}
       >
         Withdraw
       </Button>
@@ -59,9 +65,7 @@ const TransferButtons = ({ DSCStore, Web3Store, token }) => {
         size="small"
         mx={3}
         onClick={transfer(token, depositTokens)}
-        disabled={
-          !transferAmount || isTransferring || token.balance < transferAmount
-        }
+        disabled={!transferAmount || isTransferring || cantDeposit}
       >
         Deposit
       </Button>
