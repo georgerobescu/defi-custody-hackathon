@@ -21,25 +21,29 @@ const View = ({ DSCStore, wallet, Web3Store }) => {
           <tr key={token.address + i}>
             <CenteredTD>{token.name}</CenteredTD>
             <CenteredTD>
-              {token.balance
+              {(token.balance
                 ? generateDicimaledBalance(
                     token.balance,
                     token.decimals,
                     Web3Store.web3.utils.toBN
                   )
-                : 0 + " " + token.symbol}
+                : 0) +
+                " " +
+                token.symbol}
             </CenteredTD>
             <td>
               <TransferButtons token={token} />
             </td>
             <CenteredTD>
-              {token.amount
+              {(token.amount
                 ? generateDicimaledBalance(
                     token.amount,
                     token.decimals,
                     Web3Store.web3.utils.toBN
                   )
-                : 0 + " " + token.symbol}
+                : 0) +
+                " " +
+                token.symbol}
             </CenteredTD>
           </tr>
         ))}

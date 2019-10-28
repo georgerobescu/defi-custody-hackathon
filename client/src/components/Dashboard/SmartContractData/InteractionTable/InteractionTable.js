@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  CenteredDiv,
   CenteredTD,
   CenteredTH,
   PercentageInput,
@@ -77,25 +78,29 @@ const InteractionTable = ({ DSCStore, Web3Store }) => {
           <tr key={token.address + tokenIndex}>
             <CenteredTD>{token.name}</CenteredTD>
             <CenteredTD>
-              {token.amount
+              {(token.amount
                 ? generateDicimaledBalance(
                     token.amount,
                     token.decimals,
                     Web3Store.web3.utils.toBN
                   )
-                : 0 + " " + token.symbol}
+                : 0) +
+                " " +
+                token.symbol}
             </CenteredTD>
             {addresses.map((address, i) => {
               const percent = token.percentage ? token.percentage[address] : "";
               return (
                 <CenteredTD key={i}>
-                  <PercentageInput
-                    disabled={token.amount === 0}
-                    symbol="%"
-                    value={percent}
-                    type="number"
-                    onChange={changePercentage(tokenIndex, address)}
-                  />
+                  <CenteredDiv>
+                    <PercentageInput
+                      disabled={token.amount === 0}
+                      symbol="%"
+                      value={percent}
+                      type="number"
+                      onChange={changePercentage(tokenIndex, address)}
+                    />
+                  </CenteredDiv>
                 </CenteredTD>
               );
             })}

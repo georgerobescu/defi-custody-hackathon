@@ -15,10 +15,11 @@ const DeadlineChooser = ({ DSCStore }) => (
     <Select
       disabled={!DSCStore.isInteractionAllowed}
       options={[
-        { value: "years", label: "Years" },
-        { value: "months", label: "Months" },
+        { value: "seconds", label: "Seconds" },
+        { value: "days", label: "Days" },
         { value: "weeks", label: "Weeks" },
-        { value: "days", label: "Days" }
+        { value: "months", label: "Months" },
+        { value: "years", label: "Years" }
       ]}
     />
   </Box>
