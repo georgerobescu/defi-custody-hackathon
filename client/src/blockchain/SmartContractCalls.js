@@ -1,4 +1,5 @@
 import { generateDicimaledBalance } from "../utils/ethereum";
+import { toast } from "react-toastify";
 
 const API_KEY = "UAK3dea068114955255b188b0cdfd12c9ae";
 const RINKEBY_ID = "1b3f7a72b3e99c13";
@@ -82,22 +83,28 @@ export const depositTokens = async (amount, token, DSCStore, Web3Store) => {
     payableBeneficiary: Web3Store.defaultAccount,
     value: amount
   };
+  console.log("Smart contract call, deposit", data);
   const request = await fetchDeFi("invest", data);
-  console.log("Smart contract call, deposit", amount);
+  toast.success("Withdraw completed!");
 };
 
 export const withdrawTokens = async (amount, token, DSCStore, Web3Store) => {
+  amount = new Web3Store.web3.utils.BN(amount.toString()).abs();
   const rayTokenIds = await DSCStore.drizzle.contracts.DeFiCustodyRegistry.methods
     .getRayTokens(Web3Store.defaultAccount)
     .call();
   //TODO fix to range
   const rayTokenId = rayTokenIds[0];
-  console.log("Smart contract call, withdraw: ", rayTokenId, amount);
-  // dependencies.rayIntegration.methods.redeemAndWithdraw(
-  //   rayTokenId,
-  //   value,
-  //   user1
-  // )
+  console.log(
+    "Smart contract call, withdraw: ",
+    rayTokenId,
+    amount.toString(),
+    Web3Store.defaultAccount
+  );
+  const result = await DSCStore.drizzle.contracts.DeFiCustodyRegistry.methods
+    .redeemAndWithdraw(rayTokenId, amount.toString(), Web3Store.defaultAccount)
+    .send();
+  toast.success("Withdraw completed!");
 };
 
 // TODO work only on mainnet and rinkeby

@@ -82,24 +82,17 @@ class DSCStore {
 
   @action
   transferTokens = (token, amount) => {
-    amount = new this.BN(amount);
-    const decimalsPower = new this.BN(10).pow(
-      this.tokens[token.index].decimals
-    );
-    amount.mul(decimalsPower);
+    amount *= 10 ** this.tokens[token.index].decimals;
     amount = Math.trunc(amount);
-    console.log(amount, parseInt(this.tokens[token.index].balance));
-    const newBalance = parseInt(this.tokens[token.index].balance) - amount;
-    const newAmount = parseInt(this.tokens[token.index].amount) + amount;
-    console.log(newBalance, newAmount);
-    this.tokens[token.index].balance = parseFloat(
-      newBalance.toFixed(6).toString()
-    );
-    this.tokens[token.index].amount = parseFloat(
-      newAmount.toFixed(6).toString()
-    );
-    console.log(this.tokens[token.index].amount);
-    console.log(this.tokens[token.index].balance);
+    amount = new this.BN(amount);
+    const newBalance = new this.BN(
+      this.tokens[token.index].balance.toString()
+    ).sub(amount);
+    const newAmount = new this.BN(
+      this.tokens[token.index].amount.toString()
+    ).add(amount);
+    this.tokens[token.index].balance = newBalance.toString();
+    this.tokens[token.index].amount = newAmount.toString();
     this.isInteractionAllowed = true;
   };
 
