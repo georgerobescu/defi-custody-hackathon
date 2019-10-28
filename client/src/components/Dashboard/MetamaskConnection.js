@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 const USER_DENIED_ACCESS = "User denied account authorization";
 
-const MetamaskConnection = ({ Web3Store, DSCStore }) => {
+const MetamaskConnection = ({ Web3Store, DSCStore, BlockchainStatusStore }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [defaultAddress, setDefaultAddress] = useState();
   const setInitContractsStore = useCallback(
@@ -28,10 +28,12 @@ const MetamaskConnection = ({ Web3Store, DSCStore }) => {
       if (accounts.length > 0) {
         await setInitContractsStore(web3, accounts);
       }
+      BlockchainStatusStore.metamaskLoading &&
+        BlockchainStatusStore.setMetamaskLoading(false);
       setIsLoading(false);
     };
     fetchAccount();
-  }, [setInitContractsStore]);
+  }, [BlockchainStatusStore, setInitContractsStore]);
   const connect = async () => {
     setIsLoading(true);
     if (window.ethereum) {
@@ -68,6 +70,6 @@ const MetamaskConnection = ({ Web3Store, DSCStore }) => {
 };
 
 export default compose(
-  inject("Web3Store", "DSCStore"),
+  inject("Web3Store", "DSCStore", "BlockchainStatusStore"),
   observer
 )(MetamaskConnection);

@@ -1,17 +1,23 @@
 import { action, computed, observable } from "mobx";
 
-const DeFiCustodyRegistry = require("../../../build/contracts/DeFiCustodyRegistry");
 class Web3Store {
   @observable web3;
-  @observable loading = true;
-  @observable DeFiCustodyRegistry;
+  @observable metamaskLoading = true;
+  @observable isFetched = false;
 
   @action
   setWeb3 = async (web3, accounts) => {
     web3.eth.defaultAccount = accounts[0];
     this.web3 = web3;
-    this.loading = false;
   };
+
+  @action
+  setMetamaskLoading = status => {
+    this.metamaskLoading = status;
+  };
+
+  @action
+  setTokensFetched = state => (this.isFetched = state);
 
   @computed get defaultAccount() {
     return this.web3.eth.defaultAccount;
