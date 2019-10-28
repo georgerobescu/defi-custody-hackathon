@@ -10,7 +10,10 @@ class BlockchainStatusStore {
   };
 
   @action
-  setTokensFetched = state => (this.isFetched = state);
+  setTokensFetched = state => {
+    this.isFetched = state;
+    console.log(state);
+  };
 }
 
 const store = new BlockchainStatusStore();

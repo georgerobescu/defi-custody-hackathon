@@ -3,9 +3,7 @@ import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
 import { CenteredTD, CenteredTH, Table } from "../../../../styled";
 import { generateDicimaledBalance } from "../../../../utils/ethereum";
-import DrizzleContainer from "../../../../drizzle/DrizzleContainer";
 import TransferButtons from "./TransferButtons";
-import TransferButtonsHookWrapper from "./TransferButtonsHookWrapper";
 
 const DSCAssetsContainer = ({ DSCStore, Web3Store }) => {
   return (
@@ -38,12 +36,7 @@ const DSCAssetsContainer = ({ DSCStore, Web3Store }) => {
                   token.symbol}
               </CenteredTD>
               <td>
-                <DrizzleContainer
-                  component={props => (
-                    <TransferButtons token={token} {...props} />
-                  )}
-                  HooksWrapper={TransferButtonsHookWrapper}
-                />
+                <TransferButtons token={token} />
               </td>
               <CenteredTD>
                 {(token.amount

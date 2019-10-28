@@ -9,11 +9,13 @@ import {
 } from "../../blockchain/SmartContractCalls";
 import { drizzleReactHooks } from "../../drizzle";
 import Spinner from "../utils/Spinner";
+import withDrizzle from "../../drizzle/WithDrizzle";
 
 const AssetsObserver = ({
   DSCStore,
   Web3Store,
   BlockchainStatusStore,
+  isFetched,
   children
 }) => {
   const { useCacheCall } = drizzleReactHooks.useDrizzle();
@@ -55,16 +57,25 @@ const AssetsObserver = ({
       BlockchainStatusStore.setTokensFetched(true);
       console.log("Data fetched.");
     };
-    supportedTokens && smartContractTokens && fetchSmartContractData();
+    supportedTokens &&
+      smartContractTokens &&
+      !isFetched &&
+      fetchSmartContractData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [supportedTokens, smartContractTokens]);
-  return BlockchainStatusStore.isFetched ? children : <Spinner />;
+  return isFetched ? children : <Spinner />;
 };
 
 const Container = props =>
-  props.DSCStore.drizzle ? <AssetsObserver {...props} /> : null;
+  props.DSCStore.drizzle ? (
+    <AssetsObserver
+      isFetched={props.BlockchainStatusStore.isFetched}
+      {...props}
+    />
+  ) : null;
 
 export default compose(
+  withDrizzle,
   inject("DSCStore", "Web3Store", "BlockchainStatusStore"),
   observer
 )(Container);
