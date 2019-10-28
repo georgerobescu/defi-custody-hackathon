@@ -85,7 +85,7 @@ export const depositTokens = async (amount, token, DSCStore, Web3Store) => {
   };
   console.log("Smart contract call, deposit", data);
   const request = await fetchDeFi("invest", data);
-  toast.success("Withdraw completed!");
+  toast.success("Deposit completed!");
 };
 
 export const withdrawTokens = async (amount, token, DSCStore, Web3Store) => {
