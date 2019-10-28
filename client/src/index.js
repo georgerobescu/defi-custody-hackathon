@@ -6,6 +6,7 @@ import { Provider } from "mobx-react";
 import Web3Store from "./stores/Web3Store";
 import DSCStore from "./stores/DSCStore";
 import { ToastContainer } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.min.css";
 
 const App = () => (
@@ -22,5 +23,4 @@ const App = () => (
 );
 
 ReactDOM.render(<App />, document.getElementById("root"));
-
 serviceWorker.unregister();

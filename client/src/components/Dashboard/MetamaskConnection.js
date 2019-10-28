@@ -19,6 +19,7 @@ const MetamaskConnection = ({ Web3Store, DSCStore }) => {
     },
     [DSCStore, Web3Store]
   );
+
   useEffect(() => {
     const fetchAccount = async () => {
       const { ethereum } = window;

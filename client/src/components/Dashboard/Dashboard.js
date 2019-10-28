@@ -1,3 +1,4 @@
+
 import React from "react";
 import styled from "styled-components";
 import Assets from "./Assets";
@@ -12,6 +13,7 @@ const CenteredColumns = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
 const Drizzled = withDrizzle(() => (
   <>
     <Assets />
