@@ -10,9 +10,13 @@ const GrowButton = styled(Button)`
   flex-basis: 0;
 `;
 
-const ActionButtons = ({ DSCStore }) => (
+const ActionButtons = ({ DSCStore, Web3Store }) => (
   <FlexDiv noPadding={true}>
-    <GrowButton disabled={DSCStore.tokens.length === 0} mr={2}>
+    <GrowButton
+      onClick={() => DSCStore.setRecoverySheet(0, Web3Store.web3.utils.toWei)}
+      disabled={DSCStore.tokens.length === 0}
+      mr={2}
+    >
       Sign
     </GrowButton>
     <GrowButton disabled={DSCStore.tokens.length === 0} ml={2}>
@@ -22,6 +26,6 @@ const ActionButtons = ({ DSCStore }) => (
 );
 
 export default compose(
-  inject("DSCStore"),
+  inject("DSCStore", "Web3Store"),
   observer
 )(ActionButtons);

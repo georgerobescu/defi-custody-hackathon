@@ -1,7 +1,8 @@
 import { action, observable } from "mobx";
 
 class DSCStore {
-  @observable addresses = [undefined, undefined, undefined, undefined];
+  BN;
+  @observable addresses = [undefined];
   @observable tokens = [
     {
       address: "-",
@@ -56,6 +57,7 @@ class DSCStore {
     if (value + sum > 100) {
       value = 100 - sum;
     }
+    console.log(tokenIndex, address, value, this.tokens[tokenIndex].percentage);
     this.tokens[tokenIndex].percentage[address] = value;
   };
 
@@ -80,10 +82,16 @@ class DSCStore {
 
   @action
   transferTokens = (token, amount) => {
-    amount *= 10 ** this.tokens[token.index].decimals;
+    amount = new this.BN(amount);
+    const decimalsPower = new this.BN(10).pow(
+      this.tokens[token.index].decimals
+    );
+    amount.mul(decimalsPower);
     amount = Math.trunc(amount);
-    const newBalance = this.tokens[token.index].balance - amount;
-    const newAmount = this.tokens[token.index].amount + amount;
+    console.log(amount, parseInt(this.tokens[token.index].balance));
+    const newBalance = parseInt(this.tokens[token.index].balance) - amount;
+    const newAmount = parseInt(this.tokens[token.index].amount) + amount;
+    console.log(newBalance, newAmount);
     this.tokens[token.index].balance = parseFloat(
       newBalance.toFixed(6).toString()
     );
@@ -120,6 +128,34 @@ class DSCStore {
     console.log(this.tokens[tokenIndex], "token percentage updated");
   };
 
+  @action
+  setRecoverySheet = async (tokenIndex = 0, toWei) => {
+    const percentages = this.addresses.map(address =>
+      toWei(
+        this.tokens[tokenIndex].percentage[address].toString() + "0",
+        "milli"
+      )
+    );
+    console.log(
+      "Setting recovery sheet",
+      this.tokens[0].address,
+      [...this.addresses],
+      percentages,
+      parseInt(this.newDeadline)
+    );
+    const result = await this.drizzle.contracts.DeFiCustodyRegistry.methods
+      .setRecoverySheet(
+        this.tokens[0].address,
+        [...this.addresses],
+        percentages,
+        parseInt(this.newDeadline)
+      )
+      .send();
+    console.log(result);
+  };
+  setBN = BN => {
+    this.BN = BN;
+  };
   percentageSum = tokenIndex => {
     let sum = 0;
     this.addresses.forEach(addr => {

@@ -18749,7 +18749,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-10-27T23:27:38.342Z",
+  "updatedAt": "2019-10-28T00:33:21.775Z",
   "devdoc": {
     "methods": {
       "deposit(bytes32,uint256)": {

@@ -5,7 +5,8 @@ import {
   fetchUserBalances,
   fetchSmartContractAssets,
   mergeTokenAndBalances,
-  fetchUserBalance
+  fetchUserBalance,
+  fetchDeadline
 } from "../../../../blockchain/SmartContractCalls";
 import { drizzleReactHooks } from "../../../../drizzle";
 const AssetsObserver = ({ DSCStore, Web3Store }) => {
@@ -40,6 +41,9 @@ const AssetsObserver = ({ DSCStore, Web3Store }) => {
         balances,
         smartContractAssets
       );
+      const deadline = await fetchDeadline(DSCStore, Web3Store);
+      DSCStore.setBN(Web3Store.web3.utils.BN);
+      deadline && DSCStore.setDeadline(deadline);
       DSCStore.setAddresses(addresses);
       DSCStore.setTokens(mergedTokens);
       DSCStore.setTokensFetched(true);

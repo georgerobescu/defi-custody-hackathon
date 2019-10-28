@@ -27,7 +27,6 @@ router.post("/invest", async (req, res, next) => {
       payableBeneficiary,
       value
     );
-    console.log(rayContractInstance)
     console.log(
       "Sending mint transaction for rayContractInstance with params:",
       portfolioId,

@@ -9723,8 +9723,8 @@
     "27": {
       "links": {},
       "events": {},
-      "address": "0x6254d3A5187B683cB22c122a47c058e01cf450B6",
-      "updated_at": 1572200831281
+      "address": "0x0656682aE3F8DaDbb049a5697F2E3c1823E7CFb0",
+      "updated_at": 1572222302675
     },
     "42": {
       "links": {},
@@ -10008,7 +10008,7 @@
     }
   },
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-10-27T23:27:38.333Z",
+  "updatedAt": "2019-10-28T00:33:21.768Z",
   "devdoc": {
     "methods": {
       "alive()": {

@@ -1,9 +1,10 @@
-//TODO fetch balances -> filter -> fetchDCSAmount -> fetchEarnings
 import { generateDicimaledBalance } from "../utils/ethereum";
-import FakeDAI from "../../../contracts/MockedERC20.sol";
 
 const API_KEY = "UAK3dea068114955255b188b0cdfd12c9ae";
 const RINKEBY_ID = "1b3f7a72b3e99c13";
+// TODO fix porfolioId
+const BZX_COMPOUND_DYDX =
+  "0x87e3990b15e1e64e3a17b0e4ebfcc4c03cc5ec64a33b442ae01ef15d9dadb575";
 
 export const fetchSmartContractAssets = async (
   Web3Store,
@@ -17,18 +18,22 @@ export const fetchSmartContractAssets = async (
   const percentages = [];
   for (let i = 0; i < smartContractTokens.tokens.length; i++) {
     const promises = recoveryWallets.map(recoveryWallet =>
-      DSCStore.drizzle.contracts.DeFiCustodyRegistry.recoverySheet(
-        Web3Store.defaultAccount,
-        recoveryWallet,
-        smartContractTokens.tokens[i]
-      ).call()
+      DSCStore.drizzle.contracts.DeFiCustodyRegistry.methods
+        .recoverySheet(
+          Web3Store.defaultAccount,
+          recoveryWallet,
+          smartContractTokens.tokens[i]
+        )
+        .call()
     );
     const percentage = await Promise.all(promises);
     const tokenPercentage = {};
     percentage.forEach((percent, i) => {
+      percent = Web3Store.web3.utils.fromWei(percent, "milli");
+      percent = percent.substr(0, percent.length - 1);
       tokenPercentage[recoveryWallets[i]] = percent;
     });
-    percentages.push(percentage);
+    percentages.push(tokenPercentage);
   }
   //TODO earnings
   smartContractTokens.tokens
@@ -67,33 +72,32 @@ export const fetchRayTokenBalances = async DSCStore => {
   ];
   return [dummyTokens, dummyAddresses];
 };
-// TODO fix porfolioId
-const BZX_COMPOUND_DYDX =
-  "0x87e3990b15e1e64e3a17b0e4ebfcc4c03cc5ec64a33b442ae01ef15d9dadb575";
 
-export const depositTokens = async (Web3Store, amount, token, DSCStore) => {
-  console.log(token.address, amount);
-  console.log(
-    await DSCStore.drizzle.contracts.MockedERC20.methods
-      .balanceOf(Web3Store.defaultAccount)
-      .call()
-  );
+export const depositTokens = async (amount, token, DSCStore, Web3Store) => {
   const transaction = await DSCStore.drizzle.contracts.MockedERC20.methods
-    .approve(token.address, amount)
+    .approve(DSCStore.drizzle.contracts.DeFiCustodyRegistry.address, amount)
     .send();
-  console.log(transaction);
   const data = {
     portfolioId: BZX_COMPOUND_DYDX,
     payableBeneficiary: Web3Store.defaultAccount,
     value: amount
   };
   const request = await fetchDeFi("invest", data);
-  console.log(request);
   console.log("Smart contract call, deposit", amount);
 };
 
-export const withdrawTokens = (web3, amount, token) => {
-  console.log("Smart contract call, withdraw", amount);
+export const withdrawTokens = async (amount, token, DSCStore, Web3Store) => {
+  const rayTokenIds = await DSCStore.drizzle.contracts.DeFiCustodyRegistry.methods
+    .getRayTokens(Web3Store.defaultAccount)
+    .call();
+  //TODO fix to range
+  const rayTokenId = rayTokenIds[0];
+  console.log("Smart contract call, withdraw: ", rayTokenId, amount);
+  // dependencies.rayIntegration.methods.redeemAndWithdraw(
+  //   rayTokenId,
+  //   value,
+  //   user1
+  // )
 };
 
 // TODO work only on mainnet and rinkeby
@@ -170,6 +174,11 @@ export const mergeTokenAndBalances = (
     ...balances[token],
     ...smartContractAssets[token]
   }));
+
+export const fetchDeadline = (DSCStore, Web3Store) =>
+  DSCStore.drizzle.contracts.DeFiCustodyRegistry.methods
+    .recoveryDeadline(Web3Store.defaultAccount)
+    .call();
 
 const fetchDeFi = async (uri = "", data = {}, method = "POST") => {
   try {
