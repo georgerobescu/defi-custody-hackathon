@@ -19,7 +19,12 @@ const TransactionWrapper = props => {
   return (
     <>
       {Component(rest)}
-      {currentStatus && <TransactionStatus currentStatus={currentStatus} />}
+      {currentStatus && (
+        <TransactionStatus
+          currentStatus={currentStatus}
+          onSuccess={successToast.onSuccess}
+        />
+      )}
     </>
   );
 };
@@ -33,7 +38,7 @@ const DrizzleContainer = props => {
       )}
     </HooksWrapper>
   ) : (
-    component({ DSCStore })
+    component({})
   );
 };
 

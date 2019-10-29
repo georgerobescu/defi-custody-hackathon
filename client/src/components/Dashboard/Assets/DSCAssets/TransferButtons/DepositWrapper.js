@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
 import { drizzleReactHooks } from "../../../../../drizzle";
@@ -9,20 +10,22 @@ const BZX_COMPOUND_DYDX =
 const TransferButtonsHookWrapper = ({ DSCStore, Web3Store, children }) => {
   const { useCacheSend } = drizzleReactHooks.useDrizzle();
   const { send, TXObjects } = useCacheSend("MockedERC20", "approve");
+  const [depositAmount, setDepositAmount] = useState(0);
   const successToast = {
     successTitle: "Successfully deposited!",
-    successSubtitle: receipt => {
-      // const data = {
-      //   portfolioId: BZX_COMPOUND_DYDX,
-      //   payableBeneficiary: Web3Store.defaultAccount,
-      //   value: amount
-      // };
-      // const request = fetchDeFi("invest", data);
-      return "mined";
+    successSubtitle: receipt => "mined",
+    onSuccess: async () => {
+      const data = {
+        portfolioId: BZX_COMPOUND_DYDX,
+        payableBeneficiary: Web3Store.defaultAccount,
+        value: depositAmount
+      };
+      const request = await fetchDeFi("invest", data);
     }
   };
-  const transfer = async (amount, token) => {
-    await send(DSCStore.drizzle.contracts.DeFiCustodyRegistry.address, amount);
+  const transfer = (amount, token) => {
+    send(DSCStore.drizzle.contracts.DeFiCustodyRegistry.address, amount);
+    setDepositAmount(amount);
   };
   return children({ transfer, TXObjects, successToast });
 };

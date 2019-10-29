@@ -3,9 +3,9 @@ import { compose } from "recompose";
 import { inject, observer } from "mobx-react";
 import { DrizzleProvider } from "./hooks";
 import getDrizzleStore from "./setup";
+import Spinner from "../components/utils/Spinner";
 
-const DrizzleConnectionSetter = props => {
-  const { DSCStore, Component } = props;
+const DrizzleConnectionSetter = ({ DSCStore }) => {
   const drizzle = getDrizzleStore();
   useEffect(() => {
     if (!DSCStore.drizzle) {
@@ -19,24 +19,24 @@ const DrizzleConnectionSetter = props => {
       return unsubscribe;
     }
   }, [DSCStore, drizzle]);
-  return <Component {...props} />;
+  return <Spinner />;
 };
 const withDrizzle = Component => {
   const WithDrizzle = props => {
-    const { DSCStore } = props;
-    if (!DSCStore.drizzleConnected) {
+    const { DSCStore, Web3Store } = props;
+    if (!Web3Store.web3) {
       return <Component {...props} />;
     } else if (DSCStore.drizzle) {
       return (
         <DrizzleProvider drizzle={DSCStore.drizzle}>
-          <DrizzleConnectionSetter Component={Component} {...props} />
+          <Component {...props} />
         </DrizzleProvider>
       );
     }
-    return <DrizzleConnectionSetter Component={Component} {...props} />;
+    return <DrizzleConnectionSetter {...props} />;
   };
   return compose(
-    inject("DSCStore"),
+    inject("DSCStore", "Web3Store"),
     observer
   )(WithDrizzle);
 };

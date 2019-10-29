@@ -2,7 +2,7 @@ import { action, observable } from "mobx";
 
 class BlockchainStatusStore {
   @observable metamaskLoading = true;
-  @observable isFetched = false;
+  @observable isAssetsFetched = false;
 
   @action
   setMetamaskLoading = status => {
@@ -11,8 +11,7 @@ class BlockchainStatusStore {
 
   @action
   setTokensFetched = state => {
-    this.isFetched = state;
-    console.log(state);
+    this.isAssetsFetched = state;
   };
 }
 

@@ -9722,9 +9722,284 @@
   "networks": {
     "27": {
       "links": {},
-      "events": {},
-      "address": "0x0656682aE3F8DaDbb049a5697F2E3c1823E7CFb0",
-      "updated_at": 1572222302675
+      "events": {
+        "0xd710eaacc9582acea58adbbda80c3bcef84d92e024865f9cb17a9d686cbccead": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "proxy",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "admin",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "sender",
+              "type": "address"
+            }
+          ],
+          "name": "NewWallet",
+          "type": "event",
+          "signature": "0xd710eaacc9582acea58adbbda80c3bcef84d92e024865f9cb17a9d686cbccead"
+        },
+        "0xc335693ab2fc7f7806781247c0088839e7fed4246c371f702f26176dfe8b6ed9": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "sender",
+              "type": "address"
+            }
+          ],
+          "name": "NewSupportedToken",
+          "type": "event",
+          "signature": "0xc335693ab2fc7f7806781247c0088839e7fed4246c371f702f26176dfe8b6ed9"
+        },
+        "0xea01a0ea7db0a551b7f4d29fae6934cd6ae327f0cdd83d01ad090fba6bcf9243": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "wallet",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "principalAddress",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "beneficiary",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "share",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "RecoveredERC20",
+          "type": "event",
+          "signature": "0xea01a0ea7db0a551b7f4d29fae6934cd6ae327f0cdd83d01ad090fba6bcf9243"
+        },
+        "0xd755b4b1c6f89e651f14f05a6de0376c202dddaf96dd4ee3052c42b72f47dbb4": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "user",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "asset",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "wallets",
+              "type": "address[]"
+            },
+            {
+              "indexed": false,
+              "name": "values",
+              "type": "uint256[]"
+            },
+            {
+              "indexed": false,
+              "name": "deadline",
+              "type": "uint256"
+            }
+          ],
+          "name": "NewRecoverySheet",
+          "type": "event",
+          "signature": "0xd755b4b1c6f89e651f14f05a6de0376c202dddaf96dd4ee3052c42b72f47dbb4"
+        },
+        "0x8667d3b890097908e74765dd3b76068096309b7c3755b889b9afffc436182b5e": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "portfolioId",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "name": "beneficiary",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "rayTokenId",
+              "type": "bytes32"
+            }
+          ],
+          "name": "InvestmentRAY",
+          "type": "event",
+          "signature": "0x8667d3b890097908e74765dd3b76068096309b7c3755b889b9afffc436182b5e"
+        },
+        "0x18deb3b7772ccd6bb7a588a8a4682455bd256880ac88a8cd6c692ff18ff15a62": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "rayTokenId",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "beneficiary",
+              "type": "address"
+            }
+          ],
+          "name": "DepositRAY",
+          "type": "event",
+          "signature": "0x18deb3b7772ccd6bb7a588a8a4682455bd256880ac88a8cd6c692ff18ff15a62"
+        },
+        "0x7029c547dc32802e528b6770662e27ad50f2fb85883fe19b9107a73afa6e2ef6": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "rayTokenId",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "beneficiary",
+              "type": "address"
+            }
+          ],
+          "name": "RedeemRAY",
+          "type": "event",
+          "signature": "0x7029c547dc32802e528b6770662e27ad50f2fb85883fe19b9107a73afa6e2ef6"
+        },
+        "0x811818cc81106965711d42e377725a1ae3815b6175654fc80aa44e7a6821b77f": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "tokenAddress",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "beneficiary",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "FundsTransferRAY",
+          "type": "event",
+          "signature": "0x811818cc81106965711d42e377725a1ae3815b6175654fc80aa44e7a6821b77f"
+        },
+        "0x2158f66ce15490507ec69d9824ffc1a98ef4d4ed22a9bb0419bde6b92c06d05e": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "erc20",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "DepositDC",
+          "type": "event",
+          "signature": "0x2158f66ce15490507ec69d9824ffc1a98ef4d4ed22a9bb0419bde6b92c06d05e"
+        },
+        "0x5a619174578cdee6ffdb33d380d4cc19d92b5e8ed08c2d52cfcc89d59d0a78e4": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "erc20",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "WithdrawDC",
+          "type": "event",
+          "signature": "0x5a619174578cdee6ffdb33d380d4cc19d92b5e8ed08c2d52cfcc89d59d0a78e4"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event",
+          "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
+        }
+      },
+      "address": "0x58c60b52522Bb0F193D1CA8aB9Cab3cB391d2313",
+      "updated_at": 1572222302675,
+      "transactionHash": "0x392052f96ed276fe4ca0e2d2b78262d01cdeb346e5f4a709d8364c34836c7b87"
     },
     "42": {
       "links": {},
@@ -10008,7 +10283,7 @@
     }
   },
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-10-28T00:33:21.768Z",
+  "updatedAt": "2019-10-29T03:20:40.902Z",
   "devdoc": {
     "methods": {
       "alive()": {

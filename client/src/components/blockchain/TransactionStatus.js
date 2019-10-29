@@ -2,12 +2,18 @@ import React, { useEffect, useRef } from "react";
 import { Pill, ToastMessage } from "rimble-ui";
 import { TransactionStatus as Status } from "../../constants/TransactionStatusEnum";
 
-const TransactionStatus = ({ currentStatus }) => {
+const TransactionStatus = ({ currentStatus, onSuccess }) => {
   const toastRef = useRef(null);
   const { status } = currentStatus;
   useEffect(() => {
-    toastRef.current.addMessage(...Status.getToastType(currentStatus));
-  }, [currentStatus]);
+    const showToast = async () => {
+      if (currentStatus.status === Status.SUCCESS && onSuccess) {
+        await onSuccess();
+      }
+      toastRef.current.addMessage(...Status.getToastType(currentStatus));
+    };
+    showToast();
+  }, [currentStatus, onSuccess]);
   return (
     <div>
       {status !== Status.SUCCESS && (

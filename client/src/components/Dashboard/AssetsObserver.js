@@ -15,7 +15,7 @@ const AssetsObserver = ({
   DSCStore,
   Web3Store,
   BlockchainStatusStore,
-  isFetched,
+  isAssetsFetched,
   children
 }) => {
   const { useCacheCall } = drizzleReactHooks.useDrizzle();
@@ -28,6 +28,7 @@ const AssetsObserver = ({
     "getSenderTokens"
   );
   useEffect(() => {
+    // TODO rewrite call to hooks
     const fetchSmartContractData = async () => {
       console.log(
         "Fetching data from DeFiCustody: ",
@@ -38,7 +39,6 @@ const AssetsObserver = ({
         Web3Store.defaultAccount,
         Web3Store.web3.utils.toBN
       );
-      console.log(balances);
       const [smartContractAssets, addresses] = await fetchSmartContractAssets(
         Web3Store,
         DSCStore,
@@ -59,20 +59,22 @@ const AssetsObserver = ({
     };
     supportedTokens &&
       smartContractTokens &&
-      !isFetched &&
+      !isAssetsFetched &&
       fetchSmartContractData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [supportedTokens, smartContractTokens]);
-  return isFetched ? children : <Spinner />;
+  return isAssetsFetched ? children : <Spinner />;
 };
 
 const Container = props =>
   props.DSCStore.drizzle ? (
     <AssetsObserver
-      isFetched={props.BlockchainStatusStore.isFetched}
+      isAssetsFetched={props.BlockchainStatusStore.isAssetsFetched}
       {...props}
     />
-  ) : null;
+  ) : (
+    props.children
+  );
 
 export default compose(
   withDrizzle,
