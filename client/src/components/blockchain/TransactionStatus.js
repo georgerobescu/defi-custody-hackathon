@@ -14,7 +14,8 @@ const TransactionStatus = ({ currentStatus, getStatus }) => {
       toastRef.current.addMessage(...Status.getToastType(status));
     };
     showToast();
-  }, [currentStatus, getStatus]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentStatus]);
   console.log(2345);
   return (
     <div>
