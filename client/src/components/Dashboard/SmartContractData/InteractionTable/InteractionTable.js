@@ -19,14 +19,6 @@ const InteractionTable = ({ DSCStore, Web3Store }) => {
   const changePercentage = (tokenIndex, address) => ({ target: { value } }) => {
     DSCStore.changePercentage(tokenIndex, address, value);
   };
-  const updatePercentage = tokenIndex => () => {
-    const sum = DSCStore.percentageSum(tokenIndex);
-    if (sum !== 100) {
-      toast.error(`Ooops, wrong percentage sum, ${sum}`);
-      return;
-    }
-    DSCStore.updatePercentage(tokenIndex);
-  };
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [newAddress, setNewAddress] = useState("");
   const onChangeNewAddress = ({ target: { value } }) => setNewAddress(value);
@@ -96,7 +88,7 @@ const InteractionTable = ({ DSCStore, Web3Store }) => {
                     <PercentageInput
                       disabled={token.amount === 0}
                       symbol="%"
-                      value={percent}
+                      value={percent || ""}
                       type="number"
                       onChange={changePercentage(tokenIndex, address)}
                     />
@@ -109,7 +101,9 @@ const InteractionTable = ({ DSCStore, Web3Store }) => {
                 iconpos="right"
                 size="small"
                 disabled={!DSCStore.isInteractionAllowed}
-                onClick={updatePercentage(tokenIndex)}
+                onClick={() =>
+                  DSCStore.signTransaction(0, Web3Store.web3.utils.toWei)
+                }
               >
                 Update
               </Button>

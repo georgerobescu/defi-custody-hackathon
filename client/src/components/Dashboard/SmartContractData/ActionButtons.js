@@ -4,6 +4,7 @@ import { Button } from "rimble-ui";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 
 const GrowButton = styled(Button)`
   flex-grow: 1;
@@ -13,7 +14,7 @@ const GrowButton = styled(Button)`
 const ActionButtons = ({ DSCStore, Web3Store }) => (
   <FlexDiv noPadding={true}>
     <GrowButton
-      onClick={() => DSCStore.setRecoverySheet(0, Web3Store.web3.utils.toWei)}
+      onClick={() => DSCStore.signTransaction(0, Web3Store.web3.utils.toWei)}
       disabled={DSCStore.tokens.length === 0}
       mr={2}
     >
