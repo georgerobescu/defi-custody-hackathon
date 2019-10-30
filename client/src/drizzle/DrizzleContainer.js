@@ -5,7 +5,7 @@ import TransactionStatus from "../components/blockchain";
 import { TransactionStatus as Status } from "../constants/TransactionStatusEnum";
 
 const TransactionWrapper = props => {
-  const { Component, TXObjects, successToast, ...rest } = props;
+  const { Component, TXObjects, successToast, getStatus, ...rest } = props;
   let currentStatus;
   if (TXObjects.length > 0 && TXObjects[TXObjects.length - 1]) {
     currentStatus = TXObjects[TXObjects.length - 1];
@@ -22,7 +22,7 @@ const TransactionWrapper = props => {
       {currentStatus && (
         <TransactionStatus
           currentStatus={currentStatus}
-          onSuccess={successToast.onSuccess}
+          getStatus={getStatus}
         />
       )}
     </>
