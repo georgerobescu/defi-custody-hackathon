@@ -1,4 +1,7 @@
 import { action, observable } from "mobx";
+import { toast } from "react-toastify";
+import { toWei } from "@openzeppelin/cli/lib/utils/units";
+import { DeadlineFormat } from "../constants/DeadlineTimeFormatEnum";
 
 class DSCStore {
   BN;
@@ -37,6 +40,7 @@ class DSCStore {
   @observable drizzleConnected = false;
   @observable newDeadline = 0;
   @observable walletAddress;
+  @observable deadlineFormat = DeadlineFormat.SECONDS;
 
   @action
   changePercentage = (tokenIndex, address, value) => {
@@ -113,8 +117,25 @@ class DSCStore {
   };
 
   @action
-  updatePercentage = tokenIndex => {
-    console.log(this.tokens[tokenIndex], "token percentage updated");
+  signTransaction = tokenIndex => {
+    const sum = this.percentageSum(tokenIndex);
+    if (sum !== 100) {
+      toast.error(`Ooops, wrong percentage sum, ${sum}`);
+      return;
+    }
+    if (!this.newDeadline || this.newDeadline <= 0) {
+      toast.error(`Wrong deadline date, ${this.newDeadline}`);
+      return;
+    }
+    let correctAddresses = true;
+    this.addresses.forEach(
+      address => (correctAddresses = correctAddresses && address)
+    );
+    if (!correctAddresses) {
+      toast.error("Please set recovery addresses");
+      return;
+    }
+    return this.setRecoverySheet(tokenIndex, toWei);
   };
 
   @action
@@ -125,22 +146,31 @@ class DSCStore {
         "milli"
       )
     );
+    const deadline = DeadlineFormat.getTime(
+      parseInt(this.newDeadline),
+      this.deadlineFormat
+    );
     console.log(
       "Setting recovery sheet",
       this.tokens[0].address,
       [...this.addresses],
       percentages,
-      parseInt(this.newDeadline)
+      deadline
     );
     const result = await this.drizzle.contracts.DeFiCustodyRegistry.methods
       .setRecoverySheet(
         this.tokens[0].address,
         [...this.addresses],
         percentages,
-        parseInt(this.newDeadline)
+        deadline
       )
       .send();
     console.log(result);
+  };
+
+  @action
+  setDeadlineFormat = format => {
+    this.deadlineFormat = format;
   };
 
   setBN = BN => {

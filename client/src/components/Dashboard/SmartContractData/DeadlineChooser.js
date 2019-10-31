@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Input, Select } from "rimble-ui";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
+import { DeadlineFormat } from "../../../constants/DeadlineTimeFormatEnum";
 
 const DeadlineChooser = ({ DSCStore }) => (
   <Box my={3}>
@@ -14,13 +15,15 @@ const DeadlineChooser = ({ DSCStore }) => (
     />
     <Select
       disabled={!DSCStore.isInteractionAllowed}
+      value={DSCStore.deadlineFormat}
+      onChange={({ target: { value } }) => DSCStore.setDeadlineFormat(value)}
       options={[
-        { value: "seconds", label: "Seconds" },
-        { value: "days", label: "Days" },
-        { value: "weeks", label: "Weeks" },
-        { value: "months", label: "Months" },
-        { value: "years", label: "Years" }
-      ]}
+        DeadlineFormat.SECONDS,
+        DeadlineFormat.DAYS,
+        DeadlineFormat.WEEKS,
+        DeadlineFormat.MONTHS,
+        DeadlineFormat.YEARS
+      ].map(format => ({ value: format, label: format }))}
     />
   </Box>
 );
