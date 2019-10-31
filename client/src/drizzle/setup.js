@@ -1,6 +1,6 @@
 import { Drizzle, generateStore } from "drizzle";
-import DeFiCustodyRegistry from "../../../contracts/DeFiCustodyRegistry.sol";
-import MockedERC20 from "../../../contracts/MockedERC20.sol";
+import DeFiCustodyRegistry from "../../../build/contracts/DeFiCustodyRegistry";
+import MockedERC20 from "../../../build/contracts/MockedERC20";
 let drizzle;
 const getDrizzleStore = () => {
   if (!drizzle) {

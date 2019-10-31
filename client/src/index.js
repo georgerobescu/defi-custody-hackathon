@@ -8,9 +8,14 @@ import DSCStore from "./stores/DSCStore";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.min.css";
+import BlockchainStatusStore from "./stores/BlockchainStatusStore";
 
 const App = () => (
-  <Provider Web3Store={Web3Store} DSCStore={DSCStore}>
+  <Provider
+    Web3Store={Web3Store}
+    DSCStore={DSCStore}
+    BlockchainStatusStore={BlockchainStatusStore}
+  >
     <Dashboard />
     <ToastContainer
       autoClose={4000}

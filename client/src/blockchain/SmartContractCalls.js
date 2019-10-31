@@ -187,7 +187,7 @@ export const fetchDeadline = (DSCStore, Web3Store) =>
     .recoveryDeadline(Web3Store.defaultAccount)
     .call();
 
-const fetchDeFi = async (uri = "", data = {}, method = "POST") => {
+export const fetchDeFi = async (uri = "", data = {}, method = "POST") => {
   try {
     const response = await fetch(`${process.env.REACT_APP_MAIN_URL}${uri}`, {
       method: "POST",

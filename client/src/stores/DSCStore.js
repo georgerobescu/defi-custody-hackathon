@@ -36,7 +36,6 @@ class DSCStore {
     }
   ];
   @observable isInteractionAllowed = false;
-  @observable isFetched = false;
   @observable drizzle;
   @observable drizzleConnected = false;
   @observable newDeadline = 0;
@@ -77,9 +76,6 @@ class DSCStore {
       this.addresses = addresses;
     }
   };
-
-  @action
-  setTokensFetched = state => (this.isFetched = state);
 
   @action
   setIsInteractionAllowed = state => (this.isInteractionAllowed = state);

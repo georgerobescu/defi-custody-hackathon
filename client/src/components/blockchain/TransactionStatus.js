@@ -2,12 +2,21 @@ import React, { useEffect, useRef } from "react";
 import { Pill, ToastMessage } from "rimble-ui";
 import { TransactionStatus as Status } from "../../constants/TransactionStatusEnum";
 
-const TransactionStatus = ({ currentStatus }) => {
+const TransactionStatus = ({ currentStatus, getStatus }) => {
   const toastRef = useRef(null);
   const { status } = currentStatus;
   useEffect(() => {
-    toastRef.current.addMessage(...Status.getToastType(currentStatus));
+    const showToast = async () => {
+      let status = currentStatus;
+      if (getStatus) {
+        status = await getStatus(currentStatus);
+      }
+      toastRef.current.addMessage(...Status.getToastType(status));
+    };
+    showToast();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentStatus]);
+  console.log(2345);
   return (
     <div>
       {status !== Status.SUCCESS && (

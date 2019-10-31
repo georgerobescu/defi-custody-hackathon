@@ -12,7 +12,7 @@
     "pre-commit": "cd client && npm run pre-commit",
     "chain": "ganache-cli -l 8000000 -d --db='./test/helpers/seed_ganache' -e 1000000 --networkId 27 -m 'float clock pair library upper during question ecology game timber april category'",
     "docker_test": "truffle test --network docker",
-    "docker_chain": "ganache-cli -h 0.0.0.0 -l 8000000 -d --db='./test/helpers/seed_ganache' -e 1000000 --networkId 27 -m 'float clock pair library upper during question ecology game timber april category'"
+    "docker_chain": "ganache-cli -h 0.0.0.0 -l 8000000 -d --blockTime 4 --db='./test/helpers/seed_ganache' -e 1000000 --networkId 27 -m 'float clock pair library upper during question ecology game timber april category'"
   },
   "husky": {
     "hooks": {
