@@ -71,3 +71,5 @@ zos.dev-*
 .DS_Store
 
 .openzeppelin/.session
+
+build
