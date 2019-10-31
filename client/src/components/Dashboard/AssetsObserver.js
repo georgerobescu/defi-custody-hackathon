@@ -1,15 +1,23 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
 import {
-  fetchUserBalances,
+  fetchDeadline,
   fetchSmartContractAssets,
-  mergeTokenAndBalances,
   fetchUserBalance,
-  fetchDeadline
-} from "../../../../blockchain/SmartContractCalls";
-import { drizzleReactHooks } from "../../../../drizzle";
-const AssetsObserver = ({ DSCStore, Web3Store }) => {
+  mergeTokenAndBalances
+} from "../../blockchain/SmartContractCalls";
+import { drizzleReactHooks } from "../../drizzle";
+import Spinner from "../utils/Spinner";
+import withDrizzle from "../../drizzle/WithDrizzle";
+
+const AssetsObserver = ({
+  DSCStore,
+  Web3Store,
+  BlockchainStatusStore,
+  isAssetsFetched,
+  children
+}) => {
   const { useCacheCall } = drizzleReactHooks.useDrizzle();
   //useCacheCall("DeFiCustodyRegistry", "getTokens");
   // kovan 0xc4375b7de8af5a38a93548eb8453a498222c4ff2
@@ -20,6 +28,7 @@ const AssetsObserver = ({ DSCStore, Web3Store }) => {
     "getSenderTokens"
   );
   useEffect(() => {
+    // TODO rewrite call to hooks
     const fetchSmartContractData = async () => {
       console.log(
         "Fetching data from DeFiCustody: ",
@@ -30,7 +39,6 @@ const AssetsObserver = ({ DSCStore, Web3Store }) => {
         Web3Store.defaultAccount,
         Web3Store.web3.utils.toBN
       );
-      console.log(balances);
       const [smartContractAssets, addresses] = await fetchSmartContractAssets(
         Web3Store,
         DSCStore,
@@ -46,16 +54,30 @@ const AssetsObserver = ({ DSCStore, Web3Store }) => {
       deadline && DSCStore.setDeadline(deadline);
       DSCStore.setAddresses(addresses);
       DSCStore.setTokens(mergedTokens);
-      DSCStore.setTokensFetched(true);
+      BlockchainStatusStore.setTokensFetched(true);
       console.log("Data fetched.");
     };
-    supportedTokens && smartContractTokens && fetchSmartContractData();
+    supportedTokens &&
+      smartContractTokens &&
+      !isAssetsFetched &&
+      fetchSmartContractData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [supportedTokens, smartContractTokens]);
-  return null;
+  return isAssetsFetched ? children : <Spinner />;
 };
 
+const Container = props =>
+  props.DSCStore.drizzle ? (
+    <AssetsObserver
+      isAssetsFetched={props.BlockchainStatusStore.isAssetsFetched}
+      {...props}
+    />
+  ) : (
+    props.children
+  );
+
 export default compose(
-  inject("DSCStore", "Web3Store"),
+  withDrizzle,
+  inject("DSCStore", "Web3Store", "BlockchainStatusStore"),
   observer
-)(AssetsObserver);
+)(Container);

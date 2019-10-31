@@ -33,7 +33,6 @@ class DSCStore {
     }
   ];
   @observable isInteractionAllowed = false;
-  @observable isFetched = false;
   @observable drizzle;
   @observable drizzleConnected = false;
   @observable newDeadline = 0;
@@ -73,9 +72,6 @@ class DSCStore {
       this.addresses = addresses;
     }
   };
-
-  @action
-  setTokensFetched = state => (this.isFetched = state);
 
   @action
   setIsInteractionAllowed = state => (this.isInteractionAllowed = state);
@@ -146,9 +142,11 @@ class DSCStore {
       .send();
     console.log(result);
   };
+
   setBN = BN => {
     this.BN = BN;
   };
+
   percentageSum = tokenIndex => {
     let sum = 0;
     this.addresses.forEach(addr => {

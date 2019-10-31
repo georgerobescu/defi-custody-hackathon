@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { TokenAmountInput } from "../../../../styled";
+import { TokenAmountInput } from "../../../../../styled";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
 import { Button, Flex } from "rimble-ui";
-import {
-  depositTokens,
-  withdrawTokens
-} from "../../../../blockchain/SmartContractCalls";
-import { precision } from "../../../../utils/float";
+import { precision } from "../../../../../utils/float";
+import DrizzleContainer from "../../../../../drizzle/DrizzleContainer";
+import DepositWrapper from "./DepositWrapper";
+import WithdrawWrapper from "./WithdrawWrapper";
 
 const TransferButtons = ({ DSCStore, Web3Store, token }) => {
   const [transferAmount, setTransferAmount] = useState();
@@ -28,7 +27,7 @@ const TransferButtons = ({ DSCStore, Web3Store, token }) => {
   const transfer = (token, transferTokens, isDeposit = true) => async () => {
     setIsTransferring(true);
     const amount = transferAmount * (isDeposit ? 1 : -1);
-    await transferTokens(amount, token, DSCStore, Web3Store);
+    await transferTokens(amount, token);
     DSCStore.transferTokens(token, amount);
     setTransferAmount(0);
     setIsTransferring(false);
@@ -53,22 +52,32 @@ const TransferButtons = ({ DSCStore, Web3Store, token }) => {
         onChange={onChange(token)}
         symbol={token.symbol}
       />
-      <Button
-        size="small"
-        mx={3}
-        onClick={transfer(token, withdrawTokens, false)}
-        disabled={!transferAmount || isTransferring || cantWithdraw}
-      >
-        Withdraw
-      </Button>
-      <Button
-        size="small"
-        mx={3}
-        onClick={transfer(token, depositTokens)}
-        disabled={!transferAmount || isTransferring || cantDeposit}
-      >
-        Deposit
-      </Button>
+      <DrizzleContainer
+        component={props => (
+          <Button
+            size="small"
+            mx={3}
+            onClick={transfer(token, props.transfer, false)}
+            disabled={!transferAmount || isTransferring || cantWithdraw}
+          >
+            Withdraw
+          </Button>
+        )}
+        HooksWrapper={WithdrawWrapper}
+      />
+      <DrizzleContainer
+        component={props => (
+          <Button
+            size="small"
+            mx={3}
+            onClick={transfer(token, props.transfer)}
+            disabled={!transferAmount || isTransferring || cantDeposit}
+          >
+            Deposit
+          </Button>
+        )}
+        HooksWrapper={DepositWrapper}
+      />
     </Flex>
   );
 };
