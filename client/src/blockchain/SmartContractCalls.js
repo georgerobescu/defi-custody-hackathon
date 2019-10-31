@@ -189,7 +189,7 @@ export const fetchDeadline = (DSCStore, Web3Store) =>
 
 export const fetchDeFi = async (uri = "", data = {}, method = "POST") => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_MAIN_URL}${uri}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}${uri}`, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
