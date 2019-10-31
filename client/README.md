@@ -1,12 +1,15 @@
 ## Installation
-To install all npm package dependencies run `yarn` command. To configure
-`API` request URL change:
+#####npm packages
+To install all npm package dependencies run `yarn` command. 
+##### API config
+To configure `API` request URL change:
 ```
     REACT_APP_API_URL=http://localhost:5000/v1/
 ```
 At [.env.development](./.env.development) and [.env.production](./.env.production)
 for development and production correspondingly.
-
+##### Smart contracts
+Make sure smart contract [deployed](../README.md)
 ## Available Scripts
 
 In the project directory, you can run:
