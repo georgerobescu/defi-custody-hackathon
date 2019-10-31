@@ -1,0 +1,16 @@
+{
+  "manifestVersion": "2.2",
+  "contracts": {
+    "DeFiCustodyRegistry": "DeFiCustodyRegistry"
+  },
+  "dependencies": {},
+  "name": "DeFi_Custody",
+  "version": "1.0.0",
+  "compiler": {
+    "manager": "openzeppelin",
+    "compilerSettings": {
+      "optimizer": {}
+    },
+    "solcVersion": "0.5.12"
+  }
+}

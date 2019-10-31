@@ -1,0 +1,43 @@
+version: "3.1"
+
+services:
+  watchtower:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    restart: always
+    ports:
+      - 5000:5000
+    depends_on:
+      - letsencrypt
+    environment:
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - NODE_ENV=production
+      - DEFICUSTODY_PRIVATE_KEY=${DEFICUSTODY_PRIVATE_KEY}
+      - INFURA_ID=${INFURA_ID}
+      - NETWORK=${NETWORK}
+
+  front-end:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    depends_on:
+      - letsencrypt
+
+  letsencrypt:
+    image: linuxserver/letsencrypt:latest
+    container_name: letsencrypt
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./../data/letsencrypt:/config
+      - ./docker-files/nginx/:/config/nginx/site-confs/
+    environment:
+      - EMAIL=deeson@deficustody.com
+      - URL=deficustody.com
+      - SUBDOMAINS=www
+      - VALIDATION=http

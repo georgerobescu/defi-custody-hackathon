@@ -1,0 +1,284 @@
+{
+  "contracts": {
+    "DeFiCustodyRegistry": {
+      "address": "0x2269c66579E37Ed77f9e2fC0020CCf3c0cC65de1",
+      "constructorCode": "608060405233603360006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550603360009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16600073ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a36152a9806100d16000396000f3fe",
+      "bodyBytecodeHash": "bd1449278c81af1e01ac8ee6ad980586afb7862e7b5d67f823d9654f09a243b2",
+      "localBytecodeHash": "323b3f9d2425679a6ab829e57fc0aaee52fdb9431deed7d9e5d8b7203bad7eda",
+      "deployedBytecodeHash": "323b3f9d2425679a6ab829e57fc0aaee52fdb9431deed7d9e5d8b7203bad7eda",
+      "types": {
+        "t_bool": {
+          "id": "t_bool",
+          "kind": "elementary",
+          "label": "bool"
+        },
+        "t_uint256": {
+          "id": "t_uint256",
+          "kind": "elementary",
+          "label": "uint256"
+        },
+        "t_array:50<t_uint256>": {
+          "id": "t_array:50<t_uint256>",
+          "valueType": "t_uint256",
+          "length": "50",
+          "kind": "array",
+          "label": "uint256[50]"
+        },
+        "t_address": {
+          "id": "t_address",
+          "kind": "elementary",
+          "label": "address"
+        },
+        "t_mapping<t_uint256>": {
+          "id": "t_mapping<t_uint256>",
+          "valueType": "t_uint256",
+          "label": "mapping(key => uint256)",
+          "kind": "mapping"
+        },
+        "t_bytes32": {
+          "id": "t_bytes32",
+          "kind": "elementary",
+          "label": "bytes32"
+        },
+        "t_bytes4": {
+          "id": "t_bytes4",
+          "kind": "elementary",
+          "label": "bytes4"
+        },
+        "t_address_payable": {
+          "id": "t_address_payable",
+          "kind": "elementary",
+          "label": "address payable"
+        },
+        "t_mapping<t_address_payable>": {
+          "id": "t_mapping<t_address_payable>",
+          "valueType": "t_address_payable",
+          "label": "mapping(key => address payable)",
+          "kind": "mapping"
+        },
+        "t_array:dyn<t_bytes32>": {
+          "id": "t_array:dyn<t_bytes32>",
+          "valueType": "t_bytes32",
+          "length": "dyn",
+          "kind": "array",
+          "label": "bytes32[]"
+        },
+        "t_mapping<t_array:dyn<t_bytes32>>": {
+          "id": "t_mapping<t_array:dyn<t_bytes32>>",
+          "valueType": "t_array:dyn<t_bytes32>",
+          "label": "mapping(key => bytes32[])",
+          "kind": "mapping"
+        },
+        "t_array:dyn<t_address>": {
+          "id": "t_array:dyn<t_address>",
+          "valueType": "t_address",
+          "length": "dyn",
+          "kind": "array",
+          "label": "address[]"
+        },
+        "t_mapping<t_array:dyn<t_address>>": {
+          "id": "t_mapping<t_array:dyn<t_address>>",
+          "valueType": "t_array:dyn<t_address>",
+          "label": "mapping(key => address[])",
+          "kind": "mapping"
+        }
+      },
+      "storage": [
+        {
+          "contract": "Initializable",
+          "path": "@openzeppelin/upgrades/contracts/Initializable.sol",
+          "label": "initialized",
+          "astId": 2273,
+          "type": "t_bool",
+          "src": "757:24:14"
+        },
+        {
+          "contract": "Initializable",
+          "path": "@openzeppelin/upgrades/contracts/Initializable.sol",
+          "label": "initializing",
+          "astId": 2275,
+          "type": "t_bool",
+          "src": "876:25:14"
+        },
+        {
+          "contract": "Initializable",
+          "path": "@openzeppelin/upgrades/contracts/Initializable.sol",
+          "label": "______gap",
+          "astId": 2331,
+          "type": "t_array:50<t_uint256>",
+          "src": "1951:29:14"
+        },
+        {
+          "contract": "Ownable",
+          "path": "@openzeppelin/contracts/ownership/Ownable.sol",
+          "label": "_owner",
+          "astId": 1656,
+          "type": "t_address",
+          "src": "408:22:9"
+        },
+        {
+          "contract": "DCWallet",
+          "path": "contracts/DCWallet.sol",
+          "label": "balances",
+          "astId": 12,
+          "type": "t_mapping<t_uint256>",
+          "src": "233:63:0"
+        },
+        {
+          "contract": "RAYIntegration",
+          "path": "contracts/RAYIntegration.sol",
+          "label": "ADMIN_CONTRACT",
+          "astId": 569,
+          "type": "t_bytes32",
+          "src": "630:31:4"
+        },
+        {
+          "contract": "RAYIntegration",
+          "path": "contracts/RAYIntegration.sol",
+          "label": "PORTFOLIO_MANAGER_CONTRACT",
+          "astId": 571,
+          "type": "t_bytes32",
+          "src": "667:43:4"
+        },
+        {
+          "contract": "RAYIntegration",
+          "path": "contracts/RAYIntegration.sol",
+          "label": "PAYER_CONTRACT",
+          "astId": 573,
+          "type": "t_bytes32",
+          "src": "717:31:4"
+        },
+        {
+          "contract": "RAYIntegration",
+          "path": "contracts/RAYIntegration.sol",
+          "label": "RAY_TOKEN_CONTRACT",
+          "astId": 575,
+          "type": "t_bytes32",
+          "src": "754:35:4"
+        },
+        {
+          "contract": "RAYIntegration",
+          "path": "contracts/RAYIntegration.sol",
+          "label": "NAV_CALCULATOR_CONTRACT",
+          "astId": 577,
+          "type": "t_bytes32",
+          "src": "795:40:4"
+        },
+        {
+          "contract": "RAYIntegration",
+          "path": "contracts/RAYIntegration.sol",
+          "label": "ERC721_RECEIVER_STANDARD",
+          "astId": 579,
+          "type": "t_bytes4",
+          "src": "842:40:4"
+        },
+        {
+          "contract": "RAYIntegration",
+          "path": "contracts/RAYIntegration.sol",
+          "label": "NULL_ADDRESS",
+          "astId": 581,
+          "type": "t_address",
+          "src": "888:29:4"
+        },
+        {
+          "contract": "RAYIntegration",
+          "path": "contracts/RAYIntegration.sol",
+          "label": "rayStorage",
+          "astId": 583,
+          "type": "t_address",
+          "src": "924:29:4"
+        },
+        {
+          "contract": "RAYIntegration",
+          "path": "contracts/RAYIntegration.sol",
+          "label": "rayTokens",
+          "astId": 587,
+          "type": "t_mapping<t_address_payable>",
+          "src": "1030:52:4"
+        },
+        {
+          "contract": "RAYIntegration",
+          "path": "contracts/RAYIntegration.sol",
+          "label": "reverseRayTokens",
+          "astId": 592,
+          "type": "t_mapping<t_array:dyn<t_bytes32>>",
+          "src": "1088:53:4"
+        },
+        {
+          "contract": "RecoveryLogic",
+          "path": "contracts/RecoveryLogic.sol",
+          "label": "dcWalletsList",
+          "astId": 1149,
+          "type": "t_array:dyn<t_address>",
+          "src": "206:30:5"
+        },
+        {
+          "contract": "RecoveryLogic",
+          "path": "contracts/RecoveryLogic.sol",
+          "label": "lastAction",
+          "astId": 1153,
+          "type": "t_mapping<t_uint256>",
+          "src": "243:45:5"
+        },
+        {
+          "contract": "RecoveryLogic",
+          "path": "contracts/RecoveryLogic.sol",
+          "label": "recoveryDeadline",
+          "astId": 1157,
+          "type": "t_mapping<t_uint256>",
+          "src": "294:51:5"
+        },
+        {
+          "contract": "RecoveryLogic",
+          "path": "contracts/RecoveryLogic.sol",
+          "label": "recoveryWallets",
+          "astId": 1162,
+          "type": "t_mapping<t_array:dyn<t_address>>",
+          "src": "351:52:5"
+        },
+        {
+          "contract": "RecoveryLogic",
+          "path": "contracts/RecoveryLogic.sol",
+          "label": "recoverySheet",
+          "astId": 1170,
+          "type": "t_mapping<t_uint256>",
+          "src": "488:88:5"
+        },
+        {
+          "contract": "DeFiCustodyRegistry",
+          "path": "contracts/DeFiCustodyRegistry.sol",
+          "label": "tokens",
+          "astId": 132,
+          "type": "t_array:dyn<t_address>",
+          "src": "342:24:1"
+        }
+      ],
+      "warnings": {
+        "hasConstructor": false,
+        "hasSelfDestruct": false,
+        "hasDelegateCall": false,
+        "hasInitialValuesInDeclarations": false,
+        "uninitializedBaseContracts": [],
+        "storageUncheckedVars": [],
+        "storageDiff": []
+      }
+    }
+  },
+  "solidityLibs": {},
+  "proxies": {
+    "DeFi_Custody/DeFiCustodyRegistry": [
+      {
+        "address": "0x543c51db5f3eee8AF5eF1a70F10C644CCc962d49",
+        "version": "1.0.0",
+        "implementation": "0x2269c66579E37Ed77f9e2fC0020CCf3c0cC65de1",
+        "admin": "0xfA627d56b6Af6dc5763f73D5803b81B0b0eAB8CE",
+        "kind": "Upgradeable"
+      }
+    ]
+  },
+  "manifestVersion": "2.2",
+  "version": "1.0.0",
+  "proxyAdmin": {
+    "address": "0xfA627d56b6Af6dc5763f73D5803b81B0b0eAB8CE"
+  }
+}

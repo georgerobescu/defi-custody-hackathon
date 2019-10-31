@@ -11,9 +11,21 @@ const StyledHeader = styled(Heading.h3)`
   margin: 16px 0px;
 `;
 
+export const CenteredTD = styled.td`
+  text-align: center !important;
+`;
+
+export const RightTD = styled.td`
+  text-align: right !important;
+`;
+
+export const CenteredTH = styled.th`
+  text-align: center !important;
+`;
+
 const FullWidth = styled.div`
   flex-grow: ${props => (props.fullWidth ? "1" : "")};
-  margin: 32px ${props => (props.fullWidth ? "48px" : "")} 0px 0px;
+  margin: 12px ${props => (props.fullWidth ? "48px" : "")} 0px 0px;
 `;
 
 const Table = ({ title, children, fullWidth }) => (
