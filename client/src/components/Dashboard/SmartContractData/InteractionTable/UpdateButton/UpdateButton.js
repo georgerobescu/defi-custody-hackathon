@@ -7,7 +7,6 @@ const UpdateButton = ({ tokenIndex }) => (
   <DrizzleContainer
     component={props => (
       <Button
-        iconpos="right"
         size="small"
         disabled={props.disabled === undefined ? true : props.disabled}
         onClick={() => props.signTransaction(tokenIndex)}
