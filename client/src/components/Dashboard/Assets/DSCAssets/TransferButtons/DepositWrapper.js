@@ -11,7 +11,7 @@ const BZX_COMPOUND_DYDX =
 
 const DepositWrapper = ({ DSCStore, Web3Store, children }) => {
   const { useCacheSend } = drizzleReactHooks.useDrizzle();
-  const { send, TXObjects } = useCacheSend("MockedERC20", "approve");
+  const { send, TXObjects } = useCacheSend("TestDAI", "approve");
   const [depositAmount, setDepositAmount] = useState(0);
   const successToast = {
     successTitle: "Successfully deposited!",
