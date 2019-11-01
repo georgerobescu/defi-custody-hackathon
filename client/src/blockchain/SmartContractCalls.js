@@ -75,7 +75,7 @@ export const fetchRayTokenBalances = async DSCStore => {
 };
 
 export const depositTokens = async (amount, token, DSCStore, Web3Store) => {
-  const transaction = await DSCStore.drizzle.contracts.MockedERC20.methods
+  const transaction = await DSCStore.drizzle.contracts.TestDAI.methods
     .approve(DSCStore.drizzle.contracts.DeFiCustodyRegistry.address, amount)
     .send();
   const data = {
@@ -118,20 +118,20 @@ export const fetchUserBalances = async (address, toBN) => {
 };
 
 export const fetchUserBalance = async (DSCStore, address, toBN) => {
-  console.log("DAI address: ", DSCStore.drizzle.contracts.MockedERC20.address);
-  const amount = await DSCStore.drizzle.contracts.MockedERC20.methods
+  console.log("DAI address: ", DSCStore.drizzle.contracts.TestDAI.address);
+  const amount = await DSCStore.drizzle.contracts.TestDAI.methods
     .balanceOf(address)
     .call();
   const name = "Dai test";
-  // await DSCStore.drizzle.contracts.MockedERC20.methods
+  // await DSCStore.drizzle.contracts.TestDAI.methods
   //   .name()
   //   .call();
   const symbol = "DAI";
-  // await DSCStore.drizzle.contracts.MockedERC20.methods
+  // await DSCStore.drizzle.contracts.TestDAI.methods
   //   .symbol()
   //   .call();
   const decimals = 0;
-  // await DSCStore.drizzle.contracts.MockedERC20.methods
+  // await DSCStore.drizzle.contracts.TestDAI.methods
   //   .decimals()
   //   .call();
   const balance = {
@@ -140,10 +140,10 @@ export const fetchUserBalance = async (DSCStore, address, toBN) => {
     name,
     symbol,
     decimals: parseInt(decimals),
-    address: DSCStore.drizzle.contracts.MockedERC20.options.address
+    address: DSCStore.drizzle.contracts.TestDAI.options.address
   };
   const token = {};
-  token[DSCStore.drizzle.contracts.MockedERC20.options.address] = balance;
+  token[DSCStore.drizzle.contracts.TestDAI.options.address] = balance;
   return token;
 };
 

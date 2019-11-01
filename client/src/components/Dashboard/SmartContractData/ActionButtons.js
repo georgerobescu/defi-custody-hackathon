@@ -5,22 +5,29 @@ import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
 import styled from "styled-components";
 import { toast } from "react-toastify";
+import UpdateWrapper from "./InteractionTable/UpdateButton/UpdateWrapper";
+import DrizzleContainer from "../../../drizzle/DrizzleContainer";
 
 const GrowButton = styled(Button)`
   flex-grow: 1;
   flex-basis: 0;
 `;
 
-const ActionButtons = ({ DSCStore, Web3Store }) => (
+const ActionButtons = ({ DSCStore, Web3Store, tokenIndex = 0 }) => (
   <FlexDiv noPadding={true}>
-    <GrowButton
-      onClick={() => DSCStore.signTransaction(0, Web3Store.web3.utils.toWei)}
-      disabled={DSCStore.tokens.length === 0}
-      mr={2}
-    >
-      Sign
-    </GrowButton>
-    <GrowButton disabled={DSCStore.tokens.length === 0} ml={2}>
+    <DrizzleContainer
+      component={props => (
+        <GrowButton
+          disabled={props.disabled === undefined ? true : props.disabled}
+          mr={2}
+          onClick={() => props.signTransaction(tokenIndex)}
+        >
+          Sign
+        </GrowButton>
+      )}
+      HooksWrapper={UpdateWrapper}
+    />
+    <GrowButton disabled={DSCStore.hasNotToken} ml={2}>
       Cancel
     </GrowButton>
   </FlexDiv>

@@ -1,34 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   CenteredDiv,
   CenteredTD,
   CenteredTH,
   PercentageInput,
-  SmallInput,
   Table
 } from "../../../../styled";
-import { Button } from "rimble-ui";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
 import Address from "./Address";
-import { toast } from "react-toastify";
+import NewAddress from "./NewAddress";
 import { generateDicimaledBalance } from "../../../../utils/ethereum";
+import UpdateButton from "./UpdateButton";
 
 const InteractionTable = ({ DSCStore, Web3Store }) => {
-  const { tokens, addresses, setAddresses } = DSCStore;
+  const { tokens, addresses } = DSCStore;
   const changePercentage = (tokenIndex, address) => ({ target: { value } }) => {
     DSCStore.changePercentage(tokenIndex, address, value);
-  };
-  const [isAddingAddress, setIsAddingAddress] = useState(false);
-  const [newAddress, setNewAddress] = useState("");
-  const onChangeNewAddress = ({ target: { value } }) => setNewAddress(value);
-  const addAddress = () => {
-    setAddresses([...addresses, newAddress]);
-    setNewAddress("");
-    setIsAddingAddress(false);
-  };
-  const toggleAdding = () => {
-    setIsAddingAddress(!isAddingAddress);
   };
   return (
     <Table title="Smart contract data">
@@ -39,30 +27,9 @@ const InteractionTable = ({ DSCStore, Web3Store }) => {
           {addresses.map((address, i) => (
             <Address key={i} currentAddress={address} index={i} />
           ))}
-          <CenteredTH>
-            {isAddingAddress && (
-              <>
-                <SmallInput
-                  type="text"
-                  onChange={onChangeNewAddress}
-                  value={newAddress}
-                  placeholder="0x00...?"
-                />
-                <Button.Outline size="small" mx={3} onClick={toggleAdding}>
-                  Cancel
-                </Button.Outline>
-              </>
-            )}
-            <Button
-              icon={!isAddingAddress && "Add"}
-              iconpos="right"
-              size="small"
-              onClick={isAddingAddress ? addAddress : toggleAdding}
-              disabled={!DSCStore.isInteractionAllowed}
-            >
-              Add
-            </Button>
-          </CenteredTH>
+          <th>
+            <NewAddress />
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -86,7 +53,7 @@ const InteractionTable = ({ DSCStore, Web3Store }) => {
                 <CenteredTD key={i}>
                   <CenteredDiv>
                     <PercentageInput
-                      disabled={token.amount === 0}
+                      disabled={token.amount === 0 || !address}
                       symbol="%"
                       value={percent || ""}
                       type="number"
@@ -97,16 +64,9 @@ const InteractionTable = ({ DSCStore, Web3Store }) => {
               );
             })}
             <CenteredTD>
-              <Button
-                iconpos="right"
-                size="small"
-                disabled={!DSCStore.isInteractionAllowed}
-                onClick={() =>
-                  DSCStore.signTransaction(0, Web3Store.web3.utils.toWei)
-                }
-              >
-                Update
-              </Button>
+              <CenteredDiv>
+                <UpdateButton tokenIndex={tokenIndex} />
+              </CenteredDiv>
             </CenteredTD>
           </tr>
         ))}

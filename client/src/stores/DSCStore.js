@@ -1,6 +1,5 @@
-import { action, observable } from "mobx";
+import { action, computed, observable } from "mobx";
 import { toast } from "react-toastify";
-import { toWei } from "@openzeppelin/cli/lib/utils/units";
 import { DeadlineFormat } from "../constants/DeadlineTimeFormatEnum";
 
 class DSCStore {
@@ -38,7 +37,7 @@ class DSCStore {
   @observable isInteractionAllowed = false;
   @observable drizzle;
   @observable drizzleConnected = false;
-  @observable newDeadline = 0;
+  @observable newDeadline;
   @observable walletAddress;
   @observable deadlineFormat = DeadlineFormat.SECONDS;
 
@@ -60,7 +59,6 @@ class DSCStore {
     if (value + sum > 100) {
       value = 100 - sum;
     }
-    console.log(tokenIndex, address, value, this.tokens[tokenIndex].percentage);
     this.tokens[tokenIndex].percentage[address] = value;
   };
 
@@ -108,7 +106,9 @@ class DSCStore {
 
   @action
   setDeadline = deadline => {
-    this.newDeadline = deadline;
+    if (deadline > 0) {
+      this.newDeadline = deadline;
+    }
   };
 
   @action
@@ -116,16 +116,29 @@ class DSCStore {
     this.walletAddress = address;
   };
 
-  @action
-  signTransaction = tokenIndex => {
+  @computed get hasNotToken() {
+    let hasToken = false;
+    this.tokens.forEach(token => {
+      if (token.amount > 0) {
+        hasToken = true;
+      }
+    });
+    return !hasToken || this.tokens.length === 0 || !this.isInteractionAllowed;
+  }
+
+  idValidRecoverySheet = tokenIndex => {
     const sum = this.percentageSum(tokenIndex);
     if (sum !== 100) {
       toast.error(`Ooops, wrong percentage sum, ${sum}`);
-      return;
+      return false;
     }
     if (!this.newDeadline || this.newDeadline <= 0) {
-      toast.error(`Wrong deadline date, ${this.newDeadline}`);
-      return;
+      toast.error(
+        this.newDeadline
+          ? `Wrong deadline date, ${this.newDeadline}`
+          : "Please set deadline date"
+      );
+      return false;
     }
     let correctAddresses = true;
     this.addresses.forEach(
@@ -133,39 +146,21 @@ class DSCStore {
     );
     if (!correctAddresses) {
       toast.error("Please set recovery addresses");
-      return;
+      return false;
     }
-    return this.setRecoverySheet(tokenIndex, toWei);
+    return true;
   };
 
-  @action
-  setRecoverySheet = async (tokenIndex = 0, toWei) => {
-    const percentages = this.addresses.map(address =>
-      toWei(
-        this.tokens[tokenIndex].percentage[address].toString() + "0",
-        "milli"
-      )
-    );
+  getRecoverySheet = (tokenIndex = 0, toWei) => {
+    const percentages = this.addresses.map(address => {
+      const percent = this.tokens[tokenIndex].percentage[address];
+      return toWei(percent ? percent.toString() + "0" : "0", "milli");
+    });
     const deadline = DeadlineFormat.getTime(
       parseInt(this.newDeadline),
       this.deadlineFormat
     );
-    console.log(
-      "Setting recovery sheet",
-      this.tokens[0].address,
-      [...this.addresses],
-      percentages,
-      deadline
-    );
-    const result = await this.drizzle.contracts.DeFiCustodyRegistry.methods
-      .setRecoverySheet(
-        this.tokens[0].address,
-        [...this.addresses],
-        percentages,
-        deadline
-      )
-      .send();
-    console.log(result);
+    return [this.tokens[0].address, [...this.addresses], percentages, deadline];
   };
 
   @action
@@ -180,8 +175,8 @@ class DSCStore {
   percentageSum = tokenIndex => {
     let sum = 0;
     this.addresses.forEach(addr => {
-      if (this.tokens[tokenIndex].percentage[addr])
-        sum += this.tokens[tokenIndex].percentage[addr];
+      if (addr && this.tokens[tokenIndex].percentage[addr])
+        sum += parseInt(this.tokens[tokenIndex].percentage[addr]);
     });
     return sum;
   };

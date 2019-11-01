@@ -16,7 +16,6 @@ const TransactionStatus = ({ currentStatus, getStatus }) => {
     showToast();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentStatus]);
-  console.log(2345);
   return (
     <div>
       {status !== Status.SUCCESS && (
