@@ -9,7 +9,7 @@ const UpdateButton = ({ tokenIndex }) => (
       <Button
         iconpos="right"
         size="small"
-        disabled={props.disabled}
+        disabled={props.disabled === undefined ? true : props.disabled}
         onClick={() => props.signTransaction(tokenIndex)}
       >
         Update

@@ -15,12 +15,12 @@ const ActionButtons = ({ DSCStore, Web3Store }) => (
   <FlexDiv noPadding={true}>
     <GrowButton
       onClick={() => DSCStore.signTransaction(0, Web3Store.web3.utils.toWei)}
-      disabled={DSCStore.tokens.length === 0}
+      disabled={DSCStore.hasNotToken}
       mr={2}
     >
       Sign
     </GrowButton>
-    <GrowButton disabled={DSCStore.tokens.length === 0} ml={2}>
+    <GrowButton disabled={DSCStore.hasNotToken} ml={2}>
       Cancel
     </GrowButton>
   </FlexDiv>

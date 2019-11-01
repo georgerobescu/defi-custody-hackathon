@@ -53,7 +53,7 @@ const InteractionTable = ({ DSCStore, Web3Store }) => {
                 <CenteredTD key={i}>
                   <CenteredDiv>
                     <PercentageInput
-                      disabled={token.amount === 0}
+                      disabled={token.amount === 0 || !address}
                       symbol="%"
                       value={percent || ""}
                       type="number"

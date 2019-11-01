@@ -6,15 +6,16 @@ import { DeadlineFormat } from "../../../constants/DeadlineTimeFormatEnum";
 
 const DeadlineChooser = ({ DSCStore }) => (
   <Box my={3}>
+    {console.log(DSCStore.newDeadline)}
     <Input
       type="number"
-      disabled={!DSCStore.isInteractionAllowed}
+      disabled={DSCStore.hasNotToken}
       placeholder="Deadline in"
-      value={DSCStore.isInteractionAllowed && DSCStore.newDeadline}
+      value={(DSCStore.isInteractionAllowed && DSCStore.newDeadline) || ""}
       onChange={e => DSCStore.setDeadline(e.target.value)}
     />
     <Select
-      disabled={!DSCStore.isInteractionAllowed}
+      disabled={DSCStore.hasNotToken}
       value={DSCStore.deadlineFormat}
       onChange={({ target: { value } }) => DSCStore.setDeadlineFormat(value)}
       options={[

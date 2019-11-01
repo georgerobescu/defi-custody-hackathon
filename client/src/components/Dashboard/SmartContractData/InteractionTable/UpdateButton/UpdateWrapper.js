@@ -23,9 +23,8 @@ const UpdateWrapper = ({ DSCStore, Web3Store, children }) => {
       send(...arg);
     }
   };
-  console.log(signTransaction);
   return children({
-    disabled: !DSCStore.isInteractionAllowed,
+    disabled: DSCStore.hasNotToken,
     signTransaction,
     TXObjects,
     successToast

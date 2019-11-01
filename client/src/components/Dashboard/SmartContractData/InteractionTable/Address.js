@@ -42,7 +42,7 @@ const Address = ({ currentAddress, index, DSCStore, Web3Store }) => {
     setIsAddingAddress(false);
   };
   const toggleAdding = () => {
-    if (!DSCStore.isInteractionAllowed) return;
+    if (DSCStore.hasNotToken) return;
     setIsAddingAddress(!isAddingAddress);
     setError();
   };
@@ -77,7 +77,7 @@ const Address = ({ currentAddress, index, DSCStore, Web3Store }) => {
         <div onClick={toggleAdding}>
           <AddressHeader
             type="text"
-            disabled={!currentAddress}
+            disabled={DSCStore.hasNotToken}
             defaultValue={toShortAddress(currentAddress)}
             placeholder="0x00...?"
           />
