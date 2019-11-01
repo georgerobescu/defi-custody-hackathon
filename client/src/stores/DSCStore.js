@@ -115,16 +115,15 @@ class DSCStore {
     this.walletAddress = address;
   };
 
-  @action
-  signTransaction = tokenIndex => {
+  idValidRecoverySheet = tokenIndex => {
     const sum = this.percentageSum(tokenIndex);
     if (sum !== 100) {
       toast.error(`Ooops, wrong percentage sum, ${sum}`);
-      return;
+      return false;
     }
     if (!this.newDeadline || this.newDeadline <= 0) {
       toast.error(`Wrong deadline date, ${this.newDeadline}`);
-      return;
+      return false;
     }
     let correctAddresses = true;
     this.addresses.forEach(
@@ -132,13 +131,12 @@ class DSCStore {
     );
     if (!correctAddresses) {
       toast.error("Please set recovery addresses");
-      return;
+      return false;
     }
-    return this.setRecoverySheet(tokenIndex, toWei);
+    return true;
   };
 
-  @action
-  setRecoverySheet = async (tokenIndex = 0, toWei) => {
+  getRecoverySheet = (tokenIndex = 0, toWei) => {
     const percentages = this.addresses.map(address => {
       const percent = this.tokens[tokenIndex].percentage[address];
       return toWei(percent ? percent.toString() + "0" : "0", "milli");
@@ -147,22 +145,7 @@ class DSCStore {
       parseInt(this.newDeadline),
       this.deadlineFormat
     );
-    console.log(
-      "Setting recovery sheet",
-      this.tokens[0].address,
-      [...this.addresses],
-      percentages,
-      deadline
-    );
-    const result = await this.drizzle.contracts.DeFiCustodyRegistry.methods
-      .setRecoverySheet(
-        this.tokens[0].address,
-        [...this.addresses],
-        percentages,
-        deadline
-      )
-      .send();
-    console.log(result);
+    return [this.tokens[0].address, [...this.addresses], percentages, deadline];
   };
 
   @action

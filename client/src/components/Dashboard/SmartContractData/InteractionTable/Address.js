@@ -17,8 +17,6 @@ const Address = ({ currentAddress, index, DSCStore, Web3Store }) => {
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [error, setError] = useState();
   const [address, setNewAddress] = useState(currentAddress || "");
-  console.log(currentAddress, address);
-
   const onChangeNewAddress = ({ target: { value } }) => {
     setNewAddress(value);
     if (error && Web3Store.web3.utils.isAddress(value)) {

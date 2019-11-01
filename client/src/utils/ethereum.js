@@ -21,7 +21,9 @@ export const generateDicimaledBalance = (balance, decimals, toBN) => {
 
 export const toShortAddress = address =>
   address
-    ? address.substring(0, 6) + "..." + address.substring(address.length - 4)
+    ? address.substring(0, 6).toLowerCase() +
+      "..." +
+      address.substring(address.length - 4).toLowerCase()
     : "";
 
 export const isZeroAddress = address =>

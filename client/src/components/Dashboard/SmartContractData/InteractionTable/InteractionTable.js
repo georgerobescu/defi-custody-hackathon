@@ -6,12 +6,12 @@ import {
   PercentageInput,
   Table
 } from "../../../../styled";
-import { Button } from "rimble-ui";
 import { inject, observer } from "mobx-react";
 import { compose } from "recompose";
 import Address from "./Address";
 import NewAddress from "./NewAddress";
 import { generateDicimaledBalance } from "../../../../utils/ethereum";
+import UpdateButton from "./UpdateButton";
 
 const InteractionTable = ({ DSCStore, Web3Store }) => {
   const { tokens, addresses } = DSCStore;
@@ -64,16 +64,9 @@ const InteractionTable = ({ DSCStore, Web3Store }) => {
               );
             })}
             <CenteredTD>
-              <Button
-                iconpos="right"
-                size="small"
-                disabled={!DSCStore.isInteractionAllowed}
-                onClick={() =>
-                  DSCStore.signTransaction(0, Web3Store.web3.utils.toWei)
-                }
-              >
-                Update
-              </Button>
+              <CenteredDiv>
+                <UpdateButton tokenIndex={tokenIndex} />
+              </CenteredDiv>
             </CenteredTD>
           </tr>
         ))}
