@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  AddressInput,
   CenteredDiv,
   FlexCenteredItem,
   FlexDiv,
@@ -21,20 +22,24 @@ const NewAddress = ({ DSCStore, Web3Store }) => {
     }
   };
   const addAddress = () => {
-    if (Web3Store.web3.utils.isAddress(newAddress)) {
-      setAddresses([...addresses, newAddress]);
-      setNewAddress("");
-      setIsAddingAddress(false);
-    } else {
+    if (!Web3Store.web3.utils.isAddress(newAddress)) {
       setError("Wrong eth address format!");
+      return;
     }
+    if (addresses.includes(newAddress)) {
+      setError("You can't add the same address twice");
+      return;
+    }
+    setAddresses([...addresses, newAddress]);
+    setNewAddress("");
+    setIsAddingAddress(false);
   };
   const toggleAdding = () => {
     setIsAddingAddress(!isAddingAddress);
     setError();
   };
   return (
-    <FlexCenteredItem>
+    <CenteredDiv alignItems="center" noWrap>
       {isAddingAddress && (
         <>
           {error && (
@@ -42,7 +47,7 @@ const NewAddress = ({ DSCStore, Web3Store }) => {
               <Icon color="tomato" name="Error" />
             </Tooltip>
           )}
-          <SmallInput
+          <AddressInput
             error={!!error}
             type="text"
             onChange={onChangeNewAddress}
@@ -63,7 +68,7 @@ const NewAddress = ({ DSCStore, Web3Store }) => {
       >
         Add
       </Button>
-    </FlexCenteredItem>
+    </CenteredDiv>
   );
 };
 

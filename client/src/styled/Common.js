@@ -11,7 +11,11 @@ const SmallInput = styled(Input)`
     color: rgb(117, 117, 117);
     opacity: ${props => (props.disabled ? "1" : "0.4")};
   }
-  border-color: ${props => props.error && "#DC2C10"} !important;
+  ${props => props.error && "border-color: #DC2C10 !important"};
+`;
+const AddressInput = styled(SmallInput)`
+  border-radius: 4px;
+  ${props => props.error && "border: 1px solid"}
 `;
 const OneRemInput = styled(SmallInput)`
   height: 1rem;
@@ -27,6 +31,7 @@ const AddressHeader = styled(SmallInput)`
   padding: 8px;
   max-width: 120px;
   text-align: center;
+  border-radius: 4px;
 `;
 
 const TokenAmount = styled(SmallInput)`
@@ -58,7 +63,7 @@ const PercentageInput = InputWithSymbol(OneRemInput);
 const FlexDiv = styled.div`
   display: flex;
   padding: 0px ${props => (props.noPadding ? "" : "24px")};
-  flex-wrap: wrap;
+  flex-wrap: ${props => (props.noWrap ? "nowrap" : "wrap")};
   ${props => props.alignItems && `align-items: ${props.alignItems}`};
 `;
 
@@ -101,5 +106,6 @@ export {
   FlexCenteredItem,
   PercentageInput,
   MetamaskContainer,
-  Box
+  Box,
+  AddressInput
 };

@@ -4,7 +4,8 @@ import {
   FlexCenteredItem,
   CenteredTH,
   SmallInput,
-  CenteredDiv
+  CenteredDiv,
+  AddressInput
 } from "../../../../styled";
 import { Button, Icon, Tooltip } from "rimble-ui";
 import { inject, observer } from "mobx-react";
@@ -25,13 +26,22 @@ const Address = ({ currentAddress, index, DSCStore, Web3Store }) => {
     }
   };
   const updateAddress = () => {
-    if (Web3Store.web3.utils.isAddress(address)) {
-      addresses[index] = address;
-      setAddresses([...addresses]);
-      setIsAddingAddress(false);
-    } else {
+    if (!Web3Store.web3.utils.isAddress(address)) {
       setError("Wrong eth address format!");
+      return;
     }
+    const findIndex = addresses.indexOf(address);
+    if (findIndex >= 0) {
+      setError(
+        findIndex !== index
+          ? "You can't add the same address twice"
+          : "You didn't update address"
+      );
+      return;
+    }
+    addresses[index] = address;
+    setAddresses([...addresses]);
+    setIsAddingAddress(false);
   };
   const toggleAdding = () => {
     if (!DSCStore.isInteractionAllowed) return;
@@ -41,14 +51,13 @@ const Address = ({ currentAddress, index, DSCStore, Web3Store }) => {
   return (
     <CenteredTH>
       {isAddingAddress ? (
-        <CenteredDiv>
+        <CenteredDiv alignItems="center" noWrap>
           {error && (
             <Tooltip message={error}>
               <Icon color="tomato" name="Error" />
             </Tooltip>
           )}
-          {console.log(!!error)}
-          <SmallInput
+          <AddressInput
             error={!!error}
             type="text"
             onChange={onChangeNewAddress}

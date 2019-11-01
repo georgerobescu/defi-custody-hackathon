@@ -12,7 +12,8 @@ import {
   FlexCenteredItem,
   PercentageInput,
   MetamaskContainer,
-  Box
+  Box,
+  AddressInput
 } from "./Common";
 import EthAddress from "./EthAddress";
 export {
@@ -34,5 +35,6 @@ export {
   PercentageInput,
   CenteredTH,
   MetamaskContainer,
-  Box
+  Box,
+  AddressInput
 };

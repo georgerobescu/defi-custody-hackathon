@@ -60,7 +60,6 @@ class DSCStore {
     if (value + sum > 100) {
       value = 100 - sum;
     }
-    console.log(tokenIndex, address, value, this.tokens[tokenIndex].percentage);
     this.tokens[tokenIndex].percentage[address] = value;
   };
 
@@ -140,12 +139,10 @@ class DSCStore {
 
   @action
   setRecoverySheet = async (tokenIndex = 0, toWei) => {
-    const percentages = this.addresses.map(address =>
-      toWei(
-        this.tokens[tokenIndex].percentage[address].toString() + "0",
-        "milli"
-      )
-    );
+    const percentages = this.addresses.map(address => {
+      const percent = this.tokens[tokenIndex].percentage[address];
+      return toWei(percent ? percent.toString() + "0" : "0", "milli");
+    });
     const deadline = DeadlineFormat.getTime(
       parseInt(this.newDeadline),
       this.deadlineFormat
@@ -180,7 +177,7 @@ class DSCStore {
   percentageSum = tokenIndex => {
     let sum = 0;
     this.addresses.forEach(addr => {
-      if (this.tokens[tokenIndex].percentage[addr])
+      if (addr && this.tokens[tokenIndex].percentage[addr])
         sum += this.tokens[tokenIndex].percentage[addr];
     });
     return sum;
