@@ -80,9 +80,7 @@ class DSCStore {
 
   @action
   transferTokens = (token, amount) => {
-    amount *= 10 ** this.tokens[token.index].decimals;
-    amount = Math.trunc(amount);
-    amount = new this.BN(amount);
+    amount = new this.BN(amount.toString());
     const newBalance = new this.BN(
       this.tokens[token.index].balance.toString()
     ).sub(amount);

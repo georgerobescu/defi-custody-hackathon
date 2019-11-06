@@ -147,15 +147,15 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.8+commit.23d335f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"contractId\",\"type\":\"bytes32\"}],\"name\":\"getContractAddress\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"portfolioId\",\"type\":\"bytes32\"},{\"name\":\"rayTokenId\",\"type\":\"bytes32\"}],\"name\":\"getTokenCapital\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"portfolioId\",\"type\":\"bytes32\"}],\"name\":\"getPrincipalAddress\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"rayTokenId\",\"type\":\"bytes32\"}],\"name\":\"getTokenKey\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"principalAddress\",\"type\":\"address\"}],\"name\":\"getIsERC20\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"portfolioId\",\"type\":\"bytes32\"},{\"name\":\"rayTokenId\",\"type\":\"bytes32\"}],\"name\":\"getTokenAllowance\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"portfolioId\",\"type\":\"bytes32\"},{\"name\":\"rayTokenId\",\"type\":\"bytes32\"}],\"name\":\"getTokenShares\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"getContractAddress(bytes32)\":{\"params\":{\"contractId\":\"- Each contract has an id represented by the result of                       a keccak256() of the contract name.   ///                       Example: PortfolioManager.sol can be dynamically referenced                       by getContractAddress(keccak256('PortfolioManagerContract'));\"}}}},\"userdoc\":{\"methods\":{\"getContractAddress(bytes32)\":{\"notice\":\"Dynamically get the contract address of different RAY smart contracts \"},\"getIsERC20(address)\":{\"notice\":\"Get if a contract address follows the ERC20 standard or not\"},\"getPrincipalAddress(bytes32)\":{\"notice\":\"Get the contract address of the underlying asset associated with a          portfolioId\"},\"getTokenAllowance(bytes32,bytes32)\":{\"notice\":\"Get the allowance credited to a RAY token - allowance decides what          amount of value will be charged a fee\"},\"getTokenCapital(bytes32,bytes32)\":{\"notice\":\"Get the capital credited to a RAY token\"},\"getTokenKey(bytes32)\":{\"notice\":\"Get the portfolioId associated with a RAY token\"},\"getTokenShares(bytes32,bytes32)\":{\"notice\":\"Get the shares owned by a RAY token\"}},\"notice\":\"Basic interface containing some useful functions for RAY integration.  /// Author:   Devan Purhar\"}},\"settings\":{\"compilationTarget\":{\"/Users/tom/www/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAYStorage.sol\":\"IRAYStorage\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/tom/www/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAYStorage.sol\":{\"keccak256\":\"0x66bb9ed2f3748bc4f1039584c7f9ea39c1ee76e361beb31961a0b87f4efb5570\",\"urls\":[\"bzzr://ddec937215883a1b4a52f3672368bd371feab8319f0883f5723b8366457d44d7\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.8+commit.23d335f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"contractId\",\"type\":\"bytes32\"}],\"name\":\"getContractAddress\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"portfolioId\",\"type\":\"bytes32\"},{\"name\":\"rayTokenId\",\"type\":\"bytes32\"}],\"name\":\"getTokenCapital\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"portfolioId\",\"type\":\"bytes32\"}],\"name\":\"getPrincipalAddress\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"rayTokenId\",\"type\":\"bytes32\"}],\"name\":\"getTokenKey\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"principalAddress\",\"type\":\"address\"}],\"name\":\"getIsERC20\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"portfolioId\",\"type\":\"bytes32\"},{\"name\":\"rayTokenId\",\"type\":\"bytes32\"}],\"name\":\"getTokenAllowance\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"portfolioId\",\"type\":\"bytes32\"},{\"name\":\"rayTokenId\",\"type\":\"bytes32\"}],\"name\":\"getTokenShares\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{\"getContractAddress(bytes32)\":{\"notice\":\"by getContractAddress(keccak256('PortfolioManagerContract'));\"},\"getIsERC20(address)\":{\"notice\":\"Get if a contract address follows the ERC20 standard or not\"},\"getPrincipalAddress(bytes32)\":{\"notice\":\"portfolioId\"},\"getTokenAllowance(bytes32,bytes32)\":{\"notice\":\"amount of value will be charged a fee\"},\"getTokenCapital(bytes32,bytes32)\":{\"notice\":\"Get the capital credited to a RAY token\"},\"getTokenKey(bytes32)\":{\"notice\":\"Get the portfolioId associated with a RAY token\"},\"getTokenShares(bytes32,bytes32)\":{\"notice\":\"Get the shares owned by a RAY token\"}},\"notice\":\"Author:   Devan Purhar\"}},\"settings\":{\"compilationTarget\":{\"/C/Users/ilgiz/IdeaProjects/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAYStorage.sol\":\"IRAYStorage\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/ilgiz/IdeaProjects/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAYStorage.sol\":{\"keccak256\":\"0x5a3cb0d5c219c876fbafbf42ccb715fd122537970d8897fd65b3de675a47c141\",\"urls\":[\"bzzr://2ecd2d2e59e2a4b0ced64e67e1df8b19e4745d4c51bf5cfffb10963022ad1662\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity >=0.5.0 <0.6.0;\n\n\n/// @notice  Basic interface containing some useful functions for RAY integration.\n///\n/// Author:   Devan Purhar\n\ninterface IRAYStorage {\n\n  /// @notice  Get the portfolioId associated with a RAY token\n  function getTokenKey(bytes32 rayTokenId) external view returns (bytes32);\n\n\n  /// @notice  Get the contract address of the underlying asset associated with a\n  ///          portfolioId\n  function getPrincipalAddress(bytes32 portfolioId) external view returns (address);\n\n\n  /// @notice  Get if a contract address follows the ERC20 standard or not\n  function getIsERC20(address principalAddress) external view returns (bool);\n\n\n  /// @notice  Dynamically get the contract address of different RAY smart contracts\n  ///\n  /// @param   contractId - Each contract has an id represented by the result of\n  ///                       a keccak256() of the contract name.\n  ///\n  ///                       Example: PortfolioManager.sol can be dynamically referenced\n  ///                       by getContractAddress(keccak256('PortfolioManagerContract'));\n  function getContractAddress(bytes32 contractId) external view returns (address);\n\n\n  /// @notice  Get the shares owned by a RAY token\n  function getTokenShares(bytes32 portfolioId, bytes32 rayTokenId) external view returns (uint);\n\n\n  /// @notice  Get the capital credited to a RAY token\n  function getTokenCapital(bytes32 portfolioId, bytes32 rayTokenId) external view returns (uint);\n\n\n  /// @notice  Get the allowance credited to a RAY token - allowance decides what\n  ///          amount of value will be charged a fee\n  function getTokenAllowance(bytes32 portfolioId, bytes32 rayTokenId) external view returns (uint);\n\n}\n",
-  "sourcePath": "/Users/tom/www/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAYStorage.sol",
+  "source": "pragma solidity >=0.5.0 <0.6.0;\r\n\r\n\r\n/// @notice  Basic interface containing some useful functions for RAY integration.\r\n///\r\n/// Author:   Devan Purhar\r\n\r\ninterface IRAYStorage {\r\n\r\n  /// @notice  Get the portfolioId associated with a RAY token\r\n  function getTokenKey(bytes32 rayTokenId) external view returns (bytes32);\r\n\r\n\r\n  /// @notice  Get the contract address of the underlying asset associated with a\r\n  ///          portfolioId\r\n  function getPrincipalAddress(bytes32 portfolioId) external view returns (address);\r\n\r\n\r\n  /// @notice  Get if a contract address follows the ERC20 standard or not\r\n  function getIsERC20(address principalAddress) external view returns (bool);\r\n\r\n\r\n  /// @notice  Dynamically get the contract address of different RAY smart contracts\r\n  ///\r\n  /// @param   contractId - Each contract has an id represented by the result of\r\n  ///                       a keccak256() of the contract name.\r\n  ///\r\n  ///                       Example: PortfolioManager.sol can be dynamically referenced\r\n  ///                       by getContractAddress(keccak256('PortfolioManagerContract'));\r\n  function getContractAddress(bytes32 contractId) external view returns (address);\r\n\r\n\r\n  /// @notice  Get the shares owned by a RAY token\r\n  function getTokenShares(bytes32 portfolioId, bytes32 rayTokenId) external view returns (uint);\r\n\r\n\r\n  /// @notice  Get the capital credited to a RAY token\r\n  function getTokenCapital(bytes32 portfolioId, bytes32 rayTokenId) external view returns (uint);\r\n\r\n\r\n  /// @notice  Get the allowance credited to a RAY token - allowance decides what\r\n  ///          amount of value will be charged a fee\r\n  function getTokenAllowance(bytes32 portfolioId, bytes32 rayTokenId) external view returns (uint);\r\n\r\n}\r\n",
+  "sourcePath": "C:\\Users\\ilgiz\\IdeaProjects\\defi-custody-sf-hackathon\\contracts\\interfaces\\ray\\IRAYStorage.sol",
   "ast": {
-    "absolutePath": "/Users/tom/www/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAYStorage.sol",
+    "absolutePath": "/C/Users/ilgiz/IdeaProjects/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAYStorage.sol",
     "exportedSymbols": {
       "IRAYStorage": [
         1586
@@ -182,7 +182,7 @@
         "baseContracts": [],
         "contractDependencies": [],
         "contractKind": "interface",
-        "documentation": "@notice  Basic interface containing some useful functions for RAY integration.\n\n/// Author:   Devan Purhar",
+        "documentation": "Author:   Devan Purhar",
         "fullyImplemented": false,
         "id": 1586,
         "linearizedBaseContracts": [
@@ -210,7 +210,7 @@
                   "name": "rayTokenId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1537,
-                  "src": "260:18:7",
+                  "src": "270:18:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -221,7 +221,7 @@
                     "id": 1531,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "260:7:7",
+                    "src": "270:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -231,7 +231,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "259:20:7"
+              "src": "269:20:7"
             },
             "returnParameters": {
               "id": 1536,
@@ -243,7 +243,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1537,
-                  "src": "303:7:7",
+                  "src": "313:7:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -254,7 +254,7 @@
                     "id": 1534,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "303:7:7",
+                    "src": "313:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -264,17 +264,17 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "302:9:7"
+              "src": "312:9:7"
             },
             "scope": 1586,
-            "src": "239:73:7",
+            "src": "249:73:7",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
-            "documentation": "@notice  Get the contract address of the underlying asset associated with a\n          portfolioId",
+            "documentation": "portfolioId",
             "id": 1544,
             "implemented": false,
             "kind": "function",
@@ -291,7 +291,7 @@
                   "name": "portfolioId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1544,
-                  "src": "455:19:7",
+                  "src": "470:19:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -302,7 +302,7 @@
                     "id": 1538,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "455:7:7",
+                    "src": "470:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -312,7 +312,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "454:21:7"
+              "src": "469:21:7"
             },
             "returnParameters": {
               "id": 1543,
@@ -324,7 +324,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1544,
-                  "src": "499:7:7",
+                  "src": "514:7:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -335,7 +335,7 @@
                     "id": 1541,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "499:7:7",
+                    "src": "514:7:7",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -346,10 +346,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "498:9:7"
+              "src": "513:9:7"
             },
             "scope": 1586,
-            "src": "426:82:7",
+            "src": "441:82:7",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -373,7 +373,7 @@
                   "name": "principalAddress",
                   "nodeType": "VariableDeclaration",
                   "scope": 1551,
-                  "src": "608:24:7",
+                  "src": "627:24:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -384,7 +384,7 @@
                     "id": 1545,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "608:7:7",
+                    "src": "627:7:7",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -395,7 +395,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "607:26:7"
+              "src": "626:26:7"
             },
             "returnParameters": {
               "id": 1550,
@@ -407,7 +407,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1551,
-                  "src": "657:4:7",
+                  "src": "676:4:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -418,7 +418,7 @@
                     "id": 1548,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "657:4:7",
+                    "src": "676:4:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -428,17 +428,17 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "656:6:7"
+              "src": "675:6:7"
             },
             "scope": 1586,
-            "src": "588:75:7",
+            "src": "607:75:7",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
-            "documentation": "@notice  Dynamically get the contract address of different RAY smart contracts\n\n  /// @param   contractId - Each contract has an id represented by the result of\n                       a keccak256() of the contract name.\n\n  ///                       Example: PortfolioManager.sol can be dynamically referenced\n                       by getContractAddress(keccak256('PortfolioManagerContract'));",
+            "documentation": "by getContractAddress(keccak256('PortfolioManagerContract'));",
             "id": 1558,
             "implemented": false,
             "kind": "function",
@@ -455,7 +455,7 @@
                   "name": "contractId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1558,
-                  "src": "1116:18:7",
+                  "src": "1145:18:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -466,7 +466,7 @@
                     "id": 1552,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1116:7:7",
+                    "src": "1145:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -476,7 +476,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1115:20:7"
+              "src": "1144:20:7"
             },
             "returnParameters": {
               "id": 1557,
@@ -488,7 +488,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1558,
-                  "src": "1159:7:7",
+                  "src": "1188:7:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -499,7 +499,7 @@
                     "id": 1555,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1159:7:7",
+                    "src": "1188:7:7",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -510,10 +510,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1158:9:7"
+              "src": "1187:9:7"
             },
             "scope": 1586,
-            "src": "1088:80:7",
+            "src": "1117:80:7",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -537,7 +537,7 @@
                   "name": "portfolioId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1567,
-                  "src": "1248:19:7",
+                  "src": "1281:19:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -548,7 +548,7 @@
                     "id": 1559,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1248:7:7",
+                    "src": "1281:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -563,7 +563,7 @@
                   "name": "rayTokenId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1567,
-                  "src": "1269:18:7",
+                  "src": "1302:18:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -574,7 +574,7 @@
                     "id": 1561,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1269:7:7",
+                    "src": "1302:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -584,7 +584,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1247:41:7"
+              "src": "1280:41:7"
             },
             "returnParameters": {
               "id": 1566,
@@ -596,7 +596,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1567,
-                  "src": "1312:4:7",
+                  "src": "1345:4:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -607,7 +607,7 @@
                     "id": 1564,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1312:4:7",
+                    "src": "1345:4:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -617,10 +617,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1311:6:7"
+              "src": "1344:6:7"
             },
             "scope": 1586,
-            "src": "1224:94:7",
+            "src": "1257:94:7",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -644,7 +644,7 @@
                   "name": "portfolioId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1576,
-                  "src": "1403:19:7",
+                  "src": "1440:19:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -655,7 +655,7 @@
                     "id": 1568,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1403:7:7",
+                    "src": "1440:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -670,7 +670,7 @@
                   "name": "rayTokenId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1576,
-                  "src": "1424:18:7",
+                  "src": "1461:18:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -681,7 +681,7 @@
                     "id": 1570,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1424:7:7",
+                    "src": "1461:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -691,7 +691,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1402:41:7"
+              "src": "1439:41:7"
             },
             "returnParameters": {
               "id": 1575,
@@ -703,7 +703,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1576,
-                  "src": "1467:4:7",
+                  "src": "1504:4:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -714,7 +714,7 @@
                     "id": 1573,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1467:4:7",
+                    "src": "1504:4:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -724,17 +724,17 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1466:6:7"
+              "src": "1503:6:7"
             },
             "scope": 1586,
-            "src": "1378:95:7",
+            "src": "1415:95:7",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
-            "documentation": "@notice  Get the allowance credited to a RAY token - allowance decides what\n          amount of value will be charged a fee",
+            "documentation": "amount of value will be charged a fee",
             "id": 1585,
             "implemented": false,
             "kind": "function",
@@ -751,7 +751,7 @@
                   "name": "portfolioId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1585,
-                  "src": "1640:19:7",
+                  "src": "1682:19:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -762,7 +762,7 @@
                     "id": 1577,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1640:7:7",
+                    "src": "1682:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -777,7 +777,7 @@
                   "name": "rayTokenId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1585,
-                  "src": "1661:18:7",
+                  "src": "1703:18:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -788,7 +788,7 @@
                     "id": 1579,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1661:7:7",
+                    "src": "1703:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -798,7 +798,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1639:41:7"
+              "src": "1681:41:7"
             },
             "returnParameters": {
               "id": 1584,
@@ -810,7 +810,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1585,
-                  "src": "1704:4:7",
+                  "src": "1746:4:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -821,7 +821,7 @@
                     "id": 1582,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1704:4:7",
+                    "src": "1746:4:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -831,23 +831,23 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1703:6:7"
+              "src": "1745:6:7"
             },
             "scope": 1586,
-            "src": "1613:97:7",
+            "src": "1655:97:7",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           }
         ],
         "scope": 1587,
-        "src": "149:1564:7"
+        "src": "156:1601:7"
       }
     ],
-    "src": "0:1714:7"
+    "src": "0:1759:7"
   },
   "legacyAST": {
-    "absolutePath": "/Users/tom/www/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAYStorage.sol",
+    "absolutePath": "/C/Users/ilgiz/IdeaProjects/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAYStorage.sol",
     "exportedSymbols": {
       "IRAYStorage": [
         1586
@@ -874,7 +874,7 @@
         "baseContracts": [],
         "contractDependencies": [],
         "contractKind": "interface",
-        "documentation": "@notice  Basic interface containing some useful functions for RAY integration.\n\n/// Author:   Devan Purhar",
+        "documentation": "Author:   Devan Purhar",
         "fullyImplemented": false,
         "id": 1586,
         "linearizedBaseContracts": [
@@ -902,7 +902,7 @@
                   "name": "rayTokenId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1537,
-                  "src": "260:18:7",
+                  "src": "270:18:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -913,7 +913,7 @@
                     "id": 1531,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "260:7:7",
+                    "src": "270:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -923,7 +923,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "259:20:7"
+              "src": "269:20:7"
             },
             "returnParameters": {
               "id": 1536,
@@ -935,7 +935,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1537,
-                  "src": "303:7:7",
+                  "src": "313:7:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -946,7 +946,7 @@
                     "id": 1534,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "303:7:7",
+                    "src": "313:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -956,17 +956,17 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "302:9:7"
+              "src": "312:9:7"
             },
             "scope": 1586,
-            "src": "239:73:7",
+            "src": "249:73:7",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
-            "documentation": "@notice  Get the contract address of the underlying asset associated with a\n          portfolioId",
+            "documentation": "portfolioId",
             "id": 1544,
             "implemented": false,
             "kind": "function",
@@ -983,7 +983,7 @@
                   "name": "portfolioId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1544,
-                  "src": "455:19:7",
+                  "src": "470:19:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -994,7 +994,7 @@
                     "id": 1538,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "455:7:7",
+                    "src": "470:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -1004,7 +1004,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "454:21:7"
+              "src": "469:21:7"
             },
             "returnParameters": {
               "id": 1543,
@@ -1016,7 +1016,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1544,
-                  "src": "499:7:7",
+                  "src": "514:7:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1027,7 +1027,7 @@
                     "id": 1541,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "499:7:7",
+                    "src": "514:7:7",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1038,10 +1038,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "498:9:7"
+              "src": "513:9:7"
             },
             "scope": 1586,
-            "src": "426:82:7",
+            "src": "441:82:7",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -1065,7 +1065,7 @@
                   "name": "principalAddress",
                   "nodeType": "VariableDeclaration",
                   "scope": 1551,
-                  "src": "608:24:7",
+                  "src": "627:24:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1076,7 +1076,7 @@
                     "id": 1545,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "608:7:7",
+                    "src": "627:7:7",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1087,7 +1087,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "607:26:7"
+              "src": "626:26:7"
             },
             "returnParameters": {
               "id": 1550,
@@ -1099,7 +1099,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1551,
-                  "src": "657:4:7",
+                  "src": "676:4:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1110,7 +1110,7 @@
                     "id": 1548,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "657:4:7",
+                    "src": "676:4:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -1120,17 +1120,17 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "656:6:7"
+              "src": "675:6:7"
             },
             "scope": 1586,
-            "src": "588:75:7",
+            "src": "607:75:7",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
-            "documentation": "@notice  Dynamically get the contract address of different RAY smart contracts\n\n  /// @param   contractId - Each contract has an id represented by the result of\n                       a keccak256() of the contract name.\n\n  ///                       Example: PortfolioManager.sol can be dynamically referenced\n                       by getContractAddress(keccak256('PortfolioManagerContract'));",
+            "documentation": "by getContractAddress(keccak256('PortfolioManagerContract'));",
             "id": 1558,
             "implemented": false,
             "kind": "function",
@@ -1147,7 +1147,7 @@
                   "name": "contractId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1558,
-                  "src": "1116:18:7",
+                  "src": "1145:18:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1158,7 +1158,7 @@
                     "id": 1552,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1116:7:7",
+                    "src": "1145:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -1168,7 +1168,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1115:20:7"
+              "src": "1144:20:7"
             },
             "returnParameters": {
               "id": 1557,
@@ -1180,7 +1180,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1558,
-                  "src": "1159:7:7",
+                  "src": "1188:7:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1191,7 +1191,7 @@
                     "id": 1555,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1159:7:7",
+                    "src": "1188:7:7",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1202,10 +1202,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1158:9:7"
+              "src": "1187:9:7"
             },
             "scope": 1586,
-            "src": "1088:80:7",
+            "src": "1117:80:7",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -1229,7 +1229,7 @@
                   "name": "portfolioId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1567,
-                  "src": "1248:19:7",
+                  "src": "1281:19:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1240,7 +1240,7 @@
                     "id": 1559,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1248:7:7",
+                    "src": "1281:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -1255,7 +1255,7 @@
                   "name": "rayTokenId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1567,
-                  "src": "1269:18:7",
+                  "src": "1302:18:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1266,7 +1266,7 @@
                     "id": 1561,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1269:7:7",
+                    "src": "1302:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -1276,7 +1276,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1247:41:7"
+              "src": "1280:41:7"
             },
             "returnParameters": {
               "id": 1566,
@@ -1288,7 +1288,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1567,
-                  "src": "1312:4:7",
+                  "src": "1345:4:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1299,7 +1299,7 @@
                     "id": 1564,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1312:4:7",
+                    "src": "1345:4:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1309,10 +1309,10 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1311:6:7"
+              "src": "1344:6:7"
             },
             "scope": 1586,
-            "src": "1224:94:7",
+            "src": "1257:94:7",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
@@ -1336,7 +1336,7 @@
                   "name": "portfolioId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1576,
-                  "src": "1403:19:7",
+                  "src": "1440:19:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1347,7 +1347,7 @@
                     "id": 1568,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1403:7:7",
+                    "src": "1440:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -1362,7 +1362,7 @@
                   "name": "rayTokenId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1576,
-                  "src": "1424:18:7",
+                  "src": "1461:18:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1373,7 +1373,7 @@
                     "id": 1570,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1424:7:7",
+                    "src": "1461:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -1383,7 +1383,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1402:41:7"
+              "src": "1439:41:7"
             },
             "returnParameters": {
               "id": 1575,
@@ -1395,7 +1395,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1576,
-                  "src": "1467:4:7",
+                  "src": "1504:4:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1406,7 +1406,7 @@
                     "id": 1573,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1467:4:7",
+                    "src": "1504:4:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1416,17 +1416,17 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1466:6:7"
+              "src": "1503:6:7"
             },
             "scope": 1586,
-            "src": "1378:95:7",
+            "src": "1415:95:7",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
-            "documentation": "@notice  Get the allowance credited to a RAY token - allowance decides what\n          amount of value will be charged a fee",
+            "documentation": "amount of value will be charged a fee",
             "id": 1585,
             "implemented": false,
             "kind": "function",
@@ -1443,7 +1443,7 @@
                   "name": "portfolioId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1585,
-                  "src": "1640:19:7",
+                  "src": "1682:19:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1454,7 +1454,7 @@
                     "id": 1577,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1640:7:7",
+                    "src": "1682:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -1469,7 +1469,7 @@
                   "name": "rayTokenId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1585,
-                  "src": "1661:18:7",
+                  "src": "1703:18:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1480,7 +1480,7 @@
                     "id": 1579,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1661:7:7",
+                    "src": "1703:7:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -1490,7 +1490,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1639:41:7"
+              "src": "1681:41:7"
             },
             "returnParameters": {
               "id": 1584,
@@ -1502,7 +1502,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1585,
-                  "src": "1704:4:7",
+                  "src": "1746:4:7",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1513,7 +1513,7 @@
                     "id": 1582,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1704:4:7",
+                    "src": "1746:4:7",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1523,50 +1523,44 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1703:6:7"
+              "src": "1745:6:7"
             },
             "scope": 1586,
-            "src": "1613:97:7",
+            "src": "1655:97:7",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           }
         ],
         "scope": 1587,
-        "src": "149:1564:7"
+        "src": "156:1601:7"
       }
     ],
-    "src": "0:1714:7"
+    "src": "0:1759:7"
   },
   "compiler": {
     "name": "solc",
     "version": "0.5.8+commit.23d335f2.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.11",
-  "updatedAt": "2019-11-02T02:40:25.812Z",
+  "schemaVersion": "3.0.16",
+  "updatedAt": "2019-11-05T17:06:52.502Z",
   "devdoc": {
-    "methods": {
-      "getContractAddress(bytes32)": {
-        "params": {
-          "contractId": "- Each contract has an id represented by the result of                       a keccak256() of the contract name.   ///                       Example: PortfolioManager.sol can be dynamically referenced                       by getContractAddress(keccak256('PortfolioManagerContract'));"
-        }
-      }
-    }
+    "methods": {}
   },
   "userdoc": {
     "methods": {
       "getContractAddress(bytes32)": {
-        "notice": "Dynamically get the contract address of different RAY smart contracts "
+        "notice": "by getContractAddress(keccak256('PortfolioManagerContract'));"
       },
       "getIsERC20(address)": {
         "notice": "Get if a contract address follows the ERC20 standard or not"
       },
       "getPrincipalAddress(bytes32)": {
-        "notice": "Get the contract address of the underlying asset associated with a          portfolioId"
+        "notice": "portfolioId"
       },
       "getTokenAllowance(bytes32,bytes32)": {
-        "notice": "Get the allowance credited to a RAY token - allowance decides what          amount of value will be charged a fee"
+        "notice": "amount of value will be charged a fee"
       },
       "getTokenCapital(bytes32,bytes32)": {
         "notice": "Get the capital credited to a RAY token"
@@ -1578,6 +1572,6 @@
         "notice": "Get the shares owned by a RAY token"
       }
     },
-    "notice": "Basic interface containing some useful functions for RAY integration.  /// Author:   Devan Purhar"
+    "notice": "Author:   Devan Purhar"
   }
 }

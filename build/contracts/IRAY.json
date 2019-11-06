@@ -101,15 +101,15 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.8+commit.23d335f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"tokenId\",\"type\":\"bytes32\"},{\"name\":\"valueToWithdraw\",\"type\":\"uint256\"},{\"name\":\"originalCaller\",\"type\":\"address\"}],\"name\":\"redeem\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"tokenId\",\"type\":\"bytes32\"},{\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"deposit\",\"outputs\":[],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"portfolioId\",\"type\":\"bytes32\"},{\"name\":\"tokenId\",\"type\":\"bytes32\"}],\"name\":\"getTokenValue\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"},{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"portfolioId\",\"type\":\"bytes32\"},{\"name\":\"beneficiary\",\"type\":\"address\"},{\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"mint\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"deposit(bytes32,uint256)\":{\"details\":\"Anybody can deposit into a RAY token, not just the owner \",\"params\":{\"tokenId\":\"- the id of the RAY token to add value too\",\"value\":\"- the amount in the smallest units in-kind to deposit into the RAY\"}},\"getTokenValue(bytes32,bytes32)\":{\"details\":\"The implementation of this function exists in NAVCalculator \",\"params\":{\"portfolioId\":\"- the id of the portfolio associated with the RAY token\",\"tokenId\":\"- the id of the RAY token to get the value of \"},\"return\":\"an array of two, the first value is the current token value, the          second value is the current price per share of the portfolio\"},\"mint(bytes32,address,uint256)\":{\"params\":{\"beneficiary\":\"- the owner and beneficiary of the RAY token\",\"portfolioId\":\"- the id of the portfolio to associate the RAY token with\",\"value\":\"- the amount in the smallest units in-kind to deposit into RAY \"},\"return\":\"the unique RAY token id, used to reference anything in the RAY system\"},\"redeem(bytes32,uint256,address)\":{\"details\":\"Can partially or fully redeem the RAY token   ///          Only the owner of the RAY token can call this, or the Staked          'GasFunder' smart contract \",\"params\":{\"originalCaller\":\"- only relevant for our `GasFunder` smart contract,                           for everyone else, can be set to anything \",\"tokenId\":\"- the id of the RAY token to redeem value from\",\"valueToWithdraw\":\"- the amount in the smallest units in-kind to redeem from the RAY\"},\"return\":\"the amount transferred to the owner of the RAY token after fees\"}}},\"userdoc\":{\"methods\":{\"deposit(bytes32,uint256)\":{\"notice\":\"Deposits assets into an existing RAY token \"},\"getTokenValue(bytes32,bytes32)\":{\"notice\":\"Get the underlying value of a RAY token (principal + yield earnt) \"},\"mint(bytes32,address,uint256)\":{\"notice\":\"Mints a RAY token of the associated basket of opportunities to the portfolioId \"},\"redeem(bytes32,uint256,address)\":{\"notice\":\"Redeems a RAY token for the underlying value \"}}}},\"settings\":{\"compilationTarget\":{\"/Users/tom/www/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAY.sol\":\"IRAY\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/tom/www/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAY.sol\":{\"keccak256\":\"0x9a6104f15365f7af816bec6170182ec7dccbf080f02435991722a1a34b90b4c3\",\"urls\":[\"bzzr://426ac35129e6115d5adc878759621fad6592a880e6353fd4c7f70b0d82afd7a5\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.8+commit.23d335f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"tokenId\",\"type\":\"bytes32\"},{\"name\":\"valueToWithdraw\",\"type\":\"uint256\"},{\"name\":\"originalCaller\",\"type\":\"address\"}],\"name\":\"redeem\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"tokenId\",\"type\":\"bytes32\"},{\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"deposit\",\"outputs\":[],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"portfolioId\",\"type\":\"bytes32\"},{\"name\":\"tokenId\",\"type\":\"bytes32\"}],\"name\":\"getTokenValue\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"},{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"portfolioId\",\"type\":\"bytes32\"},{\"name\":\"beneficiary\",\"type\":\"address\"},{\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"mint\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":true,\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"deposit(bytes32,uint256)\":{\"params\":{\"value\":\"- the amount in the smallest units in-kind to deposit into the RAY\"}},\"mint(bytes32,address,uint256)\":{\"return\":\"the unique RAY token id, used to reference anything in the RAY system\"},\"redeem(bytes32,uint256,address)\":{\"return\":\"the amount transferred to the owner of the RAY token after fees\"}}},\"userdoc\":{\"methods\":{\"getTokenValue(bytes32,bytes32)\":{\"notice\":\"second value is the current price per share of the portfolio\"}}}},\"settings\":{\"compilationTarget\":{\"/C/Users/ilgiz/IdeaProjects/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAY.sol\":\"IRAY\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/ilgiz/IdeaProjects/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAY.sol\":{\"keccak256\":\"0x2eac5f61df38cec21333bc80ef60dc3dd8c127920f98a76628aecfe8f94ac661\",\"urls\":[\"bzzr://1137d3f3b3cc64504d9586ff9cac56737ab905c3e1a645e38a7b237bf819f2a1\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity >=0.5.0 <0.6.0;\n\ninterface IRAY {\n\n\n  /// @notice  Mints a RAY token of the associated basket of opportunities to the portfolioId\n  ///\n  /// @param   portfolioId - the id of the portfolio to associate the RAY token with\n  /// @param   beneficiary - the owner and beneficiary of the RAY token\n  /// @param   value - the amount in the smallest units in-kind to deposit into RAY\n  ///\n  /// @return  the unique RAY token id, used to reference anything in the RAY system\n  function mint(bytes32 portfolioId, address beneficiary, uint value) external payable returns(bytes32);\n\n\n  /// @notice  Deposits assets into an existing RAY token\n  ///\n  /// @dev     Anybody can deposit into a RAY token, not just the owner\n  ///\n  /// @param   tokenId - the id of the RAY token to add value too\n  /// @param   value - the amount in the smallest units in-kind to deposit into the RAY\n  function deposit(bytes32 tokenId, uint value) external payable;\n\n\n  /// @notice  Redeems a RAY token for the underlying value\n  ///\n  /// @dev     Can partially or fully redeem the RAY token\n  ///\n  ///          Only the owner of the RAY token can call this, or the Staked\n  ///          'GasFunder' smart contract\n  ///\n  /// @param   tokenId - the id of the RAY token to redeem value from\n  /// @param   valueToWithdraw - the amount in the smallest units in-kind to redeem from the RAY\n  /// @param   originalCaller - only relevant for our `GasFunder` smart contract,\n  ///                           for everyone else, can be set to anything\n  ///\n  /// @return  the amount transferred to the owner of the RAY token after fees\n  function redeem(bytes32 tokenId, uint valueToWithdraw, address originalCaller) external returns(uint);\n\n\n  /// @notice  Get the underlying value of a RAY token (principal + yield earnt)\n  ///\n  /// @dev     The implementation of this function exists in NAVCalculator\n  ///\n  /// @param   portfolioId - the id of the portfolio associated with the RAY token\n  /// @param   tokenId - the id of the RAY token to get the value of\n  ///\n  /// @return  an array of two, the first value is the current token value, the\n  ///          second value is the current price per share of the portfolio\n  function getTokenValue(bytes32 portfolioId, bytes32 tokenId) external view returns(uint, uint);\n\n}\n",
-  "sourcePath": "/Users/tom/www/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAY.sol",
+  "source": "pragma solidity >=0.5.0 <0.6.0;\r\n\r\ninterface IRAY {\r\n\r\n\r\n  /// @notice  Mints a RAY token of the associated basket of opportunities to the portfolioId\r\n  ///\r\n  /// @param   portfolioId - the id of the portfolio to associate the RAY token with\r\n  /// @param   beneficiary - the owner and beneficiary of the RAY token\r\n  /// @param   value - the amount in the smallest units in-kind to deposit into RAY\r\n  ///\r\n  /// @return  the unique RAY token id, used to reference anything in the RAY system\r\n  function mint(bytes32 portfolioId, address beneficiary, uint value) external payable returns(bytes32);\r\n\r\n\r\n  /// @notice  Deposits assets into an existing RAY token\r\n  ///\r\n  /// @dev     Anybody can deposit into a RAY token, not just the owner\r\n  ///\r\n  /// @param   tokenId - the id of the RAY token to add value too\r\n  /// @param   value - the amount in the smallest units in-kind to deposit into the RAY\r\n  function deposit(bytes32 tokenId, uint value) external payable;\r\n\r\n\r\n  /// @notice  Redeems a RAY token for the underlying value\r\n  ///\r\n  /// @dev     Can partially or fully redeem the RAY token\r\n  ///\r\n  ///          Only the owner of the RAY token can call this, or the Staked\r\n  ///          'GasFunder' smart contract\r\n  ///\r\n  /// @param   tokenId - the id of the RAY token to redeem value from\r\n  /// @param   valueToWithdraw - the amount in the smallest units in-kind to redeem from the RAY\r\n  /// @param   originalCaller - only relevant for our `GasFunder` smart contract,\r\n  ///                           for everyone else, can be set to anything\r\n  ///\r\n  /// @return  the amount transferred to the owner of the RAY token after fees\r\n  function redeem(bytes32 tokenId, uint valueToWithdraw, address originalCaller) external returns(uint);\r\n\r\n\r\n  /// @notice  Get the underlying value of a RAY token (principal + yield earnt)\r\n  ///\r\n  /// @dev     The implementation of this function exists in NAVCalculator\r\n  ///\r\n  /// @param   portfolioId - the id of the portfolio associated with the RAY token\r\n  /// @param   tokenId - the id of the RAY token to get the value of\r\n  ///\r\n  /// @return  an array of two, the first value is the current token value, the\r\n  ///          second value is the current price per share of the portfolio\r\n  function getTokenValue(bytes32 portfolioId, bytes32 tokenId) external view returns(uint, uint);\r\n\r\n}\r\n",
+  "sourcePath": "C:\\Users\\ilgiz\\IdeaProjects\\defi-custody-sf-hackathon\\contracts\\interfaces\\ray\\IRAY.sol",
   "ast": {
-    "absolutePath": "/Users/tom/www/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAY.sol",
+    "absolutePath": "/C/Users/ilgiz/IdeaProjects/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAY.sol",
     "exportedSymbols": {
       "IRAY": [
         1528
@@ -147,7 +147,7 @@
         "nodes": [
           {
             "body": null,
-            "documentation": "@notice  Mints a RAY token of the associated basket of opportunities to the portfolioId\n\n  /// @param   portfolioId - the id of the portfolio to associate the RAY token with\n @param   beneficiary - the owner and beneficiary of the RAY token\n @param   value - the amount in the smallest units in-kind to deposit into RAY\n\n  /// @return  the unique RAY token id, used to reference anything in the RAY system",
+            "documentation": "@return  the unique RAY token id, used to reference anything in the RAY system",
             "id": 1498,
             "implemented": false,
             "kind": "function",
@@ -164,7 +164,7 @@
                   "name": "portfolioId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1498,
-                  "src": "500:19:6",
+                  "src": "512:19:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -175,7 +175,7 @@
                     "id": 1488,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "500:7:6",
+                    "src": "512:7:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -190,7 +190,7 @@
                   "name": "beneficiary",
                   "nodeType": "VariableDeclaration",
                   "scope": 1498,
-                  "src": "521:19:6",
+                  "src": "533:19:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -201,7 +201,7 @@
                     "id": 1490,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "521:7:6",
+                    "src": "533:7:6",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -217,7 +217,7 @@
                   "name": "value",
                   "nodeType": "VariableDeclaration",
                   "scope": 1498,
-                  "src": "542:10:6",
+                  "src": "554:10:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -228,7 +228,7 @@
                     "id": 1492,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "542:4:6",
+                    "src": "554:4:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -238,7 +238,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "499:54:6"
+              "src": "511:54:6"
             },
             "returnParameters": {
               "id": 1497,
@@ -250,7 +250,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1498,
-                  "src": "579:7:6",
+                  "src": "591:7:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -261,7 +261,7 @@
                     "id": 1495,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "579:7:6",
+                    "src": "591:7:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -271,17 +271,17 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "578:9:6"
+              "src": "590:9:6"
             },
             "scope": 1528,
-            "src": "486:102:6",
+            "src": "498:102:6",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
-            "documentation": "@notice  Deposits assets into an existing RAY token\n\n  /// @dev     Anybody can deposit into a RAY token, not just the owner\n\n  /// @param   tokenId - the id of the RAY token to add value too\n @param   value - the amount in the smallest units in-kind to deposit into the RAY",
+            "documentation": "@param   value - the amount in the smallest units in-kind to deposit into the RAY",
             "id": 1505,
             "implemented": false,
             "kind": "function",
@@ -298,7 +298,7 @@
                   "name": "tokenId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1505,
-                  "src": "906:15:6",
+                  "src": "927:15:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -309,7 +309,7 @@
                     "id": 1499,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "906:7:6",
+                    "src": "927:7:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -324,7 +324,7 @@
                   "name": "value",
                   "nodeType": "VariableDeclaration",
                   "scope": 1505,
-                  "src": "923:10:6",
+                  "src": "944:10:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -335,7 +335,7 @@
                     "id": 1501,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "923:4:6",
+                    "src": "944:4:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -345,23 +345,23 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "905:29:6"
+              "src": "926:29:6"
             },
             "returnParameters": {
               "id": 1504,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "951:0:6"
+              "src": "972:0:6"
             },
             "scope": 1528,
-            "src": "889:63:6",
+            "src": "910:63:6",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
-            "documentation": "@notice  Redeems a RAY token for the underlying value\n\n  /// @dev     Can partially or fully redeem the RAY token\n\n  ///          Only the owner of the RAY token can call this, or the Staked\n          'GasFunder' smart contract\n\n  /// @param   tokenId - the id of the RAY token to redeem value from\n @param   valueToWithdraw - the amount in the smallest units in-kind to redeem from the RAY\n @param   originalCaller - only relevant for our `GasFunder` smart contract,\n                           for everyone else, can be set to anything\n\n  /// @return  the amount transferred to the owner of the RAY token after fees",
+            "documentation": "@return  the amount transferred to the owner of the RAY token after fees",
             "id": 1516,
             "implemented": false,
             "kind": "function",
@@ -378,7 +378,7 @@
                   "name": "tokenId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1516,
-                  "src": "1636:15:6",
+                  "src": "1673:15:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -389,7 +389,7 @@
                     "id": 1506,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1636:7:6",
+                    "src": "1673:7:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -404,7 +404,7 @@
                   "name": "valueToWithdraw",
                   "nodeType": "VariableDeclaration",
                   "scope": 1516,
-                  "src": "1653:20:6",
+                  "src": "1690:20:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -415,7 +415,7 @@
                     "id": 1508,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1653:4:6",
+                    "src": "1690:4:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -430,7 +430,7 @@
                   "name": "originalCaller",
                   "nodeType": "VariableDeclaration",
                   "scope": 1516,
-                  "src": "1675:22:6",
+                  "src": "1712:22:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -441,7 +441,7 @@
                     "id": 1510,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1675:7:6",
+                    "src": "1712:7:6",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -452,7 +452,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1635:63:6"
+              "src": "1672:63:6"
             },
             "returnParameters": {
               "id": 1515,
@@ -464,7 +464,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1516,
-                  "src": "1716:4:6",
+                  "src": "1753:4:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -475,7 +475,7 @@
                     "id": 1513,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1716:4:6",
+                    "src": "1753:4:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -485,17 +485,17 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1715:6:6"
+              "src": "1752:6:6"
             },
             "scope": 1528,
-            "src": "1620:102:6",
+            "src": "1657:102:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
-            "documentation": "@notice  Get the underlying value of a RAY token (principal + yield earnt)\n\n  /// @dev     The implementation of this function exists in NAVCalculator\n\n  /// @param   portfolioId - the id of the portfolio associated with the RAY token\n @param   tokenId - the id of the RAY token to get the value of\n\n  /// @return  an array of two, the first value is the current token value, the\n          second value is the current price per share of the portfolio",
+            "documentation": "second value is the current price per share of the portfolio",
             "id": 1527,
             "implemented": false,
             "kind": "function",
@@ -512,7 +512,7 @@
                   "name": "portfolioId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1527,
-                  "src": "2232:19:6",
+                  "src": "2281:19:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -523,7 +523,7 @@
                     "id": 1517,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2232:7:6",
+                    "src": "2281:7:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -538,7 +538,7 @@
                   "name": "tokenId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1527,
-                  "src": "2253:15:6",
+                  "src": "2302:15:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -549,7 +549,7 @@
                     "id": 1519,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2253:7:6",
+                    "src": "2302:7:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -559,7 +559,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2231:38:6"
+              "src": "2280:38:6"
             },
             "returnParameters": {
               "id": 1526,
@@ -571,7 +571,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1527,
-                  "src": "2292:4:6",
+                  "src": "2341:4:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -582,7 +582,7 @@
                     "id": 1522,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2292:4:6",
+                    "src": "2341:4:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -597,7 +597,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1527,
-                  "src": "2298:4:6",
+                  "src": "2347:4:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -608,7 +608,7 @@
                     "id": 1524,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2298:4:6",
+                    "src": "2347:4:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -618,23 +618,23 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2291:12:6"
+              "src": "2340:12:6"
             },
             "scope": 1528,
-            "src": "2209:95:6",
+            "src": "2258:95:6",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           }
         ],
         "scope": 1529,
-        "src": "33:2274:6"
+        "src": "35:2323:6"
       }
     ],
-    "src": "0:2308:6"
+    "src": "0:2360:6"
   },
   "legacyAST": {
-    "absolutePath": "/Users/tom/www/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAY.sol",
+    "absolutePath": "/C/Users/ilgiz/IdeaProjects/defi-custody-sf-hackathon/contracts/interfaces/ray/IRAY.sol",
     "exportedSymbols": {
       "IRAY": [
         1528
@@ -672,7 +672,7 @@
         "nodes": [
           {
             "body": null,
-            "documentation": "@notice  Mints a RAY token of the associated basket of opportunities to the portfolioId\n\n  /// @param   portfolioId - the id of the portfolio to associate the RAY token with\n @param   beneficiary - the owner and beneficiary of the RAY token\n @param   value - the amount in the smallest units in-kind to deposit into RAY\n\n  /// @return  the unique RAY token id, used to reference anything in the RAY system",
+            "documentation": "@return  the unique RAY token id, used to reference anything in the RAY system",
             "id": 1498,
             "implemented": false,
             "kind": "function",
@@ -689,7 +689,7 @@
                   "name": "portfolioId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1498,
-                  "src": "500:19:6",
+                  "src": "512:19:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -700,7 +700,7 @@
                     "id": 1488,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "500:7:6",
+                    "src": "512:7:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -715,7 +715,7 @@
                   "name": "beneficiary",
                   "nodeType": "VariableDeclaration",
                   "scope": 1498,
-                  "src": "521:19:6",
+                  "src": "533:19:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -726,7 +726,7 @@
                     "id": 1490,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "521:7:6",
+                    "src": "533:7:6",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -742,7 +742,7 @@
                   "name": "value",
                   "nodeType": "VariableDeclaration",
                   "scope": 1498,
-                  "src": "542:10:6",
+                  "src": "554:10:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -753,7 +753,7 @@
                     "id": 1492,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "542:4:6",
+                    "src": "554:4:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -763,7 +763,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "499:54:6"
+              "src": "511:54:6"
             },
             "returnParameters": {
               "id": 1497,
@@ -775,7 +775,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1498,
-                  "src": "579:7:6",
+                  "src": "591:7:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -786,7 +786,7 @@
                     "id": 1495,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "579:7:6",
+                    "src": "591:7:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -796,17 +796,17 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "578:9:6"
+              "src": "590:9:6"
             },
             "scope": 1528,
-            "src": "486:102:6",
+            "src": "498:102:6",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
-            "documentation": "@notice  Deposits assets into an existing RAY token\n\n  /// @dev     Anybody can deposit into a RAY token, not just the owner\n\n  /// @param   tokenId - the id of the RAY token to add value too\n @param   value - the amount in the smallest units in-kind to deposit into the RAY",
+            "documentation": "@param   value - the amount in the smallest units in-kind to deposit into the RAY",
             "id": 1505,
             "implemented": false,
             "kind": "function",
@@ -823,7 +823,7 @@
                   "name": "tokenId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1505,
-                  "src": "906:15:6",
+                  "src": "927:15:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -834,7 +834,7 @@
                     "id": 1499,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "906:7:6",
+                    "src": "927:7:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -849,7 +849,7 @@
                   "name": "value",
                   "nodeType": "VariableDeclaration",
                   "scope": 1505,
-                  "src": "923:10:6",
+                  "src": "944:10:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -860,7 +860,7 @@
                     "id": 1501,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "923:4:6",
+                    "src": "944:4:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -870,23 +870,23 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "905:29:6"
+              "src": "926:29:6"
             },
             "returnParameters": {
               "id": 1504,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "951:0:6"
+              "src": "972:0:6"
             },
             "scope": 1528,
-            "src": "889:63:6",
+            "src": "910:63:6",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
-            "documentation": "@notice  Redeems a RAY token for the underlying value\n\n  /// @dev     Can partially or fully redeem the RAY token\n\n  ///          Only the owner of the RAY token can call this, or the Staked\n          'GasFunder' smart contract\n\n  /// @param   tokenId - the id of the RAY token to redeem value from\n @param   valueToWithdraw - the amount in the smallest units in-kind to redeem from the RAY\n @param   originalCaller - only relevant for our `GasFunder` smart contract,\n                           for everyone else, can be set to anything\n\n  /// @return  the amount transferred to the owner of the RAY token after fees",
+            "documentation": "@return  the amount transferred to the owner of the RAY token after fees",
             "id": 1516,
             "implemented": false,
             "kind": "function",
@@ -903,7 +903,7 @@
                   "name": "tokenId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1516,
-                  "src": "1636:15:6",
+                  "src": "1673:15:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -914,7 +914,7 @@
                     "id": 1506,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1636:7:6",
+                    "src": "1673:7:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -929,7 +929,7 @@
                   "name": "valueToWithdraw",
                   "nodeType": "VariableDeclaration",
                   "scope": 1516,
-                  "src": "1653:20:6",
+                  "src": "1690:20:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -940,7 +940,7 @@
                     "id": 1508,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1653:4:6",
+                    "src": "1690:4:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -955,7 +955,7 @@
                   "name": "originalCaller",
                   "nodeType": "VariableDeclaration",
                   "scope": 1516,
-                  "src": "1675:22:6",
+                  "src": "1712:22:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -966,7 +966,7 @@
                     "id": 1510,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1675:7:6",
+                    "src": "1712:7:6",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -977,7 +977,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1635:63:6"
+              "src": "1672:63:6"
             },
             "returnParameters": {
               "id": 1515,
@@ -989,7 +989,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1516,
-                  "src": "1716:4:6",
+                  "src": "1753:4:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1000,7 +1000,7 @@
                     "id": 1513,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1716:4:6",
+                    "src": "1753:4:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1010,17 +1010,17 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1715:6:6"
+              "src": "1752:6:6"
             },
             "scope": 1528,
-            "src": "1620:102:6",
+            "src": "1657:102:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           },
           {
             "body": null,
-            "documentation": "@notice  Get the underlying value of a RAY token (principal + yield earnt)\n\n  /// @dev     The implementation of this function exists in NAVCalculator\n\n  /// @param   portfolioId - the id of the portfolio associated with the RAY token\n @param   tokenId - the id of the RAY token to get the value of\n\n  /// @return  an array of two, the first value is the current token value, the\n          second value is the current price per share of the portfolio",
+            "documentation": "second value is the current price per share of the portfolio",
             "id": 1527,
             "implemented": false,
             "kind": "function",
@@ -1037,7 +1037,7 @@
                   "name": "portfolioId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1527,
-                  "src": "2232:19:6",
+                  "src": "2281:19:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1048,7 +1048,7 @@
                     "id": 1517,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2232:7:6",
+                    "src": "2281:7:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -1063,7 +1063,7 @@
                   "name": "tokenId",
                   "nodeType": "VariableDeclaration",
                   "scope": 1527,
-                  "src": "2253:15:6",
+                  "src": "2302:15:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1074,7 +1074,7 @@
                     "id": 1519,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2253:7:6",
+                    "src": "2302:7:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -1084,7 +1084,7 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2231:38:6"
+              "src": "2280:38:6"
             },
             "returnParameters": {
               "id": 1526,
@@ -1096,7 +1096,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1527,
-                  "src": "2292:4:6",
+                  "src": "2341:4:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1107,7 +1107,7 @@
                     "id": 1522,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2292:4:6",
+                    "src": "2341:4:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1122,7 +1122,7 @@
                   "name": "",
                   "nodeType": "VariableDeclaration",
                   "scope": 1527,
-                  "src": "2298:4:6",
+                  "src": "2347:4:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1133,7 +1133,7 @@
                     "id": 1524,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "2298:4:6",
+                    "src": "2347:4:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1143,77 +1143,47 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "2291:12:6"
+              "src": "2340:12:6"
             },
             "scope": 1528,
-            "src": "2209:95:6",
+            "src": "2258:95:6",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           }
         ],
         "scope": 1529,
-        "src": "33:2274:6"
+        "src": "35:2323:6"
       }
     ],
-    "src": "0:2308:6"
+    "src": "0:2360:6"
   },
   "compiler": {
     "name": "solc",
     "version": "0.5.8+commit.23d335f2.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.11",
-  "updatedAt": "2019-11-02T02:40:25.810Z",
+  "schemaVersion": "3.0.16",
+  "updatedAt": "2019-11-05T17:06:52.485Z",
   "devdoc": {
     "methods": {
       "deposit(bytes32,uint256)": {
-        "details": "Anybody can deposit into a RAY token, not just the owner ",
         "params": {
-          "tokenId": "- the id of the RAY token to add value too",
           "value": "- the amount in the smallest units in-kind to deposit into the RAY"
         }
       },
-      "getTokenValue(bytes32,bytes32)": {
-        "details": "The implementation of this function exists in NAVCalculator ",
-        "params": {
-          "portfolioId": "- the id of the portfolio associated with the RAY token",
-          "tokenId": "- the id of the RAY token to get the value of "
-        },
-        "return": "an array of two, the first value is the current token value, the          second value is the current price per share of the portfolio"
-      },
       "mint(bytes32,address,uint256)": {
-        "params": {
-          "beneficiary": "- the owner and beneficiary of the RAY token",
-          "portfolioId": "- the id of the portfolio to associate the RAY token with",
-          "value": "- the amount in the smallest units in-kind to deposit into RAY "
-        },
         "return": "the unique RAY token id, used to reference anything in the RAY system"
       },
       "redeem(bytes32,uint256,address)": {
-        "details": "Can partially or fully redeem the RAY token   ///          Only the owner of the RAY token can call this, or the Staked          'GasFunder' smart contract ",
-        "params": {
-          "originalCaller": "- only relevant for our `GasFunder` smart contract,                           for everyone else, can be set to anything ",
-          "tokenId": "- the id of the RAY token to redeem value from",
-          "valueToWithdraw": "- the amount in the smallest units in-kind to redeem from the RAY"
-        },
         "return": "the amount transferred to the owner of the RAY token after fees"
       }
     }
   },
   "userdoc": {
     "methods": {
-      "deposit(bytes32,uint256)": {
-        "notice": "Deposits assets into an existing RAY token "
-      },
       "getTokenValue(bytes32,bytes32)": {
-        "notice": "Get the underlying value of a RAY token (principal + yield earnt) "
-      },
-      "mint(bytes32,address,uint256)": {
-        "notice": "Mints a RAY token of the associated basket of opportunities to the portfolioId "
-      },
-      "redeem(bytes32,uint256,address)": {
-        "notice": "Redeems a RAY token for the underlying value "
+        "notice": "second value is the current price per share of the portfolio"
       }
     }
   }

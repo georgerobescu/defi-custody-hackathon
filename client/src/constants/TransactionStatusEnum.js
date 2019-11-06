@@ -41,7 +41,7 @@ export const TransactionStatus = {
           successTitle,
           {
             secondaryMessage: successSubtitle,
-            actionHref: `https://rinkeby.etherscan.io/tx/${receipt.transactionHash}`,
+            actionHref: `https://kovan.etherscan.io/tx/${receipt.transactionHash}`,
             actionText: "Check",
             variant: "success"
           }

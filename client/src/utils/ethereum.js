@@ -1,11 +1,14 @@
 export const generateDicimaledBalance = (balance, decimals, toBN) => {
   const divisor = toBN("10").pow(toBN(decimals));
-  const beforeDecimal = toBN(balance)
+  const beforeDecimal = toBN(balance.toString())
     .div(divisor)
     .toString();
-  let afterDecimal = toBN(balance)
+  let afterDecimal = toBN(balance.toString())
     .mod(divisor)
     .toString();
+  while (afterDecimal.length < decimals) {
+    afterDecimal = "0" + afterDecimal;
+  }
   if (afterDecimal.length < 2) {
     afterDecimal += "0";
   } else {

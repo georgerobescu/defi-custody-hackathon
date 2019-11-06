@@ -11,6 +11,19 @@ import { drizzleReactHooks } from "../../drizzle";
 import Spinner from "../utils/Spinner";
 import withDrizzle from "../../drizzle/WithDrizzle";
 
+const calculateBalance = smartContractTokens => {
+  const tokens = {};
+  smartContractTokens.tokens.forEach((token, i) => {
+    tokens[token] =
+      (tokens[token] || 0) + parseInt(smartContractTokens.balances[i]);
+  });
+  const result = { tokens: [], balances: [] };
+  Object.keys(tokens).forEach(token => {
+    result.tokens.push(token);
+    result.balances.push(tokens[token]);
+  });
+  return result;
+};
 const AssetsObserver = ({
   DSCStore,
   Web3Store,
@@ -21,7 +34,8 @@ const AssetsObserver = ({
   const { useCacheCall } = drizzleReactHooks.useDrizzle();
   //useCacheCall("DeFiCustodyRegistry", "getTokens");
   // kovan 0xc4375b7de8af5a38a93548eb8453a498222c4ff2
-  const supportedTokens = ["0x7F6319187249dB5ec845F92ffA3318A9E6604293"];
+  const tokenAddress = DSCStore.drizzle.contracts.TestDAI.options.address;
+  const supportedTokens = [tokenAddress];
 
   const smartContractTokens = useCacheCall(
     "DeFiCustodyRegistry",
@@ -30,6 +44,7 @@ const AssetsObserver = ({
   useEffect(() => {
     // TODO rewrite call to hooks
     const fetchSmartContractData = async () => {
+      const fixedSmartContractTokens = calculateBalance(smartContractTokens);
       console.log(
         "Fetching data from DeFiCustody: ",
         DSCStore.drizzle.contracts.DeFiCustodyRegistry.address
@@ -42,7 +57,7 @@ const AssetsObserver = ({
       const [smartContractAssets, addresses] = await fetchSmartContractAssets(
         Web3Store,
         DSCStore,
-        smartContractTokens
+        fixedSmartContractTokens
       );
       const mergedTokens = mergeTokenAndBalances(
         supportedTokens,

@@ -730,6 +730,10 @@
     "27": {
       "links": {},
       "address": "0x7F6319187249dB5ec845F92ffA3318A9E6604293"
+    },
+    "42": {
+      "links": {},
+      "address": "0xc4375b7de8af5a38a93548eb8453a498222c4ff2"
     }
   },
   "schemaVersion": "3.0.11",
