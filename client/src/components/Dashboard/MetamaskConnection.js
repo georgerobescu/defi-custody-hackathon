@@ -5,11 +5,13 @@ import { MetaMaskButton } from "rimble-ui";
 import { EthAddress, MetamaskContainer } from "../../styled";
 import Web3 from "web3";
 import { toast } from "react-toastify";
+import Spinner from "../utils/Spinner";
 
 const USER_DENIED_ACCESS = "User denied account authorization";
 
 const MetamaskConnection = ({ Web3Store, DSCStore, BlockchainStatusStore }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isMetamaskInstalled, setIsMetamaskInstalled] = useState(false);
   const [defaultAddress, setDefaultAddress] = useState();
   const setInitContractsStore = useCallback(
     async (web3, accounts) => {
@@ -22,11 +24,18 @@ const MetamaskConnection = ({ Web3Store, DSCStore, BlockchainStatusStore }) => {
 
   useEffect(() => {
     const fetchAccount = async () => {
-      const { ethereum } = window;
-      const web3 = new Web3(ethereum);
-      const accounts = await web3.eth.getAccounts();
-      if (accounts.length > 0) {
-        await setInitContractsStore(web3, accounts);
+      try {
+        const { ethereum } = window;
+        const web3 = new Web3(ethereum);
+        const accounts = await web3.eth.getAccounts();
+        if (accounts.length > 0) {
+          await setInitContractsStore(web3, accounts);
+        }
+        setIsMetamaskInstalled(true);
+      } catch (e) {
+        if (e.message === "Provider not set or invalid") {
+          toast.error("Ooops. Looks like you don't have metamask extension...");
+        }
       }
       BlockchainStatusStore.metamaskLoading &&
         BlockchainStatusStore.setMetamaskLoading(false);
@@ -60,10 +69,22 @@ const MetamaskConnection = ({ Web3Store, DSCStore, BlockchainStatusStore }) => {
     <MetamaskContainer>
       {defaultAddress ? (
         <EthAddress address={defaultAddress} textLabels />
-      ) : (
+      ) : isLoading ? (
+        <Spinner />
+      ) : isMetamaskInstalled ? (
         <MetaMaskButton.Outline onClick={connect} disabled={isLoading}>
           Connect with MetaMask
         </MetaMaskButton.Outline>
+      ) : (
+        <a
+          href="https://metamask.io/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <MetaMaskButton.Outline>
+            Please install metamask
+          </MetaMaskButton.Outline>
+        </a>
       )}
     </MetamaskContainer>
   );
