@@ -116,7 +116,7 @@ export const fetchUserBalances = async (address, toBN) => {
   });
   return tokens;
 };
-
+// TODO change TestDAI ABI and fetch amount name and symbol from blockchain
 export const fetchUserBalance = async (DSCStore, address, toBN) => {
   console.log("DAI address: ", DSCStore.drizzle.contracts.TestDAI.address);
   const amount = await DSCStore.drizzle.contracts.TestDAI.methods
@@ -130,7 +130,7 @@ export const fetchUserBalance = async (DSCStore, address, toBN) => {
   // await DSCStore.drizzle.contracts.TestDAI.methods
   //   .symbol()
   //   .call();
-  const decimals = 0;
+  const decimals = 18;
   // await DSCStore.drizzle.contracts.TestDAI.methods
   //   .decimals()
   //   .call();
@@ -202,7 +202,6 @@ export const fetchDeFi = async (uri = "", data = {}, method = "POST") => {
       referrer: "no-referrer",
       body: JSON.stringify(data)
     });
-    console.log("Success:");
     return await response.json();
   } catch (error) {
     console.error("Failure:", error);

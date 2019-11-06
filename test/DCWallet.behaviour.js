@@ -15,7 +15,7 @@ const DCWalletTestSuite = async (accounts, dependencies) => {
 
   describe("depositDC()", () => {
     it("should deposit tokens to wallet", async () => {
-      const wallet = dcWallet.options.address
+      const wallet = dcWallet.options.address;
       const amount = new BN(web3.utils.toWei("1", "milli"));
       const userBalanceBefore = new BN(
         await ERC20Instance.methods.balanceOf(user).call()
@@ -50,7 +50,7 @@ const DCWalletTestSuite = async (accounts, dependencies) => {
 
   describe("withdrawDC()", () => {
     it("should withdraw tokens from wallet", async () => {
-      const wallet = dcWallet.options.address
+      const wallet = dcWallet.options.address;
       const amount = new BN(web3.utils.toWei("1", "milli"));
       const userBalanceBefore = new BN(
         await ERC20Instance.methods.balanceOf(user).call()

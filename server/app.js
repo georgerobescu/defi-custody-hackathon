@@ -8,8 +8,6 @@ const { recoveryFunc } = require("./jobs/recovery");
 const cron = require("node-cron");
 const cors = require("cors");
 
-customWeb3.initAccount();
-
 const app = express();
 //TODO set logger var
 app.use(logger("dev"));

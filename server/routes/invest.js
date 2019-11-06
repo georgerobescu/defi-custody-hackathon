@@ -21,11 +21,10 @@ router.post("/invest", async (req, res, next) => {
   // mint(bytes32 portfolioId, address payable beneficiary, uint value)
   try {
     const rayContractInstance = await getRayContract();
-
     const transaction = rayContractInstance.methods.mint(
       portfolioId,
       payableBeneficiary,
-      value
+      value.toString()
     );
     console.log(
       "Sending mint transaction for rayContractInstance with params:",

@@ -12,6 +12,7 @@ const DepositWrapper = ({ DSCStore, Web3Store, children }) => {
   const { useCacheSend } = drizzleReactHooks.useDrizzle();
   const { send, TXObjects } = useCacheSend("TestDAI", "approve");
   const [depositAmount, setDepositAmount] = useState(0);
+  const [completeTransfer, setCompleteTransfer] = useState();
   const successToast = {
     successTitle: "Successfully deposited!",
     successSubtitle: receipt => "Transaction mined"
@@ -24,17 +25,24 @@ const DepositWrapper = ({ DSCStore, Web3Store, children }) => {
         value: depositAmount
       };
       const response = await fetchDeFi("invest", data);
-      console.log(response);
+      if (response.error) {
+        TXObjects.status = TransactionStatus.ERROR;
+        TXObjects.error = { message: response.error };
+      }
       TXObjects.receipt = response;
+    }
+    if (TXObjects.status !== TransactionStatus.PENDING && completeTransfer) {
+      completeTransfer(TXObjects.status === TransactionStatus.ERROR);
     }
     return {
       ...TXObjects,
       successToast
     };
   };
-  const transfer = (amount, token) => {
+  const transfer = (amount, completeTransfer) => {
     send(DSCStore.drizzle.contracts.DeFiCustodyRegistry.address, amount);
     setDepositAmount(amount);
+    setCompleteTransfer(() => completeTransfer);
   };
   return children({ transfer, TXObjects, successToast, getStatus });
 };

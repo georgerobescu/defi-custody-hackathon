@@ -3,28 +3,25 @@ const web3Library = require("web3");
 
 const fs = require("fs");
 
-const mnemonic = process.env.DEFICUSTODY_PRIVATE_KEY;
 const network = process.env.NETWORK || "development";
 const INFURA_ID = process.env.INFURA_ID || "d6760e62b67f4937ba1ea2691046f06d";
 
-const path = "m/44'/60'/0'/0/";
 class Web3 {
   constructor() {
-    var providerConfig
+    let providerConfig;
     const { gas } = JSON.parse(
-      fs.readFileSync(`${__dirname}/../config/deployConfig.json`, 'utf8'),
-    )
+      fs.readFileSync(`${__dirname}/../config/deployConfig.json`, "utf8")
+    );
     if (process.env.NODE_ENV === "prod") {
       providerConfig = `https://${network}.infura.io/v3/${INFURA_ID}`;
     } else {
       providerConfig = "http://localhost:8545";
     }
-    console.log(providerConfig)
 
     this.gas = gas;
     const provider = new web3Library.providers.HttpProvider(providerConfig);
-    const web3 = new web3Library(provider);
-    this._web3 = web3;
+    this._web3 = new web3Library(provider);
+    this.initAccount();
   }
 
   getWeb3() {
@@ -34,26 +31,29 @@ class Web3 {
   async initAccount() {
     const accounts = await this._web3.eth.getAccounts();
     if (accounts.length === 0) {
-      if (mnemonic == "") {
-        var privateKey =
-          "0x" + fs.readFileSync(`${__dirname}/../config/privateKey`, "utf8");
-      } else {
-        var privateKey = mnemonic;
-      }
-      const account = this._web3.eth.accounts.privateKeyToAccount(privateKey);
+      const privateKey = process.env.DEFICUSTODY_PRIVATE_KEY
+        ? process.env.DEFICUSTODY_PRIVATE_KEY
+        : fs.readFileSync(`${__dirname}/../config/privateKey`, "utf8");
+      const account = this._web3.eth.accounts.privateKeyToAccount(
+        "0x" + privateKey
+      );
       this._web3.eth.accounts.wallet.add(account);
       this._web3.eth.defaultAccount = account.address;
     } else {
       this._web3.eth.defaultAccount = accounts[0];
     }
-    console.log(`Default account: ${this._web3.eth.defaultAccount}`);
+    const balance = await this._web3.eth.getBalance(
+      this._web3.eth.defaultAccount
+    );
+    console.log(
+      `Default account: ${this._web3.eth.defaultAccount}, balance: ${balance}`
+    );
   }
 
   sendFromMain(transaction) {
     return transaction.send({
       from: this._web3.eth.defaultAccount,
-      gas: this.gas,
-      gasPrice: 10 ** 10
+      gas: this.gas
     });
   }
 }

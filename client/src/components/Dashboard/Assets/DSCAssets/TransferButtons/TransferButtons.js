@@ -26,19 +26,21 @@ const TransferButtons = ({ DSCStore, Web3Store, token }) => {
   };
   const transfer = (token, transferTokens, isDeposit = true) => async () => {
     setIsTransferring(true);
-    const amount = transferAmount * (isDeposit ? 1 : -1);
-    await transferTokens(amount, token);
-    DSCStore.transferTokens(token, amount);
-    setTransferAmount(0);
-    setIsTransferring(false);
+    const amount = transferAmount * (isDeposit ? 1 : -1) * 10 ** token.decimals;
+    await transferTokens(amount, isError => {
+      !isError && DSCStore.transferTokens(token, amount);
+      setTransferAmount(0);
+      setIsTransferring(false);
+    });
   };
   let cantWithdraw, cantDeposit;
   if (Web3Store.web3) {
     const { BN } = Web3Store.web3.utils;
+    const amount = transferAmount * 10 ** token.decimals;
     cantWithdraw =
-      new BN(transferAmount).cmp(new BN(token.amount.toString())) === 1;
+      new BN(amount.toString()).cmp(new BN(token.amount.toString())) === 1;
     cantDeposit =
-      new BN(transferAmount).cmp(new BN(token.balance.toString())) === 1;
+      new BN(amount.toString()).cmp(new BN(token.balance.toString())) === 1;
   }
   return (
     <Flex>
